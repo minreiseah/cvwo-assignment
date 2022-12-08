@@ -6,12 +6,12 @@
 
 ## Architecture
 
-Name | Description | Technologies 
-- | - | -  
-Frontend | UI/UX | Typescript + React 
-Application | RESTful API | Golang (Go-Chi)
-Database | Persistent Storage Layer | MySQL + Entgo
-Hosting | Deployment, Web Server, Storage | Heroku, Netlify, AWS(?)
+| Name | Description | Technologies |
+| - | - | - |
+| Frontend | UI/UX | Typescript + React |
+| Application | RESTful API | Golang (Go-Chi) |
+| Database | Persistent Storage Layer | MySQL + Entgo |
+| Hosting | Deployment, Web Server, Storage | Heroku, Netlify, AWS(?) |
 
 ## Project Requirements
 
