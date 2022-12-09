@@ -12,7 +12,7 @@
 | - | - | - |
 | Frontend | UI/UX | Typescript + React |
 | Application | RESTful API | Golang (Go-Chi) |
-| Database | Persistent Storage Layer | MySQL + Entgo |
+| Database | Persistent Storage Layer | PostgreSQL + Entgo |
 | Hosting | Deployment, Web Server, Storage | Heroku, Netlify, Render, AWS(?) |
 
 </div>
