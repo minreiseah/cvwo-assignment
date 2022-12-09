@@ -122,5 +122,43 @@ Refer to [API Documentation](documentation/API.md)
 
 - [ ] Buffer, stretch goals.
 
+## Notes
+
+Generally,
+
+Framework/language-specific notes are shown below.
+
+#### Documentation
+
+- React: `react-docgen` for JSDocs
+- Go: `godoc` for docstring
+- API: Github pages (tentative)
+
+#### React
+
+- This project will use npm instead of yarn as I am more familiar with the former.
+- Chakra UI is chosen over MUI for its flexibility and ease of modification.
+- The Framer Motion library is an option for adding animations such as a loading screen or transitions.
+- I will attempt to integrate Redux from the start rather than refactoring my code to integreate it later on.
+
+#### Go
+
+
+#### Database
+
+- As most hosting providers seem to provide native PostgreSQL support, I will tentatively pick PostgreSQL for my database.
+- Seems like `pg_dump` can be used to create PostgreSQL backups
+
+#### Hosting
+
+- Requirements include: frontend, database, application/web server for Rest API.
+- Render or Heroku for free-tier hosting. 
+- Netlify only provides a serverless backend.
+
+### Stretch Goals
+
+- Implementing Cron to backup the database.
+- Docker
+- AWS
 
 
