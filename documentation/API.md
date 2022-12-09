@@ -55,7 +55,9 @@ Retrieve all categories. Note that users are not allowed to create categories. O
 
 ### Threads
 
-Retrieve all threads or threads from a specific category. Create threads in a specific category.
+Retrieve all threads or threads from a specific category.
+Create threads in a specific category.
+Edit or delete threads.
 
 #### `GET /threads`
 
@@ -64,9 +66,9 @@ Retrieve all threads or threads from a specific category. Create threads in a sp
 - Response data format: JSON
 - Authentication: None
 
-#### `POST /threads`
+#### `POST /categories/:category_id/threads/new`
 
-- Description: Creates a *new* thread.
+- Description: Creates a *new* thread in a *specified* category.
 - Request data format: JSON
 - Response data format: JSON
 - Authentication: Required
@@ -77,11 +79,26 @@ Retrieve all threads or threads from a specific category. Create threads in a sp
 - Request data format: None
 - Response data format: JSON
 - Authentication: None
-- Authentication: None
+
+#### `PUT /threads/:thread_id/edit`
+
+- Description: Edits a thread.
+- Request data format: JSON
+- Response data format: JSON
+- Authentication: Required
+
+#### `DELETE /threads/:thread_id/delete`
+
+- Description: Deletes a thread.
+- Request data format: None
+- Response data format: JSON
+- Authentication: Required
 
 ### Posts
 
-Retrieve all posts or posts from a specific thread. Create posts(replies) in a specific thread.
+Retrieve all posts or posts from a specific thread.
+Create posts (replies) in a specific thread.
+Edit or delete posts.
 
 #### `GET /posts`
 
@@ -90,9 +107,9 @@ Retrieve all posts or posts from a specific thread. Create posts(replies) in a s
 - Response data format: JSON
 - Authentication: None
 
-#### `POST /posts`
+#### `POST /threads/:thead_id/posts/new`
 
-- Description: Creates a *new* post. 
+- Description: Creates a *new* post in a specific thread. 
 - Request data format: JSON
 - Response data format: JSON
 - Authentication: Required
@@ -104,4 +121,16 @@ Retrieve all posts or posts from a specific thread. Create posts(replies) in a s
 - Response data format: JSON
 - Authentication: None
 
+#### `PUT /threads/:thread_id/posts/:post_id/edit`
 
+- Description: Edits a post from a *specified* thread.
+- Request data format: JSON
+- Response data format: JSON
+- Authentication: Required
+
+#### `DELETE /threads/:thread_id/posts/:post_id/delete`
+
+- Description: Deletes a post from a *specified* thread.
+- Request data format: None
+- Response data format: JSON
+- Authentication: Required

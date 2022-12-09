@@ -89,38 +89,38 @@ Refer to [API Documentation](documentation/API.md)
 
 #### Dec 9 - 11
 
-- Learn Typescript.
-- Read up on test driven development in React.
-- Design basic wireframes in Figma.
-- Read up on MVC.
+- [ ] Learn Typescript.
+- [ ] Read up on test driven development in React.
+- [ ] Design basic wireframes in Figma.
+- [ ] Read up on MVC.
 
 #### Dec 12 - 18
 
-- Implement basic frontend in React.
-- Learn about [TDD in Go](https://quii.gitbook.io/learn-go-with-tests/).
-- Read up on [Go-Chi](https://go-chi.io/#/README) to build REST API.
-- Implement database in MySQL (tentative).
-- Read up on [Entgo](https://entgo.io/docs/getting-started/).
+- [ ] Implement basic frontend in React.
+- [ ] Learn about [TDD in Go](https://quii.gitbook.io/learn-go-with-tests/).
+- [ ] Read up on [Go-Chi](https://go-chi.io/#/README) to build REST API.
+- [ ] Implement database in MySQL (tentative).
+- [ ] Read up on [Entgo](https://entgo.io/docs/getting-started/).
 
 #### Dec 19 - 25
 
-- Implement API.
+- [ ] Implement API.
 
 #### Dec 26 - 30
 
-- Rest.
+- [ ] Rest.
 
 #### Jan 1 - 7
 
-- Complete MVP before the semester   starts.
+- [ ] Complete MVP before the semester starts.
 
 #### Jan 8 - 14
 
-- Stocktake.
+- [ ] Stocktake.
 
 #### Jan 15 - 25
 
-- Buffer, stretch goals.
+- [ ] Buffer, stretch goals.
 
 
 
