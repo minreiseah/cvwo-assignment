@@ -13,7 +13,7 @@
 | Frontend | UI/UX | Typescript + React |
 | Application | RESTful API | Golang (Go-Chi) |
 | Database | Persistent Storage Layer | MySQL + Entgo |
-| Hosting | Deployment, Web Server, Storage | Heroku, Netlify, AWS(?) |
+| Hosting | Deployment, Web Server, Storage | Heroku, Netlify, Render, AWS(?) |
 
 </div>
 
@@ -39,14 +39,14 @@ Good navigation and organisation make the forum easy to use and accessible to us
     - The user can view a list of recent threads organised by time (most recent update).
 
 1. **As a** user, **I want** to be able to view a list of all the available threads **so that** I can *easily* find discussions that interest me.
-    - The user can view a list of all threads topics organised by category and/or popularity.
+    - The user can view a list of all threads topics organised by *category*.
 
 1. **As a** user, **I want** to be able to search for specific discussions or keywords **so that** I can easily find relevant information on the forum.
     - The user can search for specific discussions or keywords by typing their search query into a search bar and clicking a "search" button.
 
-### CRUD for Threads and Comments
+### CRUD for Threads and Posts
 
-The bread and butter of the forum. Only by allowing users to create, view, update, and delete threads and comments will the forum allow for users to particpate in discussion and contribute to the forum.
+The bread and butter of the forum. Only by allowing users to create, view, update, and delete threads and posts(replies) will the forum allow for users to particpate in discussion.
 
 1. **As a** user, **I want** to be able to create a new thread **so that** I can share my thoughts and ideas with other members.
     - The user can create a new thread by providing a title, category, and description.
@@ -56,7 +56,14 @@ The bread and butter of the forum. Only by allowing users to create, view, updat
 
 1. **As a** user, **I want** to be able to edit or delete my comments **so that** I can correct any mistakes.
     - The user can edit or delete their comments by clicking an "edit" or "delete" button.
-1. **As a** user, **I want** to be able to reply to other people's posts **so that** I can engage in discussions and contribute to the conversation. The user can reply to other people's posts by typing their response and clicking a "submit" button. ### Social Features Social features allow users to interact with each other on the forum. These features help to foster a sense of community, and encourage engagement and participation.
+
+1. **As a** user, **I want** to be able to reply to other people's posts **so that** I can engage in discussions and contribute to the conversation.
+
+    - The user can reply to other people's posts by typing their response and clicking a "submit" button.
+
+### Social Features
+
+Social features allow users to interact with each other on the forum. These features help to foster a sense of community, and encourage engagement and participation.
 
 1. **As a** user, **I want** to be able to upvote or downvote other users' comments **so that** I can show my approval or support for another user's comment.
     - The user can upvote or downvote other people's posts by clicking the respective button next to the comment.
@@ -76,9 +83,44 @@ Monitoring and managing content ensures that the forum is a safe place for users
 
 ## API Endpoints
 
-Refer to 
+Refer to [API Documentation](documentation/API.md)
 
 ## Execution Plan
+
+#### Dec 9 - 11
+
+- Learn Typescript.
+- Read up on test driven development in React.
+- Design basic wireframes in Figma.
+- Read up on MVC.
+
+#### Dec 12 - 18
+
+- Implement basic frontend in React.
+- Learn about [TDD in Go](https://quii.gitbook.io/learn-go-with-tests/).
+- Read up on [Go-Chi](https://go-chi.io/#/README) to build REST API.
+- Implement database in MySQL (tentative).
+- Read up on [Entgo](https://entgo.io/docs/getting-started/).
+
+#### Dec 19 - 25
+
+- Implement API.
+
+#### Dec 26 - 30
+
+- Rest.
+
+#### Jan 1 - 7
+
+- Complete MVP before the semester   starts.
+
+#### Jan 8 - 14
+
+- Stocktake.
+
+#### Jan 15 - 25
+
+- Buffer, stretch goals.
 
 
 
