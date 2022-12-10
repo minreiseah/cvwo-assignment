@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as ReactRouterLink} from "react-router-dom"
 
 import {
   Box,
@@ -9,13 +10,11 @@ import {
   Button,
   Spacer,
   Heading,
+  Link,
 } from '@chakra-ui/react'
 
-const Logo: React.FC = () => {
-  return (
-    <Heading fontSize='3xl'>FORUM</Heading>
-  )
-}
+import { Logo } from "./Logo"
+
 
 const Signup: React.FC = () => {
   return (
@@ -29,18 +28,23 @@ const Login: React.FC = () => {
   )
 }
 
+const handleSortThreads = () => {
+  // TODO
+  return null;
+}
+
 const Nav: React.FC = () => {
   return (
     <Flex py={4}>
       <Logo />
       <Spacer />
-      <HStack spacing={16}>
-        <Text>Home</Text>
-        <Text>What's New</Text>
-        <Text>Help</Text>
+      <HStack spacing={16} letterSpacing="widest">
+        <Link as={ReactRouterLink} to="/">Home</Link>
+        <Text onClick={handleSortThreads}>What's New</Text>
+        <Link as={ReactRouterLink} to="/help">Help</Link>
       </HStack>
       <Spacer />
-      <HStack>
+      <HStack spacing={4}>
         <Signup />
         <Login />
       </HStack>

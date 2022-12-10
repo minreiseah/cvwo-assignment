@@ -12,7 +12,7 @@ type LayoutProps = {
 const Layout = (props: LayoutProps) => {
   return (
     <React.Fragment>
-      <Box maxW={1200} flex={1} m="0 auto">
+      <Box maxW={1200} flex={1} m="0 auto" px={4} borderTop="8px" borderColor="black">
         <Header />
         <Nav />
         <main>{props.children}</main>
