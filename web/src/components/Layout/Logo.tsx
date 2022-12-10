@@ -3,6 +3,6 @@ import { Heading } from "@chakra-ui/react"
 
 export const Logo: React.FC = () => {
   return (
-    <Heading fontSize='3xl'>FORUM</Heading>
+    <Heading fontSize="3xl" letterSpacing="widest" >FORUM</Heading>
   )
 }

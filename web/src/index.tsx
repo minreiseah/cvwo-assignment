@@ -31,10 +31,10 @@ const theme = extendTheme({
     }
   },
 
-  fonts: {
-    heading: `'Metropolis', sans-serif`,
-    body: `'Inter', sans-serif`,
-  }
+  // fonts: {
+  //   heading: `'Metropolis', sans-serif`,
+  //   body: `'Inter', sans-serif`,
+  // }
 })
 
 root.render(
