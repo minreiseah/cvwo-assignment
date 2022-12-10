@@ -1,8 +1,9 @@
 import React from "react";
 
-import Metadata from "./Metadata";
 import Header from "./Header";
+import Nav from "./Nav";
 import Footer from "./Footer";
+import { Box } from "@chakra-ui/react";
 
 type LayoutProps = {
   children: React.ReactNode
@@ -11,10 +12,12 @@ type LayoutProps = {
 const Layout = (props: LayoutProps) => {
   return (
     <React.Fragment>
-      <Metadata />
-      <Header />
-      <main>{props.children}</main>
-      <Footer />
+      <Box maxW={1200} flex={1} m="0 auto">
+        <Header />
+        <Nav />
+        <main>{props.children}</main>
+        <Footer />
+      </Box>
     </React.Fragment>
   )
 }

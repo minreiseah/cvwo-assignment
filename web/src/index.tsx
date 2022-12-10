@@ -10,6 +10,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 // Chakra UI
 import { extendTheme, ChakraProvider } from '@chakra-ui/react';
+import '@fontsource/inter/400.css'
+import '@fontsource/metropolis/700.css'
 
 import App from './App';
 
@@ -17,18 +19,23 @@ const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 // Extending Chakra UI theme to include custom colours, fonts
-const colours = {
-  primary: {
-    1: '#5EB2A5', // teal
-    2: '#F8C6D2' // pink
+const theme = extendTheme({ 
+  colors: {
+    primary: {
+      1: '#5EB2A5', // teal
+      2: '#F8C6D2' // pink
+    },
+    secondary: {
+      1: '#DFF2F8', // cyan
+      2: '$4B8E9A', // malachite
+    }
   },
-  secondary: {
-    1: '#DFF2F8', // cyan
-    2: '$4B8E9A', // malachite
-  }
-}
 
-const theme = extendTheme({ colours })
+  fonts: {
+    heading: `'Metropolis', sans-serif`,
+    body: `'Inter', sans-serif`,
+  }
+})
 
 root.render(
   <React.StrictMode>
