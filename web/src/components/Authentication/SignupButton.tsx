@@ -1,6 +1,16 @@
+import { useAuth0 } from "@auth0/auth0-react"
 import { Button } from "@chakra-ui/react"
 
 const SignupButton: React.FC = () => {
+
+  const { loginWithRedirect } = useAuth0();
+
+  const handleSignUp = async () => {
+    await loginWithRedirect({
+      screen_hint: "signup",
+    });
+  }
+
   return (
     <Button
       border="1px"
@@ -11,6 +21,8 @@ const SignupButton: React.FC = () => {
       color="black"
       fontFamily="Metropolis"
       letterSpacing="wider"
+
+      onClick={handleSignUp}
     >
       Sign Up
     </Button>
