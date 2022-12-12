@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
   return (
     <Flex
       direction="column"
-      py={8}
+      my={16}
       gap={2}
     >
       <Flex letterSpacing="wide" justify="space-between">

@@ -22,18 +22,17 @@ type ThreadCardProps = {
 
 
 /**
- * Displays information about a thread in a card. Used on the forum homepage.
- * 
- * @param {string} props.title - Title 
- * @param {string} props.author - Author 
- * @param {string} props.profilePicture - Profile picture
- * @param {Date} props.timestamp - Date of most recent reply
- * @param {string[]} props.categories - Categories of thread
- * @param {string} props.replies - Replies
- * @param {string} props.views - Views
- */
+* Displays information about a thread in a card. Used on the forum homepage.
+* 
+* @param {string} props.title - Title 
+* @param {string} props.author - Author 
+* @param {string} props.profilePicture - Profile picture
+* @param {Date} props.timestamp - Date of most recent reply
+* @param {string[]} props.categories - Categories of thread
+* @param {string} props.replies - Replies
+* @param {string} props.views - Views
+*/
 const ThreadCard = (props: ThreadCardProps) => {
-
   // deconstruction
   const {
     title,
@@ -60,10 +59,36 @@ const ThreadCard = (props: ThreadCardProps) => {
     <Flex 
       direction="row"
       justify="space-between" 
-      border="4px"
+      border="1px"
       borderColor="black"
+      borderRadius="xl"
       mt={4}
       p={4}
+      position="relative"
+      bg="white"
+
+      _before={{
+        // content: `''`,
+        content: "none",
+        background: "primary.1",
+        borderColor: "black",
+        borderWidth: "1px",
+        borderRadius: "xl",
+
+        // positioning
+        top: 0,
+        left: 0,
+        position: "absolute",
+        transform: "translate(0.5em, 0.5em)",
+        height: "100%",
+        width: "100%",
+        zIndex: "-1",
+      }}
+
+      _hover={{
+        _before:{content: `''`}
+      }}
+
     >
       <HStack gap={2}>
         <Avatar name={author} src={profilePicture}/>
@@ -95,12 +120,12 @@ const ThreadCard = (props: ThreadCardProps) => {
 
       <HStack gap={8}>
         <VStack align="flex-start">
-          <Heading fontSize="2xl">{replies}</Heading>
+          <Heading fontSize="2xl" letterSpacing="wide">{replies}</Heading>
           <Text>Replies</Text>
         </VStack>
 
         <VStack align="flex-start">
-          <Heading fontSize="2xl">{views}</Heading>
+          <Heading fontSize="2xl" letterSpacing="wide">{views}</Heading>
           <Text>Views</Text>
         </VStack>
 
