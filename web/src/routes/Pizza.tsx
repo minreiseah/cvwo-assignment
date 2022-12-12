@@ -16,6 +16,7 @@ const Pizza: React.FC = () => {
       ))}
 
       <button onClick={() => dispatch(addTopping('pepperoni'))}> Add Pepperoni</button>
+
     </React.Fragment>
   )
 

@@ -8,45 +8,25 @@ import { store } from './app/store';
 // react-router
 import { BrowserRouter } from 'react-router-dom';
 
-// Chakra UI
-import { extendTheme, ChakraProvider } from '@chakra-ui/react';
-import '@fontsource/inter/400.css'
-import '@fontsource/inter/700.css'
-import '@fontsource/metropolis/400.css'
-import '@fontsource/metropolis/700.css'
+// providers
+import Auth0ProviderWithHistory from './providers/Auth0ProviderWithHistory';
+import ChakraThemedProvider from './providers/ChakraThemedProvider';
 
 import App from './App';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
 
-// Extending Chakra UI theme to include custom colours, fonts
-const theme = extendTheme({ 
-  colors: {
-    primary: {
-      1: '#5EB2A5', // teal
-      2: '#F8C6D2' // pink
-    },
-    secondary: {
-      1: '#DFF2F8', // cyan
-      2: '#4B8E9A', // malachite
-    }
-  },
-
-  fonts: {
-    heading: `'Metropolis', sans-serif`,
-    body: `'Inter', sans-serif`,
-  }
-})
-
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <ChakraProvider theme={theme}>
+      <ChakraThemedProvider>
         <BrowserRouter>
-          <App />
+          <Auth0ProviderWithHistory>
+            <App />
+          </Auth0ProviderWithHistory>
         </BrowserRouter>
-      </ChakraProvider>
+      </ChakraThemedProvider>
     </Provider>
   </React.StrictMode>
 );
