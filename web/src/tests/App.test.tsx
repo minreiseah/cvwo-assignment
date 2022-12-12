@@ -27,16 +27,8 @@ describe('Forum Home Page', () => {
   // it.todo('should search for specific discussions or keywords')
 })
 
-describe('Authentication', () => {
-  it.todo('should create user account')
-
-  it.todo('should log in ')
-
-  it.todo('should log out ')
-})
-
 describe('Threads', () => {
-  it.todo('should create new thread')
+  it.todo('only member should create new thread')
 
   it.todo('should be able to view thread')
 
