@@ -11,6 +11,8 @@ import { BrowserRouter } from 'react-router-dom';
 // Chakra UI
 import { extendTheme, ChakraProvider } from '@chakra-ui/react';
 import '@fontsource/inter/400.css'
+import '@fontsource/inter/700.css'
+import '@fontsource/metropolis/400.css'
 import '@fontsource/metropolis/700.css'
 
 import App from './App';
@@ -27,14 +29,14 @@ const theme = extendTheme({
     },
     secondary: {
       1: '#DFF2F8', // cyan
-      2: '$4B8E9A', // malachite
+      2: '#4B8E9A', // malachite
     }
   },
 
-  // fonts: {
-  //   heading: `'Metropolis', sans-serif`,
-  //   body: `'Inter', sans-serif`,
-  // }
+  fonts: {
+    heading: `'Metropolis', sans-serif`,
+    body: `'Inter', sans-serif`,
+  }
 })
 
 root.render(

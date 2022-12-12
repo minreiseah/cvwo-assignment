@@ -5,14 +5,12 @@ import {
   Flex,
   Divider,
   Text,
-  VStack,
   HStack,
   Center,
-  Spacer,
   Link,
 } from "@chakra-ui/react"
 
-import { Logo } from "./Logo";
+import { Logo } from "../Shared/Logo";
 
 const Footer: React.FC = () => {
   return (
@@ -21,9 +19,9 @@ const Footer: React.FC = () => {
       py={8}
       gap={2}
     >
-      <Flex letterSpacing="widest" justify="space-between">
+      <Flex letterSpacing="wide" justify="space-between">
         <Box display={["none", "initial"]}>
-        <Logo />
+          <Logo />
         </Box>
         <HStack 
           spacing={[4,16]}
@@ -38,7 +36,11 @@ const Footer: React.FC = () => {
         </HStack>
       </Flex>
 
-      <Divider opacity="1" borderColor="black" borderBottom="2px" />
+      <Divider 
+        opacity="1" 
+        borderColor="black" 
+        borderBottom="4px"
+      />
 
       <Center mt={6} gap={4}>
         <Text fontSize='xs'>© 2010 — 2023</Text>

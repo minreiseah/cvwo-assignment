@@ -10,11 +10,11 @@ import { BrowserRouter } from 'react-router-dom';
 import App from '../App';
 
 describe('Forum Home Page', () => {
-  it('renders hello world', () => {
-    render(<Provider store={store}><App /></Provider>, {wrapper: BrowserRouter})
-
-    expect(screen.getByText(/Hello World!/)).toBeInTheDocument();
-  })
+  // it('renders hello world', () => {
+  //   render(<Provider store={store}><App /></Provider>, {wrapper: BrowserRouter})
+  //
+  //   expect(screen.getByText(/Hello World!/)).toBeInTheDocument();
+  // })
 
   it.todo('should render forum title')
 

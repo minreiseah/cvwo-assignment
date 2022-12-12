@@ -10,9 +10,9 @@ import {
   Divider,
 } from '@chakra-ui/react'
 
-import { Logo } from "./Logo"
-import Login from "../Authentication/Login";
-import Signup from "../Authentication/Signup";
+import { Logo } from "../Shared/Logo"
+import LoginButton from "../Shared/LoginButton";
+import SignupButton from "../Shared/SignupButton";
 
 
 const handleSortThreads = () => {
@@ -23,15 +23,13 @@ const handleSortThreads = () => {
 const Nav: React.FC = () => {
   return (
     <React.Fragment>
-      <Flex py={4}>
+      <Flex pt={4}>
 
-        <Flex flexGrow={1} flexBasis={0}>
+        <Flex flexGrow={1} flexBasis={0} align="center">
           <Logo />
         </Flex>
 
-        <Spacer />
-
-        <Flex display={["none", "initial"]}>
+        <Flex display={["none", "flex"]} justify="center" align="center">
           <HStack spacing={16} letterSpacing="widest">
             <Link as={ReactRouterLink} to="/">Home</Link>
             <Text onClick={handleSortThreads}>What's New</Text>
@@ -39,12 +37,10 @@ const Nav: React.FC = () => {
           </HStack>
         </Flex>
 
-        <Spacer />
-
         <Flex flexGrow={1} flexBasis={0} justify="flex-end">
-          <HStack spacing={4}>
-            <Login />
-            <Signup />
+          <HStack spacing={4} marginRight="6px">
+            <LoginButton />
+            <SignupButton />
           </HStack>
         </Flex>
 
@@ -52,7 +48,8 @@ const Nav: React.FC = () => {
       <Divider
         opacity="1"
         borderColor="black"
-        borderBottom="2px"
+        borderBottom="4px"
+        py={2}
       />
     </React.Fragment>
   )
