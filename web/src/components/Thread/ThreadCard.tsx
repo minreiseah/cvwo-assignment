@@ -62,31 +62,34 @@ const ThreadCard = (props: ThreadCardProps) => {
       border="1px"
       borderColor="black"
       borderRadius="xl"
-      mt={4}
+      my={6}
+      mx={4}
       p={4}
       position="relative"
       bg="white"
+      cursor="default"
 
       _before={{
-        // content: `''`,
-        content: "none",
+        content: `''`,
         background: "primary.1",
         borderColor: "black",
         borderWidth: "1px",
         borderRadius: "xl",
+        transition:"transform 0.2s",
 
         // positioning
         top: 0,
         left: 0,
         position: "absolute",
-        transform: "translate(0.5em, 0.5em)",
         height: "100%",
         width: "100%",
         zIndex: "-1",
       }}
 
       _hover={{
-        _before:{content: `''`}
+        _before:{
+          transform: "translate(0.5em, 0.5em)"
+        }
       }}
 
     >

@@ -51,7 +51,7 @@ const ForumThreads: React.FC = () => {
       author: "Christian",
       profilePicture: "https://bit.ly/sage-adebayo",
       timestamp: new Date(2022, 9, 22),
-      categories: ["Furniture, Architecture"],
+      categories: ["Furniture", "Architecture"],
       replies: 1,
       views: 12,
     },

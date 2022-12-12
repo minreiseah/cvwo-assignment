@@ -8,6 +8,7 @@ import {
   Tabs,
   TabList,
   Tab,
+  Tooltip,
 } from "@chakra-ui/react";
 
 const ForumHeader: React.FC = () => {
@@ -15,14 +16,27 @@ const ForumHeader: React.FC = () => {
     <Flex 
       direction="row" 
       justify="space-between"
+      align="center"
       mt={16}
       px={2}
     >
-      <Heading 
-        fontSize="2xl"
+      <Tooltip 
+        hasArrow
+        label='View all posts' 
+        placement="right" 
+        bg="primary.2" 
+        color="black" 
+        borderRadius="sm"
+        boxShadow="0 0 0 0"
       >
-        Posts
-      </Heading>
+        <Heading 
+          fontSize="2xl"
+          cursor="pointer"
+          pr={2}
+        >
+          Posts
+        </Heading>
+      </Tooltip>
 
       <Tabs 
         variant='unstyled'
