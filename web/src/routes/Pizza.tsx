@@ -1,6 +1,6 @@
 import React from 'react'
 import { useAppSelector, useAppDispatch } from '../app/hooks'
-import { addTopping } from '../app/pizzaSlice'
+import { addTopping } from '../app/slices/pizza.slice'
 
 const Pizza: React.FC = () => {
 

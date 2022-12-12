@@ -7,7 +7,9 @@ const initialState = {
 
 export const pizzaSlice = createSlice({
   name: 'pizza',
+
   initialState,
+
   reducers: {
     toggleGluten: (state) => {
       state.gluten = !state.gluten;

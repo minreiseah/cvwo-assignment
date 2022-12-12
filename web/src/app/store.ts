@@ -1,5 +1,5 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import pizzaReducer from './pizzaSlice'
+import pizzaReducer from './slices/pizza.slice'
 
 export const store = configureStore({
   reducer: {
