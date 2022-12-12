@@ -1,18 +1,19 @@
 import React from "react";
 import { Link as ReactRouterLink} from "react-router-dom"
+import { useAuth0 } from "@auth0/auth0-react";
 
 import {
   Flex,
   HStack,
   Text,
-  Spacer,
   Link,
   Divider,
 } from '@chakra-ui/react'
 
 import { Logo } from "../Shared/Logo"
-import LoginButton from "../Shared/LoginButton";
-import SignupButton from "../Shared/SignupButton";
+import LoginButton from "../Authentication/LoginButton";
+import SignupButton from "../Authentication/SignupButton";
+import LogoutButton from "../Authentication/LogoutButton";
 
 
 const handleSortThreads = () => {
@@ -21,6 +22,8 @@ const handleSortThreads = () => {
 }
 
 const Nav: React.FC = () => {
+  const { isAuthenticated } = useAuth0();
+
   return (
     <React.Fragment>
       <Flex pt={4}>
@@ -38,10 +41,15 @@ const Nav: React.FC = () => {
         </Flex>
 
         <Flex flexGrow={1} flexBasis={0} justify="flex-end">
-          <HStack spacing={4} marginRight="6px">
-            <LoginButton />
-            <SignupButton />
-          </HStack>
+          {!isAuthenticated && (
+            <HStack spacing={4} marginRight="6px">
+              <LoginButton />
+              <SignupButton />
+            </HStack>
+          )}
+          {isAuthenticated && (
+            <LogoutButton />
+          )}
         </Flex>
 
       </Flex>

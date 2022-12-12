@@ -10,7 +10,7 @@ type ChakraThemedProviderProps = {
   children: React.ReactNode
 }
 
-const ChakraThemedProvider = ({children}: ChakraThemedProviderProps) => {
+export const ChakraThemedProvider = ({ children }: ChakraThemedProviderProps) => {
   // Extending Chakra UI theme to include custom colours, fonts
   const theme = extendTheme({ 
     colors: {
@@ -36,5 +36,3 @@ const ChakraThemedProvider = ({children}: ChakraThemedProviderProps) => {
     </ChakraProvider>
   )
 }
-
-export default ChakraThemedProvider  

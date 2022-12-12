@@ -6,7 +6,7 @@ type Auth0ProviderWithHistoryProps = {
   children: React.ReactNode
 }
 
-const Auth0ProviderWithHistory = ({children}: Auth0ProviderWithHistoryProps) => {
+export const Auth0ProviderWithHistory = ({children}: Auth0ProviderWithHistoryProps) => {
   const history = useNavigate();
 
   const domain = process.env.REACT_APP_AUTH0_DOMAIN;
@@ -34,5 +34,3 @@ const Auth0ProviderWithHistory = ({children}: Auth0ProviderWithHistoryProps) => 
     </Auth0Provider>
   )
 }
-
-export default Auth0ProviderWithHistory
