@@ -1,8 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import TestWrapper from "./TestWrapper"
-import { useAppSelector } from '../app/hooks';
 
-import App from '../App';
 import Forum from '../routes/Forum';
 import { store } from '../app/store';
 

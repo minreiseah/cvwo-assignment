@@ -51,7 +51,7 @@ const Nav: React.FC = () => {
         </Flex>
 
         <Flex flexGrow={1} flexBasis={0} justify="flex-end">
-          {!isAuthenticated && !isLoading && (
+          {!isAuthenticated && (
             <HStack spacing={4} marginRight="6px">
               <LoginButton />
               <SignupButton />

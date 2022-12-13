@@ -36,6 +36,3 @@ const userProfileSlice = createSlice({
 export const { onUserLogin, onUserLogout } = userProfileSlice.actions
 
 export default userProfileSlice.reducer
-
-
-

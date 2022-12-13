@@ -1,4 +1,4 @@
-export interface ThreadCardProps {
+export interface ThreadCardData {
     id: number,
     title: string,
     author: string,

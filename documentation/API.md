@@ -16,7 +16,7 @@ The database schema includes the following entities:
 
 The entities are **related** as follows:
 
-- Each thread belongs to a *single* category, and *each* category can have *multiple* threads.
+- Each thread can have *multiple* categories, and *each* category can have *multiple* threads.
 - Each post belongs to a *single* thread, and *each* thread can have *multiple* posts.
 - Each user can create *multiple* threads and posts.
 
@@ -35,7 +35,7 @@ Retrieve and create users.
 - Response data format: JSON
 - Authentication: None
 
-#### `POST /users`
+#### `POST /users/new`
 
 - Description: Creates a new user.
 - Request data format: JSON
@@ -66,12 +66,19 @@ Edit or delete threads.
 - Response data format: JSON
 - Authentication: None
 
-#### `POST /categories/:category_id/threads/new`
+#### `GET /threads?sort=:sort_param`
+- Description: Retrieves a list of all threads sorted by time or popularity, e.g. date_asc, popularity_desc
+- Request data format: JSON
+- Response data format: JSON
+- Authentication: None
+
+#### `POST /threads/new`
 
 - Description: Creates a *new* thread in a *specified* category.
 - Request data format: JSON
 - Response data format: JSON
 - Authentication: Required
+
 
 #### `GET /categories/:category_id/threads`
 
@@ -94,6 +101,15 @@ Edit or delete threads.
 - Response data format: JSON
 - Authentication: Required
 
+### Threads_Categories
+
+#### `POST /threads_categories`
+
+- Description: Creates a composite link between thread_id and category_id
+- Request data format: JSON
+- Response data format: JSON
+- Authentication: Required
+
 ### Posts
 
 Retrieve all posts or posts from a specific thread.
@@ -107,7 +123,7 @@ Edit or delete posts.
 - Response data format: JSON
 - Authentication: None
 
-#### `POST /threads/:thead_id/posts/new`
+#### `POST /threads/:thread_id/posts/new`
 
 - Description: Creates a *new* post in a specific thread. 
 - Request data format: JSON
