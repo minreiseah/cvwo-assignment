@@ -39,6 +39,5 @@ describe('getTodos', () => {
     expect(axios.post).toHaveBeenCalled();
 
     expect(data).toEqual(userData);
-    console.log(mockUser)
   });
 })

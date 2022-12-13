@@ -3,10 +3,8 @@ import React from "react";
 import {
   Flex,
   VStack,
-  HStack,
   Heading,
   Text,
-  Spacer,
 } from "@chakra-ui/react"
 
 // type ForumStatsProps = {
@@ -24,10 +22,6 @@ const ForumStats: React.FC = () => {
     members: 15,
     latestMember: "Christian",
   }
-  // const threads = 10;
-  // const messages = 100;
-  // const members= 15;
-  // const latestMember = "Christian";
 
   return (
     <Flex
@@ -73,7 +67,7 @@ const ForumStats: React.FC = () => {
             .replace(/([A-Z])/g, " $1");
 
           return (
-            <Flex justify="space-between" gap={8}>
+            <Flex justify="space-between" gap={8} key={name}>
               <Text>{name}:</Text>
               <Text fontWeight="bold">{value}</Text>
             </Flex>

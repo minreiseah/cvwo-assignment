@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 type ThreadCardProps = {
+  id: number,
   title: string;
   author: string;
   profilePicture: string;
@@ -113,7 +114,7 @@ const ThreadCard = (props: ThreadCardProps) => {
               const color = colors[randomIndex];
 
               return ( 
-                <Text color={color}>{cat}</Text>
+                <Text color={color} key={cat}>{cat}</Text>
               )
             })}
           </HStack>

@@ -1,22 +1,15 @@
 import { render, screen } from '@testing-library/react';
+import TestWrapper from "./TestWrapper"
 
-// redux
-import { Provider } from 'react-redux';
-import { store } from '../app/store';
-
-// router
-import { BrowserRouter } from 'react-router-dom';
 
 import App from '../App';
 
 describe('Forum Home Page', () => {
-  // it('renders hello world', () => {
-  //   render(<Provider store={store}><App /></Provider>, {wrapper: BrowserRouter})
-  //
-  //   expect(screen.getByText(/Hello World!/)).toBeInTheDocument();
-  // })
+  it('should render forum title', () => {
+    render(<App />, { wrapper: TestWrapper });
 
-  it.todo('should render forum title')
+    expect(screen.getByText(/Posts/)).toBeInTheDocument();
+  })
 
   it.todo('should view all recent threads')
 

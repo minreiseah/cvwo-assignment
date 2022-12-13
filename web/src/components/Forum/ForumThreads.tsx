@@ -7,6 +7,7 @@ const ForumThreads: React.FC = () => {
 
   const ThreadsInfo = [ // sorted by date
     {
+      id: 1,
       title: "First Post. Whodis.",
       author: "John Smith",
       profilePicture: "https://bit.ly/dan-abramov",
@@ -17,6 +18,7 @@ const ForumThreads: React.FC = () => {
     },
 
     {
+      id: 2,
       title: "Second Post. Hello.",
       author: "Bartholomew",
       profilePicture: "https://bit.ly/kent-c-dodds",
@@ -27,6 +29,7 @@ const ForumThreads: React.FC = () => {
     },
 
     {
+      id: 3,
       title: "Third Post. Good Morning.",
       author: "Ryan Florence",
       profilePicture: "https://bit.ly/ryan-florence",
@@ -37,6 +40,7 @@ const ForumThreads: React.FC = () => {
     },
 
     {
+      id: 4,
       title: "Fourth Post. Hi.",
       author: "Prosper Baba",
       profilePicture: "https://bit.ly/prosper-baba",
@@ -47,6 +51,7 @@ const ForumThreads: React.FC = () => {
     },
 
     {
+      id: 5,
       title: "Fifth Post. Good Night.",
       author: "Christian",
       profilePicture: "https://bit.ly/sage-adebayo",
@@ -62,7 +67,7 @@ const ForumThreads: React.FC = () => {
   return (
     <div>
       {ThreadsInfo.map(item => {
-        return <ThreadCard {...item}/>
+        return <ThreadCard {...item} key={item.id}/>
       })}
     </div>
   );
