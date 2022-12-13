@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+import { ReduxProvider } from '../providers/ReduxProvider';
 
 import { useAuth0 } from '@auth0/auth0-react';
 import { User } from '@auth0/auth0-react';
@@ -43,13 +44,25 @@ describe('Nav Component Tests - Logged Out', () => {
   })
 
   it("Log In button displays when logged out", () => {
-    render(<Nav />, {wrapper: BrowserRouter});
+    render (
+      <ReduxProvider>
+        <BrowserRouter>
+          <Nav />
+        </BrowserRouter>
+      </ReduxProvider>
+    )
 
     expect(screen.getByText(/Log In/)).toBeInTheDocument();
   })
 
   it("Sign Up button displays when logged out", () => {
-    render(<Nav />, {wrapper: BrowserRouter});
+    render (
+      <ReduxProvider>
+        <BrowserRouter>
+          <Nav />
+        </BrowserRouter>
+      </ReduxProvider>
+    )
 
     expect(screen.getByText(/Sign Up/)).toBeInTheDocument();
   })
@@ -62,7 +75,13 @@ describe('Nav Component Tests - Logged In', () => {
   })
 
   it("Log Out button displays when logged in", () => {
-    render (<Nav />,{wrapper: BrowserRouter});
+    render (
+      <ReduxProvider>
+        <BrowserRouter>
+          <Nav />
+        </BrowserRouter>
+      </ReduxProvider>
+    )
 
     expect(screen.getByText(/Log Out/)).toBeInTheDocument();
   })
