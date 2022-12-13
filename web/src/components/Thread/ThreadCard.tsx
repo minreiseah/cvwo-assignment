@@ -1,5 +1,5 @@
 import React from "react";
-import { ThreadCardProps } from "../../app/forum/types"
+import { ThreadCardData } from "../../app/forum/types"
 
 import {
   Flex,
@@ -21,7 +21,7 @@ import {
 * @param {string} props.replies - Replies
 * @param {string} props.views - Views
 */
-const ThreadCard = (props: ThreadCardProps) => {
+const ThreadCard = (props: ThreadCardData) => {
   // deconstruction
   const {
     id,

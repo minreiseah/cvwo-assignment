@@ -1,13 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { ThreadCardProps } from "./types"
+import { ThreadCardData } from "./types"
 
 type sortedBy = 'top' | 'recent'
 
 interface Forum {
   sortedBy: sortedBy,
-  recentThreadCards: ThreadCardProps[] | null,
-  topThreadCards: ThreadCardProps[] | null
+  recentThreadCards: ThreadCardData[] | null,
+  topThreadCards: ThreadCardData[] | null
 }
 
 const initialState: Forum = {
@@ -26,11 +26,11 @@ const forumSlice = createSlice({
       state.sortedBy = action.payload 
     },
 
-    updateRecentThreadCards: (state, action: PayloadAction<ThreadCardProps[]>) => {
+    updateRecentThreadCards: (state, action: PayloadAction<ThreadCardData[]>) => {
       state.recentThreadCards = action.payload
     },
 
-    updateTopThreadCards: (state, action: PayloadAction<ThreadCardProps[]>) => {
+    updateTopThreadCards: (state, action: PayloadAction<ThreadCardData[]>) => {
       state.topThreadCards = action.payload
     }
 
