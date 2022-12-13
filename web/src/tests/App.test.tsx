@@ -1,17 +1,29 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import TestWrapper from "./TestWrapper"
-
+import { useAppSelector } from '../app/hooks';
 
 import App from '../App';
+import Forum from '../routes/Forum';
+import { store } from '../app/store';
 
 describe('Forum Home Page', () => {
-  it('should render forum title', () => {
-    render(<App />, { wrapper: TestWrapper });
+  it('Should render forum title', () => {
+    render(<Forum />, { wrapper: TestWrapper });
 
     expect(screen.getByText(/Posts/)).toBeInTheDocument();
   })
 
-  it.todo('should view all recent threads')
+  it('Should view all recent threads on page initialisation', () => {
+    render(<Forum />, { wrapper: TestWrapper });
+
+    // Get threads sorted state
+    const initialState = store.getState().forum.sortedBy;
+
+    expect(initialState).toEqual('recent')
+
+  })
+
+  it.todo('View all recent threads on tab change')
 
   it.todo('should view all top threads')
 

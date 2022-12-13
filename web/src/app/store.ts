@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
-import pizzaReducer from './slices/pizzaSlice'
-import userProfileReducer from './slices/userProfileSlice'
-import forumReducer from './slices/forumSlice'
+import pizzaReducer from './pizzaSlice' 
+import userProfileReducer from './userProfile/userProfileSlice'
+import forumReducer from './forum/forumSlice'
 
 export const store = configureStore({
   reducer: {
