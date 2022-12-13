@@ -1,10 +1,10 @@
 import React from "react";
+import { useAppDispatch } from "../../app/hooks";
+import { toggleSort } from "../../app/slices/forumSlice";
 
 import { 
   Flex,
   Heading,
-  Text,
-  HStack,
   Tabs,
   TabList,
   Tab,
@@ -12,6 +12,8 @@ import {
 } from "@chakra-ui/react";
 
 const ForumHeader: React.FC = () => {
+  const dispatch = useAppDispatch();
+
   return (
     <Flex 
       direction="row" 
@@ -59,6 +61,8 @@ const ForumHeader: React.FC = () => {
             _hover={{
               textShadow: "0 0 1px black, 0 0 1px black"
             }}
+
+            onClick={() => dispatch(toggleSort('recent'))}
           >
             Recent
           </Tab>
@@ -79,6 +83,8 @@ const ForumHeader: React.FC = () => {
             _hover={{
               textShadow: "0 0 1px black, 0 0 1px black"
             }}
+
+            onClick={() => dispatch(toggleSort('top'))}
           >
             Top
           </Tab>
