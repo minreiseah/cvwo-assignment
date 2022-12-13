@@ -1,7 +1,7 @@
 import React from "react";
+import { ThreadCardProps } from "../../app/forum/types"
 
 import {
-  Circle,
   Flex,
   VStack,
   HStack,
@@ -10,24 +10,12 @@ import {
   Avatar
 } from "@chakra-ui/react";
 
-type ThreadCardProps = {
-  id: number,
-  title: string;
-  author: string;
-  profilePicture: string;
-  timestamp: Date;
-  categories: string[];
-  replies: number;
-  views: number;
-}
-
-
 /**
 * Displays information about a thread in a card. Used on the forum homepage.
 * 
 * @param {string} props.title - Title 
 * @param {string} props.author - Author 
-* @param {string} props.profilePicture - Profile picture
+* @param {string} props.picture - Profile picture
 * @param {Date} props.timestamp - Date of most recent reply
 * @param {string[]} props.categories - Categories of thread
 * @param {string} props.replies - Replies
@@ -36,9 +24,10 @@ type ThreadCardProps = {
 const ThreadCard = (props: ThreadCardProps) => {
   // deconstruction
   const {
+    id,
     title,
     author,
-    profilePicture,
+    picture,
     timestamp,
     categories,
     replies,
@@ -95,7 +84,7 @@ const ThreadCard = (props: ThreadCardProps) => {
 
     >
       <HStack gap={2}>
-        <Avatar name={author} src={profilePicture}/>
+        <Avatar name={author} src={picture}/>
 
         <VStack align="flex-start">
           <Heading fontSize="default" letterSpacing="wide">{title}</Heading>

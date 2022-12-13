@@ -15,16 +15,16 @@ import LoginButton from "../Authentication/LoginButton";
 import SignupButton from "../Authentication/SignupButton";
 import LogoutButton from "../Authentication/LogoutButton";
 import { useAppDispatch } from "../../app/hooks";
-import { onUserLogin, onUserLogout } from "../../app/slices/userProfileSlice";
+import { onUserLogin, onUserLogout } from "../../app/userProfile/userProfileSlice";
 
 
-const handleSortThreads = () => {
+const goToNewThreads = () => {
   // TODO
   return null;
 }
 
 const Nav: React.FC = () => {
-  const { isAuthenticated, user } = useAuth0();
+  const { isAuthenticated, user, isLoading } = useAuth0();
   const dispatch = useAppDispatch();
 
   // On user login
@@ -45,19 +45,19 @@ const Nav: React.FC = () => {
         <Flex display={["none", "flex"]} justify="center" align="center">
           <HStack spacing={16} letterSpacing="widest">
             <Link as={ReactRouterLink} to="/">Home</Link>
-            <Text onClick={handleSortThreads}>What's New</Text>
+            <Text as={Link} onClick={goToNewThreads}>What's New</Text>
             <Link as={ReactRouterLink} to="/help">Help</Link>
           </HStack>
         </Flex>
 
         <Flex flexGrow={1} flexBasis={0} justify="flex-end">
-          {!isAuthenticated && (
+          {!isAuthenticated && !isLoading && (
             <HStack spacing={4} marginRight="6px">
               <LoginButton />
               <SignupButton />
             </HStack>
           )}
-          {isAuthenticated && (
+          {isAuthenticated && !isLoading && (
             <LogoutButton />
           )}
         </Flex>
