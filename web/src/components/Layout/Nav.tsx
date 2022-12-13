@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link as ReactRouterLink} from "react-router-dom"
 import { useAuth0 } from "@auth0/auth0-react";
 
@@ -14,6 +14,8 @@ import { Logo } from "../Shared/Logo"
 import LoginButton from "../Authentication/LoginButton";
 import SignupButton from "../Authentication/SignupButton";
 import LogoutButton from "../Authentication/LogoutButton";
+import { useAppDispatch } from "../../app/hooks";
+import { onUserLogin, onUserLogout } from "../../app/slices/userProfileSlice";
 
 
 const handleSortThreads = () => {
@@ -22,7 +24,15 @@ const handleSortThreads = () => {
 }
 
 const Nav: React.FC = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
+  const dispatch = useAppDispatch();
+
+  // On user login
+  useEffect(() => {
+    isAuthenticated
+    ? dispatch(onUserLogin(user))
+    : dispatch(onUserLogout())
+  }, [isAuthenticated])
 
   return (
     <React.Fragment>

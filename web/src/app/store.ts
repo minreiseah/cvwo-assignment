@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 import pizzaReducer from './slices/pizzaSlice'
+import userProfileReducer from './slices/userProfileSlice'
 
 export const store = configureStore({
   reducer: {
     pizza: pizzaReducer,
+    userProfile: userProfileReducer
   },
 })
 

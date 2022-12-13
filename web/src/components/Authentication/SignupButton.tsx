@@ -6,9 +6,11 @@ const SignupButton: React.FC = () => {
   const { loginWithRedirect } = useAuth0();
 
   const handleSignUp = async () => {
-    await loginWithRedirect({
+    const res = await loginWithRedirect({
       screen_hint: "signup",
     });
+
+    console.log(res);
   }
 
   return (

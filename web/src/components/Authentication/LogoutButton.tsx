@@ -1,8 +1,13 @@
 import { useAuth0 } from "@auth0/auth0-react"
 import { Button } from "@chakra-ui/react"
+import UserService from "../../services/UserService";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { onUserLogin } from "../../app/slices/userProfileSlice";
 
 const LogoutButton: React.FC = () => {
-  const { logout } = useAuth0();
+  const { logout, user } = useAuth0();
+  const userProfile = useAppSelector(state => state.userProfile)
+  const dispatch = useAppDispatch()
 
   const handleLogout = () => {
     logout({
@@ -21,6 +26,7 @@ const LogoutButton: React.FC = () => {
       letterSpacing="wider"
 
       onClick={handleLogout}
+      // onClick ={() => dispatch(onUserLogin(user))}
     >Log Out</Button>
   )
 }

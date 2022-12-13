@@ -1,16 +1,24 @@
 import { useAuth0 } from "@auth0/auth0-react"
 import { Button } from "@chakra-ui/react"
+import UserService from "../../services/UserService";
+import { useAppSelector, useAppDispatch } from "../../app/hooks";
+import { onUserLogin } from "../../app/slices/userProfileSlice";
+import { useEffect, useRef } from "react";
 
 const LoginButton: React.FC = () => {
-  const { loginWithRedirect } = useAuth0();
+
+  const { loginWithPopup, user, isAuthenticated } = useAuth0();
+  const dispatch = useAppDispatch()
 
   const handleLogin = async () => {
-    await loginWithRedirect({
-      appState: {
-        returnTo: window.location.origin,
-      }
+    await loginWithPopup({
+      // appState: {
+      //   // returnTo: window.location.origin,
+      // }
     }); 
   }
+
+
   return (
     <Button
       border="1px"
