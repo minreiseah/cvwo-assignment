@@ -15,19 +15,19 @@ const ForumThreads: React.FC = () => {
     <div>
       {
       sortedBy === 'recent' &&
-      recentThreadCards !== null && 
+        recentThreadCards !== null && 
         recentThreadCards.map(item => {
           return (
-            <ThreadCard {...item}/>
+            <ThreadCard {...item} key={item.id}/>
           )}
         )
     }
       {
       sortedBy === 'top' &&
-      topThreadCards !== null && 
+        topThreadCards !== null && 
         topThreadCards.map(item => {
           return (
-            <ThreadCard {...item}/>
+            <ThreadCard {...item} key={item.id}/>
           )}
         )
     }

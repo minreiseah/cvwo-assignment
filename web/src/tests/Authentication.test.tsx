@@ -23,7 +23,7 @@ const mockUser = {
 const mockLoggedOut: Auth0ContextInterface<User> = {
   error: Error(""),
   isAuthenticated: false,
-  isLoading: true,
+  isLoading: false,
   user: mockUser,
   getAccessTokenSilently: jest.fn(),
   getAccessTokenWithPopup: jest.fn(),

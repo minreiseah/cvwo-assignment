@@ -3,8 +3,8 @@ export interface ThreadCardProps {
     title: string,
     author: string,
     picture: string,
-    timestamp: Date
-    categories: string[]
+    timestamp: string,
+    categories: string[],
     replies: number,
     views: number,
 }

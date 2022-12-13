@@ -16,7 +16,7 @@ import {
 * @param {string} props.title - Title 
 * @param {string} props.author - Author 
 * @param {string} props.picture - Profile picture
-* @param {Date} props.timestamp - Date of most recent reply
+* @param {string} props.timestamp - Date of most recent reply
 * @param {string[]} props.categories - Categories of thread
 * @param {string} props.replies - Replies
 * @param {string} props.views - Views
@@ -43,7 +43,7 @@ const ThreadCard = (props: ThreadCardProps) => {
     minute: 'numeric',
     hour12: true
   };
-  const dateString = timestamp.toLocaleString(undefined, options);
+  const date = new Date(timestamp).toLocaleString(undefined, options);
 
   return (
     <Flex 
@@ -92,7 +92,7 @@ const ThreadCard = (props: ThreadCardProps) => {
           <HStack>
             <Text>{author}</Text>
             <Text>•</Text> 
-            <Text>{dateString}</Text>
+            <Text>{date}</Text>
           </HStack>
 
           <HStack>
