@@ -10,9 +10,10 @@ import {
   Tab,
   Tooltip,
 } from "@chakra-ui/react";
+import ThreadService from "../../services/ThreadService";
 
 // TEMPORARY TODO
-const threadCardsDate = [ 
+const threadCardsRecent = [ 
   {
     thread_id: 1,
     title: "First Post. Whodis.",
@@ -128,25 +129,33 @@ const threadCardsPopular = [
 
 const ForumHeader: React.FC = () => {
   const dispatch = useAppDispatch();
+  const threadService = new ThreadService();
 
   const handleRecent = async () => {
     dispatch(toggleSort('recent'))
     // TODO
-    // const  = await getRecentThreadCards()
-    dispatch(updateRecentThreadCards(threadCardsDate))
+    const threadCardsRecent = await threadService.getSortedThreads('date_desc')
+    dispatch(updateRecentThreadCards(threadCardsRecent))
   }
 
   const handleTop = async () => {
     dispatch(toggleSort('top'))
     // TODO
-    // const  = await getRecentThreadCards()
+    const threadCardsPopular= await threadService.getSortedThreads('popularity_desc')
     dispatch(updateTopThreadCards(threadCardsPopular))
   }
 
   useEffect(() => {
-    // const  = await getRecentThreadCards()
-    dispatch(updateRecentThreadCards(threadCardsDate))
-    // const  = await getRecentThreadCards()
+    const fetchInitialThreads = async () => {
+      try {
+        // const threadCardsRecent = await threadService.getSortedThreads('date_desc')
+        dispatch(updateRecentThreadCards(threadCardsRecent))
+      } catch (error) {
+        throw(error)
+      }
+    }
+
+    fetchInitialThreads()
   },[])
 
   return (

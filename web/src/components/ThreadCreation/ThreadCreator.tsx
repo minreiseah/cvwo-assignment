@@ -4,6 +4,7 @@ import {
   Flex,
   Center,
   Heading,
+  FormControl,
 } from "@chakra-ui/react"
 
 import { Category } from "./CategorySelector";
@@ -20,7 +21,8 @@ const ThreadCreator: React.FC = () => {
   const [categories, setCategories] = useState<Category>({});
 
   return (
-    <Center flexDirection="column" gap={8}>
+    <Center flexDirection="column" gap={8}
+    as={FormControl}>
       <Flex 
         direction="row" 
         justify="space-between"

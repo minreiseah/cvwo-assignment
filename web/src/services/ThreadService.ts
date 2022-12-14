@@ -27,6 +27,9 @@ export interface ThreadCreationData {
   user_id?: string | null, // sub
 }
 
+export type sortParamTypes = 'date_asc' | 'date_desc' | 'popularity_asc' | 'popularity_desc'
+
+
 class ThreadService {
 
   /**
@@ -80,7 +83,7 @@ class ThreadService {
 * Response data format: JSON
 * Authentication: None
 */
-  public async getSortedThreads(sortParam: string): Promise<ThreadCardData[]> {
+  public async getSortedThreads(sortParam: sortParamTypes): Promise<ThreadCardData[]> {
     try {
       const res = await axios.get('/threads', {
         params: {

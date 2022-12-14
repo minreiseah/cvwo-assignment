@@ -1,4 +1,5 @@
 import { Button } from "@chakra-ui/react"
+import toast from 'react-hot-toast'
 
 import ThreadService from "../../services/ThreadService"
 import { ThreadCreationData } from "../../services/ThreadService"
@@ -16,6 +17,17 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
   const { user } = useAppSelector(state => state.userProfile)
 
   const handleThreadSubmit = async () => {
+
+    // title or content cannot be empty
+    if (title.length === 0 ) {
+      toast.error("Please enter a title!")
+      return;
+    }
+    if(content.length === 0) {
+      toast.error("Please enter your thread content!")
+      return;
+    }
+
     const categoryIds: number[] =  [];
     for(const key in categories) {
       const [bool, id]: [boolean, number] = categories[key];
@@ -28,10 +40,17 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
       category_ids: categoryIds,
       user_id: user?.sub,
     }
-    console.log("submitting")
-    console.log(threadCreationData)
-    await threadService.createThread(threadCreationData)
-    console.log("submitted")
+
+    const promise = threadService.createThread(threadCreationData)
+    // const promise = new Promise(resolve => setTimeout(resolve, 1000))
+    toast.promise(
+      promise,
+      {
+        loading: 'Loading',
+        success: 'Thread Created!',
+        error: (err) => `${err.toString()}`,
+      }
+    )
   }
 
   return (
@@ -44,6 +63,8 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
       color="black"
       fontFamily="Metropolis"
       letterSpacing="wider"
+      type="submit"
+      aria-required
 
       onClick={handleThreadSubmit}
     >

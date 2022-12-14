@@ -1,4 +1,5 @@
 import React from "react";
+import { Toaster } from "react-hot-toast"
 
 import Header from "./Header";
 import Nav from "./Nav";
@@ -22,6 +23,7 @@ const Layout = (props: LayoutProps) => {
       <Nav />
       <main>{props.children}</main>
       <Footer />
+      <Toaster />
     </Box>
   )
 }

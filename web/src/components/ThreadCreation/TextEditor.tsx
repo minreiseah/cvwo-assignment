@@ -56,6 +56,7 @@ const TextEditor = ({
           focusBorderColor='black'
           autoFocus
           isRequired
+          autoComplete="false"
           value={title}
           onChange={handleTitleChange}
           />
@@ -73,8 +74,9 @@ const TextEditor = ({
         }}
         focusBorderColor='black'
         isRequired
-          value={content}
-          onChange={handleContentChange}
+        autoComplete="false"
+        value={content}
+        onChange={handleContentChange}
         />
     </Flex>
   )
