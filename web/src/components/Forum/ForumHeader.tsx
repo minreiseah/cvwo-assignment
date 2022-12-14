@@ -134,14 +134,14 @@ const ForumHeader: React.FC = () => {
   const handleRecent = async () => {
     dispatch(toggleSort('recent'))
     // TODO
-    const threadCardsRecent = await threadService.getSortedThreads('date_desc')
+    // const threadCardsRecent = await threadService.getSortedThreads('date_desc')
     dispatch(updateRecentThreadCards(threadCardsRecent))
   }
 
   const handleTop = async () => {
     dispatch(toggleSort('top'))
     // TODO
-    const threadCardsPopular= await threadService.getSortedThreads('popularity_desc')
+    // const threadCardsPopular= await threadService.getSortedThreads('popularity_desc')
     dispatch(updateTopThreadCards(threadCardsPopular))
   }
 

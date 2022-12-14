@@ -1,5 +1,6 @@
 import React from "react";
 import { ThreadCardData } from "../../app/forum/types"
+import { formatDateString } from "../../utils/dateUtils";
 
 import {
   Flex,
@@ -34,16 +35,7 @@ const ThreadCard = (props: ThreadCardData) => {
     views
   } = props;
 
-  // datetime
-  const options: Intl.DateTimeFormatOptions = {
-    year: '2-digit',
-    month: 'short',
-    day: 'numeric',
-    hour: 'numeric',
-    minute: 'numeric',
-    hour12: true
-  };
-  const date = new Date(timestamp).toLocaleString(undefined, options);
+  const date = formatDateString(timestamp);
 
   return (
     <Flex 

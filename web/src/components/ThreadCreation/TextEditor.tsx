@@ -55,7 +55,6 @@ const TextEditor = ({
           }}
           focusBorderColor='black'
           autoFocus
-          isRequired
           autoComplete="false"
           value={title}
           onChange={handleTitleChange}
@@ -73,7 +72,6 @@ const TextEditor = ({
           borderColor: "black"
         }}
         focusBorderColor='black'
-        isRequired
         autoComplete="false"
         value={content}
         onChange={handleContentChange}
