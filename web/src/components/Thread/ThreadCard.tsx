@@ -24,7 +24,7 @@ import {
 const ThreadCard = (props: ThreadCardData) => {
   // deconstruction
   const {
-    id,
+    thread_id: id,
     title,
     author,
     picture,

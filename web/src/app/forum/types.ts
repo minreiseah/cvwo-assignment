@@ -1,5 +1,5 @@
 export interface ThreadCardData {
-    id: number,
+    thread_id: number,
     title: string,
     author: string,
     picture: string,

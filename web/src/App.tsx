@@ -18,7 +18,7 @@ const App: React.FC = () => {
         <Route path = "/" element = {<Forum />} />
         <Route path = "/pizza" element = {<Pizza />} />
         <Route path = "/help" element = {<Help />} />
-        <Route path = "/postThread" element={<PostThread />} />
+        <Route path = "/post-thread" element={<PostThread />} />
         <Route path = "/thread" element={<Thread />} /> 
       </Routes>
     </Layout>

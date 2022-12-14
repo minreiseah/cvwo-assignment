@@ -1,10 +1,9 @@
 import React from "react";
+import ThreadCreator from "../components/ThreadCreation/ThreadCreator" 
 
 const PostThread: React.FC = () => {
   return (
-    <div>
-      Post Thread
-    </div>
+    <ThreadCreator />
   )
 }
 

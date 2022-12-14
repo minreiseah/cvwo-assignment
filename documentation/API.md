@@ -35,6 +35,12 @@ Retrieve and create users.
 - Response data format: JSON
 - Authentication: None
 
+#### `GET /users/:user_id`
+* Description: Retrives the profile of a user.
+* Request data format: None
+* Response data format: JSON
+* Authentication: None
+
 #### `POST /users/new`
 
 - Description: Creates a new user.

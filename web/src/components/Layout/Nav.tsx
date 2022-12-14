@@ -14,6 +14,7 @@ import { Logo } from "../Shared/Logo"
 import LoginButton from "../Authentication/LoginButton";
 import SignupButton from "../Authentication/SignupButton";
 import LogoutButton from "../Authentication/LogoutButton";
+import CreateThreadButton from "../Thread/CreateThreadButton"
 import { useAppDispatch } from "../../app/hooks";
 import { onUserLogin, onUserLogout } from "../../app/userProfile/userProfileSlice";
 
@@ -30,8 +31,8 @@ const Nav: React.FC = () => {
   // On user login
   useEffect(() => {
     isAuthenticated
-    ? dispatch(onUserLogin(user))
-    : dispatch(onUserLogout())
+      ? dispatch(onUserLogin(user))
+      : dispatch(onUserLogout())
   }, [isAuthenticated])
 
   return (
@@ -58,7 +59,10 @@ const Nav: React.FC = () => {
             </HStack>
           )}
           {isAuthenticated && !isLoading && (
-            <LogoutButton />
+            <HStack spacing={4} marginRight="6px">
+              <LogoutButton />
+              <CreateThreadButton />
+            </HStack>
           )}
         </Flex>
 
@@ -68,7 +72,8 @@ const Nav: React.FC = () => {
         borderColor="black"
         borderBottom="4px"
         py={2}
-      />
+        mb={16}
+        />
     </React.Fragment>
   )
 }

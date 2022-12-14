@@ -14,55 +14,55 @@ import {
 // TEMPORARY TODO
 const threadCardsDate = [ 
   {
-    id: 1,
+    thread_id: 1,
     title: "First Post. Whodis.",
     author: "John Smith",
     picture: "https://bit.ly/dan-abramov",
-    timestamp: JSON.stringify(new Date(2022, 13, 11)),
+    timestamp: (new Date(2022, 13, 11)).toISOString(),
     categories: ["Food", "Vibes"],
     replies: 10,
     views: 10,
   },
 
   {
-    id: 2,
+    thread_id: 2,
     title: "Second Post. Hello.",
     author: "Bartholomew",
     picture: "https://bit.ly/kent-c-dodds",
-    timestamp: JSON.stringify(new Date(2022, 10, 11)),
+    timestamp: (new Date(2022, 10, 11)).toISOString(),
     categories: ["Gaming", "Chairs"],
     replies: 12,
     views: 127,
   },
 
   {
-    id: 3,
+    thread_id: 3,
     title: "Third Post. Good Morning.",
     author: "Ryan Florence",
     picture: "https://bit.ly/ryan-florence",
-    timestamp: JSON.stringify(new Date(2022, 11, 30)),
+    timestamp: (new Date(2022, 11, 30)).toISOString(),
     categories: ["Technology"],
     replies: 7,
     views: 57,
   },
 
   {
-    id: 4,
+    thread_id: 4,
     title: "Fourth Post. Hi.",
     author: "Prosper Baba",
     picture: "https://bit.ly/prosper-baba",
-    timestamp: JSON.stringify(new Date(2022, 10, 11)),
+    timestamp: (new Date(2022, 10, 11)).toISOString(),
     categories: ["Colours"],
     replies: 0,
     views: 7,
   },
 
   {
-    id: 5,
+    thread_id: 5,
     title: "Fifth Post. Good Night.",
     author: "Christian",
     picture: "https://bit.ly/sage-adebayo",
-    timestamp: JSON.stringify(new Date(2022, 9, 22)),
+    timestamp: (new Date(2022, 9, 22)).toISOString(),
     categories: ["Furniture", "Architecture"],
     replies: 1,
     views: 12,
@@ -72,54 +72,54 @@ const threadCardsDate = [
 // TEMPORARY TODO
 const threadCardsPopular = [ 
   {
-    id: 2,
+    thread_id: 2,
     title: "Second Post. Hello.",
     author: "Bartholomew",
     picture: "https://bit.ly/kent-c-dodds",
-    timestamp: JSON.stringify(new Date(2022, 10, 11)),
+    timestamp: (new Date(2022, 10, 11)).toISOString(),
     categories: ["Gaming", "Chairs"],
     replies: 158,
     views: 473,
   },
 
   {
-    id: 4,
+    thread_id: 4,
     title: "Fourth Post. Hi.",
     author: "Prosper Baba",
     picture: "https://bit.ly/prosper-baba",
-    timestamp: JSON.stringify(new Date(2022, 10, 11)),
+    timestamp: (new Date(2022, 10, 11)).toISOString(),
     categories: ["Colours"],
     replies: 123,
     views: 412,
   },
 
   {
-    id: 5,
+    thread_id: 5,
     title: "Fifth Post. Good Night.",
     author: "Christian",
     picture: "https://bit.ly/sage-adebayo",
-    timestamp: JSON.stringify(new Date(2022, 9, 22)),
+    timestamp: (new Date(2022, 9, 22)).toISOString(),
     categories: ["Furniture", "Architecture"],
     replies: 70,
     views: 347,
   },
   {
-    id: 1,
+    thread_id: 1,
     title: "First Post. Whodis.",
     author: "John Smith",
     picture: "https://bit.ly/dan-abramov",
-    timestamp: JSON.stringify(new Date(2022, 6, 11)),
+    timestamp: (new Date(2022, 6, 11)).toISOString(),
     categories: ["Food", "Vibes"],
     replies: 60,
     views: 267,
   },
 
   {
-    id: 3,
+    thread_id: 3,
     title: "Third Post. Good Morning.",
     author: "Ryan Florence",
     picture: "https://bit.ly/ryan-florence",
-    timestamp: JSON.stringify(new Date(2022, 11, 30)),
+    timestamp: (new Date(2022, 11, 30)).toISOString(),
     categories: ["Technology"],
     replies: 48,
     views: 195,
@@ -153,8 +153,7 @@ const ForumHeader: React.FC = () => {
     <Flex 
       direction="row" 
       justify="space-between"
-      align="center"
-      mt={16}
+      align="top"
       px={2}
     >
       <Tooltip 
