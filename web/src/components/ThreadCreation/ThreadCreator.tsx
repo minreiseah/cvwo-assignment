@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+
 import {
   Flex,
   Center,
   Heading,
 } from "@chakra-ui/react"
+
+import { Category } from "./CategorySelector";
 
 import TextEditor from "./TextEditor";
 import CategorySelector from "./CategorySelector";
@@ -11,6 +14,11 @@ import ThreadSubmit from "./ThreadSubmit"
 
 
 const ThreadCreator: React.FC = () => {
+  // Set up states to pass to threadSubmitter
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [categories, setCategories] = useState<Category>({});
+
   return (
     <Center flexDirection="column" gap={8}>
       <Flex 
@@ -30,11 +38,23 @@ const ThreadCreator: React.FC = () => {
         </Heading>
 
       </Flex>
-      <TextEditor>
-        <CategorySelector />
+      <TextEditor 
+        title={title}
+        setTitle={setTitle}
+        content={content}
+        setContent={setContent}
+      >
+        <CategorySelector
+          categories={categories}
+          setCategories={setCategories}
+          />
       </TextEditor>
 
-      <ThreadSubmit />
+      <ThreadSubmit
+        title={title}
+        content={content}
+        categories={categories}
+        />
     </Center>
   )
 }

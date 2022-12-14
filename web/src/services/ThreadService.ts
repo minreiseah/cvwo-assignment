@@ -12,7 +12,7 @@ export interface ThreadDisplayData {
   category_ids: number[],
   categories: string[],
 
-  user_id: number,
+  user_id: string, // sub
   author: string,
   picture: string,
   timestamp: string,
@@ -24,7 +24,7 @@ export interface ThreadCreationData {
   title: string,
   content: string,
   category_ids: number[],
-  user_id: number,
+  user_id?: string | null, // sub
 }
 
 class ThreadService {

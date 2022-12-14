@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FormControl,
   FormLabel,
@@ -11,22 +11,29 @@ import {
 import { AddIcon, CheckIcon } from "@chakra-ui/icons"
 
 // category: [selected?, category_id]
-interface Category {
+export interface Category {
   [key: string]: [boolean, number]
 }
 
-const CategorySelector: React.FC = () => {
+type CategorySelectorProps = {
+  categories: Category
+  setCategories: React.Dispatch<React.SetStateAction<Category>>
+}
 
-  const [categories, setCategories] = useState<Category>({ 
-    "technology": [false, 1],
-    "entertainment": [false, 2],
-    "sports": [false, 3],
-    "food": [false, 4],
-    "health": [false, 5],
-    "travel": [false, 6],
-    "finance": [false, 7],
-    "education": [false, 8],
-  })
+const CategorySelector = ({ categories, setCategories }: CategorySelectorProps) => {
+
+  useEffect(() => {
+    setCategories({
+      "technology": [false, 1],
+      "entertainment": [false, 2],
+      "sports": [false, 3],
+      "food": [false, 4],
+      "health": [false, 5],
+      "travel": [false, 6],
+      "finance": [false, 7],
+      "education": [false, 8],
+    })
+  }, [])
 
   const handleTagClick = (category: string) => () => {
     setCategories({

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import {
   Flex,
   Input,
@@ -9,10 +9,30 @@ import {
 
 
 type TextEditorProps = {
-  children: React.ReactNode
+  children: React.ReactNode,
+  title: string,
+  setTitle: React.Dispatch<React.SetStateAction<string>>
+  content: string,
+  setContent: React.Dispatch<React.SetStateAction<string>>
 }
 
-const TextEditor = ({children}: TextEditorProps) => {
+const TextEditor = ({
+  children, 
+  title,
+  setTitle,
+  content,
+  setContent
+}: TextEditorProps) => {
+
+  const handleTitleChange = (event: any) => {
+    const target = event.target
+    setTitle(target.value)
+  }
+
+  const handleContentChange = (event: any) => {
+    const target = event.target
+    setContent(target.value)
+  }
 
   return (
     <Flex 
@@ -36,11 +56,12 @@ const TextEditor = ({children}: TextEditorProps) => {
           focusBorderColor='black'
           autoFocus
           isRequired
+          value={title}
+          onChange={handleTitleChange}
           />
       </FormControl>
 
       {children}
-
 
       <Textarea 
         placeholder=""
@@ -52,6 +73,8 @@ const TextEditor = ({children}: TextEditorProps) => {
         }}
         focusBorderColor='black'
         isRequired
+          value={content}
+          onChange={handleContentChange}
         />
     </Flex>
   )
