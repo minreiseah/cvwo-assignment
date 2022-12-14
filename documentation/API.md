@@ -61,9 +61,17 @@ Retrieve all categories. Note that users are not allowed to create categories. O
 
 ### Threads
 
-Retrieve all threads or threads from a specific category.
+Retrieves thread by thread_id
+Retrieve info of all threads or threads from a specific category.
 Create threads in a specific category.
 Edit or delete threads.
+
+#### `GET /threads/:thread_id`
+
+- Description: Retrieves thread by thread_id.
+- Request data format: None
+- Response data format: JSON
+- Authentication: None
 
 #### `GET /threads`
 

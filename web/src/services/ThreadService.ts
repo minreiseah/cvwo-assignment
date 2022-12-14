@@ -12,10 +12,9 @@ export interface ThreadDisplayData {
   category_ids: number[],
   categories: string[],
 
-  user_id: string, // sub
+  user_id: number,
   author: string,
   picture: string,
-  timestamp: string,
   replies: number,
   views: number,
 }
@@ -55,6 +54,23 @@ class ThreadService {
       }));
 
       await axios.post('/threads_categories', threadCategories);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+* GET /threads/:thread_id
+* Description: Retrieves thread by thread_id
+* Request data format: None
+* Response data format: JSON
+* Authentication: None
+*/
+
+  public async getThread(threadId: number): Promise<ThreadDisplayData> {
+    try {
+      const res = await axios.get(`/threads/${threadId}`);
+      return res.data;
     } catch (error) {
       throw error;
     }
