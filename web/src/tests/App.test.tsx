@@ -1,18 +1,18 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import TestWrapper from "./TestWrapper"
 
-import Forum from '../routes/Forum';
+import ForumPage from '../routes/ForumPage';
 import { store } from '../app/store';
 
 describe('Forum Home Page', () => {
   it('Should render forum title', () => {
-    render(<Forum />, { wrapper: TestWrapper });
+    render(<ForumPage />, { wrapper: TestWrapper });
 
     expect(screen.getByText(/Posts/)).toBeInTheDocument();
   })
 
   it('Should view all recent threads on page initialisation', () => {
-    render(<Forum />, { wrapper: TestWrapper });
+    render(<ForumPage />, { wrapper: TestWrapper });
 
     // Get threads sorted state
     const initialState = store.getState().forum.sortedBy;

@@ -4,22 +4,22 @@ import { Route, Routes } from "react-router-dom"
 import Layout from "./components/Layout/Layout"
 
 // routes
-import Forum from "./routes/Forum"
-import Help from "./routes/Help"
+import ForumPage from "./routes/ForumPage"
+import HelpPage from "./routes/HelpPage"
 import Pizza from "./routes/Pizza" // redux testing
-import Thread from "./routes/Thread"
-import PostThread from "./routes/PostThread"
+import ThreadPage from "./routes/ThreadPage"
+import PostThreadPage from "./routes/PostThreadPage"
 
 const App: React.FC = () => {
 
   return (
     <Layout>
       <Routes>
-        <Route path = "/" element = {<Forum />} />
+        <Route path = "/" element = {<ForumPage />} />
         <Route path = "/pizza" element = {<Pizza />} />
-        <Route path = "/help" element = {<Help />} />
-        <Route path = "/post-thread" element={<PostThread />} />
-        <Route path = "/thread" element={<Thread />} /> 
+        <Route path = "/help" element = {<HelpPage />} />
+        <Route path = "/post-thread" element={<PostThreadPage />} />
+        <Route path = "/thread" element={<ThreadPage />} /> 
       </Routes>
     </Layout>
   )
