@@ -7,6 +7,7 @@ export interface CategoryData {
 
 class CategoryService {
 
+
   /** GET /categories
 * Description: Retrieves a list of all categories.
 * Request data format: None

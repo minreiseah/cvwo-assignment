@@ -1,16 +1,24 @@
 import axios from "axios";
 import { User } from "@auth0/auth0-react";
+import apiClient from "../utils/common";
+
+export interface userData {
+  "name": string,
+  "email": string,
+  "picture": string,
+  "sub": string,
+}
 
 class UserService {
 
   /** POST /users
 * Creates a new user
 */
-  public async createUser(userData: User) {
+  public async createUser(userData: userData) {
     try {
       // make a POST request to the server to create a new user
-      // will eventually refactor into an apiclient facade (http-common) or similar
-      const res = await axios.post('/users/new', userData);
+
+      const res = await axios.post('/users/new', userData)
       return res.data;
     } catch (error) {
       throw error;

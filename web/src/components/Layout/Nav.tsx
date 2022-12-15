@@ -25,14 +25,22 @@ const goToNewThreads = () => {
 }
 
 const Nav: React.FC = () => {
-  const { isAuthenticated, user, isLoading } = useAuth0();
+  const { isAuthenticated, user, isLoading, getAccessTokenSilently } = useAuth0();
   const dispatch = useAppDispatch();
 
   // On user login
   useEffect(() => {
-    isAuthenticated
-      ? dispatch(onUserLogin(user))
-      : dispatch(onUserLogout())
+    const onAuthChange = async () => {
+      const token = await getAccessTokenSilently();
+      if(isAuthenticated) {
+       dispatch(onUserLogin({"user": user, "token": token}))
+      } else {
+        dispatch(onUserLogout())
+      }
+    }
+
+    onAuthChange()
+
   }, [isAuthenticated])
 
   return (

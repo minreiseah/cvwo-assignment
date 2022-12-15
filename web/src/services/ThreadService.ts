@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import apiClient from "../utils/common";
 import {ThreadCardData} from "../app/forum/types"
 
 export interface ThreadDisplayData {
@@ -41,7 +42,7 @@ class ThreadService {
 */
   public async createThread(threadCreationData: ThreadCreationData): Promise<void> {
     try {
-      const res = await axios.post('threads/new', threadCreationData);
+      const res = await apiClient.post('threads/new', threadCreationData);
 
       // IMPORTANT: API must return thread_id
       const threadId = res.data.thread_id; 
@@ -53,7 +54,7 @@ class ThreadService {
         category_id: categoryId
       }));
 
-      await axios.post('/threads_categories', threadCategories);
+      await apiClient.post('/threads_categories', threadCategories);
     } catch (error) {
       throw error;
     }

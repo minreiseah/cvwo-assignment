@@ -8,7 +8,7 @@ const mockUser = {
   name: "John Doe",
   email: "johndoe@example.com",
   sub: "google-oauth2|12345678901234",
-  profilePicture: "https://bit.ly/john-doe",
+  picture: "https://bit.ly/john-doe",
 }
 
 const userService = new UserService();

@@ -61,5 +61,9 @@
             "axios": "axios/dist/node/axios.cjs"
         }
     },
-    "type": "module"
+    "type": "module",
+    "devDependencies": {
+        "@microsoft/tsdoc": "^0.14.2",
+        "typedoc": "^0.23.22"
+    }
 }

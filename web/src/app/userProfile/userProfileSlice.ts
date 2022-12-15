@@ -4,12 +4,14 @@ import { User } from '@auth0/auth0-spa-js';
 
 interface UserProfile {
   isAuthenticated: boolean,
-  user: User | null
+  token: any,
+  user?: User 
 }
 
 const initialState: UserProfile = {
   isAuthenticated: false,
-  user: null,
+  token: null,
+  user: undefined,
 }
 
 const userProfileSlice = createSlice({
@@ -21,7 +23,8 @@ const userProfileSlice = createSlice({
      */
     onUserLogin: (state, action) => {
       state.isAuthenticated = true;
-      state.user = action.payload || null;
+      state.user = action.payload.user || undefined;
+      state.token = action.payload.token
     },
 
     /**
