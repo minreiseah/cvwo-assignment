@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ThreadService, { ThreadDisplayData } from "../../services/ThreadService";
 import ThreadHeader from "./ThreadHeader";
 
@@ -49,26 +49,26 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
 
   return (
     <React.Fragment>
-          <Flex direction="column">
-            <ThreadHeader
-              title={data?.title}
-              category_ids={data?.category_ids}
-              categories={data?.categories}
-              replies={data?.replies}
-              views={data?.views}
-              />
+      <Flex direction="column">
+        <ThreadHeader
+          title={data?.title}
+          category_ids={data?.category_ids}
+          categories={data?.categories}
+          replies={data?.replies}
+          views={data?.views}
+          />
 
-            <Post
-              user_id={data?.user_id}
-              author={data?.author}
-              picture={data?.picture}
-              content={data?.content}
-              created_at={data?.created_at}
-              updated_at={data?.updated_at}
-              /> 
+        <Post
+          user_id={data?.user_id}
+          author={data?.author}
+          picture={data?.picture}
+          content={data?.content}
+          created_at={data?.created_at}
+          updated_at={data?.updated_at}
+          /> 
 
-            <Posts threadId={threadId} />
-          </Flex>
+        <Posts threadId={threadId} />
+      </Flex>
     </React.Fragment>
   )
 }

@@ -1,34 +1,9 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, act, waitFor } from '@testing-library/react';
 import TestWrapper from "./TestWrapper"
 
 import ForumPage from '../routes/ForumPage';
-import { store } from '../app/store';
+import { ReduxProvider } from '../providers/ReduxProvider';
 
-describe('Forum Home Page', () => {
-  it('Should render forum title', () => {
-    render(<ForumPage />, { wrapper: TestWrapper });
-
-    expect(screen.getByText(/Posts/)).toBeInTheDocument();
-  })
-
-  it('Should view all recent threads on page initialisation', () => {
-    render(<ForumPage />, { wrapper: TestWrapper });
-
-    // Get threads sorted state
-    const initialState = store.getState().forum.sortedBy;
-
-    expect(initialState).toEqual('recent')
-
-  })
-
-  it.todo('View all recent threads on tab change')
-
-  it.todo('should view all top threads')
-
-  // it.todo('should filter threads by category')
-
-  // it.todo('should search for specific discussions or keywords')
-})
 
 describe('Threads', () => {
   it.todo('only member should create new thread')
