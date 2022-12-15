@@ -1,17 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { ThreadCardData } from "./types"
-
-type sortedBy = 'top' | 'recent'
+import { sortParamTypes } from "../../services/ThreadService"
 
 interface Forum {
-  sortedBy: sortedBy,
+  sortedBy: sortParamTypes,
   recentThreadCards: ThreadCardData[] | null,
   topThreadCards: ThreadCardData[] | null
 }
 
 const initialState: Forum = {
-  sortedBy: 'recent',
+  sortedBy: 'date_desc',
   recentThreadCards: null,
   topThreadCards: null
 }
@@ -22,21 +21,19 @@ const forumSlice = createSlice({
   initialState,
 
   reducers: {
-    toggleSort: (state, action: PayloadAction<sortedBy>) => {
-      state.sortedBy = action.payload 
-    },
-
     updateRecentThreadCards: (state, action: PayloadAction<ThreadCardData[]>) => {
+      state.sortedBy = 'date_desc'
       state.recentThreadCards = action.payload
     },
 
     updateTopThreadCards: (state, action: PayloadAction<ThreadCardData[]>) => {
+      state.sortedBy = 'popularity_desc'
       state.topThreadCards = action.payload
     }
 
   }
 })
 
-export const { toggleSort, updateRecentThreadCards, updateTopThreadCards } = forumSlice.actions
+export const { updateRecentThreadCards, updateTopThreadCards } = forumSlice.actions
 
 export default forumSlice.reducer

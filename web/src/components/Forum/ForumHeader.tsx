@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { useAppDispatch } from "../../app/hooks";
-import { toggleSort, updateRecentThreadCards, updateTopThreadCards } from "../../app/forum/forumSlice";
+import { useQuery } from "react-query";
 
 import { 
   Flex,
@@ -10,7 +9,10 @@ import {
   Tab,
   Tooltip,
 } from "@chakra-ui/react";
+
 import ThreadService from "../../services/ThreadService";
+import { useAppDispatch } from "../../app/hooks";
+import { updateRecentThreadCards, updateTopThreadCards } from "../../app/forum/forumSlice";
 
 // TEMPORARY TODO
 const threadCardsRecent = [ 
@@ -131,32 +133,54 @@ const ForumHeader: React.FC = () => {
   const dispatch = useAppDispatch();
   const threadService = new ThreadService();
 
-  const handleRecent = async () => {
-    dispatch(toggleSort('recent'))
+  const recentQuery = useQuery(
+   "date_desc",
     // TODO
-    // const threadCardsRecent = await threadService.getSortedThreads('date_desc')
-    dispatch(updateRecentThreadCards(threadCardsRecent))
-  }
+    // () => threadService.getSortedThreads('date_desc')
+    () => {
+    return threadCardsRecent
+    }
+  )
 
-  const handleTop = async () => {
-    dispatch(toggleSort('top'))
+  const popularQuery = useQuery(
+   "popularity_desc",
     // TODO
-    // const threadCardsPopular= await threadService.getSortedThreads('popularity_desc')
-    dispatch(updateTopThreadCards(threadCardsPopular))
+    // () => threadService.getSortedThreads('popularity_desc')
+    () => threadCardsPopular
+  )
+
+  const handleRecent = () => {
+    recentQuery.refetch()
+
+    if(recentQuery.error instanceof Error) {
+      throw recentQuery.error
+    }
+
+    if(recentQuery.isSuccess) {
+      console.log("dispatch recent threads")
+      dispatch(updateRecentThreadCards(recentQuery.data))
+    }
   }
 
   useEffect(() => {
-    const fetchInitialThreads = async () => {
-      try {
-        // const threadCardsRecent = await threadService.getSortedThreads('date_desc')
-        dispatch(updateRecentThreadCards(threadCardsRecent))
-      } catch (error) {
-        throw(error)
-      }
+    if(recentQuery.isSuccess) {
+      console.log("initial threads")
+      dispatch(updateRecentThreadCards(recentQuery.data))
+    }
+  }, [recentQuery.isSuccess])
+
+  const handleTop = () => {
+    popularQuery.refetch()
+
+    if(popularQuery.error instanceof Error) {
+      throw popularQuery.error
     }
 
-    fetchInitialThreads()
-  },[])
+    if (popularQuery.isSuccess) {
+      console.log("dispatch top threads")
+      dispatch(updateTopThreadCards(popularQuery.data))
+    }
+  }
 
   return (
     <Flex 

@@ -14,7 +14,7 @@ const ForumThreads: React.FC = () => {
   return (
     <div>
       {
-      sortedBy === 'recent' &&
+      sortedBy === 'date_desc' &&
         recentThreadCards !== null && 
         recentThreadCards.map(item => {
           return (
@@ -23,7 +23,7 @@ const ForumThreads: React.FC = () => {
         )
     }
       {
-      sortedBy === 'top' &&
+      sortedBy === 'popularity_desc' &&
         topThreadCards !== null && 
         topThreadCards.map(item => {
           return (
