@@ -11,6 +11,7 @@ import PostProfile from "./PostProfile";
 import { formatDateString } from "../../utils/dateUtils"
 
 export interface IPost {
+  post_id?: number,
   user_id?: number,
   author?: string,
   picture?: string,
@@ -20,6 +21,7 @@ export interface IPost {
 }
 
 const Post: React.FC<IPost> = ({
+  post_id,
   user_id,
   author,
   picture,

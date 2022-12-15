@@ -2,7 +2,6 @@ import React from "react";
 import { 
   Flex, 
   Heading, 
-  Tooltip,
   Text,
   VStack,
   HStack
@@ -48,7 +47,7 @@ const ThreadHeader: React.FC<IThreadHeader> = ({
               {categories.map((category, index) => {
                 const isLast: boolean = index === categories.length - 1
                 return (
-                  <React.Fragment>
+                  <React.Fragment key={index}>
                     <Text>{category}</Text>
                     {!isLast && <Text>•</Text>}
                   </React.Fragment>

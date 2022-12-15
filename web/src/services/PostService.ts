@@ -61,7 +61,7 @@ class PostService {
 * Response data format: JSON
 * Authentication: None
 */
-  public async getThreadPosts(threadId: string): Promise<PostData[]> {
+  public async getThreadPosts(threadId: number): Promise<PostData[]> {
     try {
       const res = await axios.get(`/threads/${threadId}/posts`);
       return res.data;
@@ -76,7 +76,7 @@ class PostService {
 * Response data format: JSON
 * Authentication: Required
 */
-  public async editPost(threadId: string, postId: string, postData: PostData): Promise<PostData> {
+  public async editPost(threadId: number, postId: number, postData: PostData): Promise<PostData> {
     try {
       const res = await axios.put(`/threads/${threadId}/posts/${postId}/edit`, postData);
       return res.data;
@@ -91,7 +91,7 @@ class PostService {
 * Response data format: JSON
 * Authentication: Required
 */
-  public async deletePost(threadId: string, postId: string): Promise<void> {
+  public async deletePost(threadId: number, postId: number): Promise<void> {
     try {
       await axios.delete(`/threads/${threadId}/posts/${postId}/delete`);
     } catch (error) {

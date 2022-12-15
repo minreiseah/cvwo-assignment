@@ -5,6 +5,7 @@ import ThreadHeader from "./ThreadHeader";
 import Post, { IPost } from "../Post/Post";
 import Posts from "../Post/Posts"
 import { Flex } from "@chakra-ui/react";
+import { useQuery } from "react-query";
 
 const sampleThreadDisplayData: ThreadDisplayData = {
   thread_id: 1,
@@ -23,22 +24,6 @@ const sampleThreadDisplayData: ThreadDisplayData = {
   views: 13,
 }
 
-const tposts: IPost[] = [
-  {
-    content: 'I am trying to understand how to get a promise from a setTimeout function in JavaScript.',
-    updated_at: '2022-12-14T12:00:00Z',
-    user_id: 11,
-    author: 'sjdlfa',
-    picture: 'https://bit.ly/dan-abramov',
-  },
-  {
-    content: 'I am trying to understand how to etc............... lorem ipsum lorefoisi',
-    updated_at: '2022-12-14T12:00:00Z',
-    user_id: 11,
-    author: 'joijasfjoasdf fella',
-    picture: '',
-  }
-]
 
 interface IThread {
   threadId: number
@@ -48,40 +33,23 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
 
   const threadService = new ThreadService()
 
-  const [isLoading, setIsLoading] = useState(true)
+  const { data, isLoading, error} = useQuery(
+    "thread",
+    // () => threadService.getThread(threadId) // TODO
+    () => sampleThreadDisplayData
+  )
 
-  const [data, setData] = useState<ThreadDisplayData>();
+  if(isLoading) {
+    return <div>Loading...</div>
+  }
 
-  // fetch thread on initial page load
-  useEffect(() => {
-    const fetchThread = async () => {
-      try {
-        // TODO
-        // const res: ThreadDisplayData = await threadService.getThread(threadId);
-        const res = sampleThreadDisplayData;
-        setData(res);
-
-      } catch (error) {
-        throw error;
-      }
-
-    }
-
-    setIsLoading(true);
-    fetchThread();
-    setIsLoading(false);
-
-  }, [])
+  if(error instanceof Error) {
+    return <div>{error.message}</div>
+  }
 
   return (
     <React.Fragment>
-      {isLoading 
-        ? (
-          <div>loading...</div>
-        ) : (
-          <Flex
-            direction="column"
-          >
+          <Flex direction="column">
             <ThreadHeader
               title={data?.title}
               category_ids={data?.category_ids}
@@ -89,6 +57,7 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
               replies={data?.replies}
               views={data?.views}
               />
+
             <Post
               user_id={data?.user_id}
               author={data?.author}
@@ -97,10 +66,9 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
               created_at={data?.created_at}
               updated_at={data?.updated_at}
               /> 
-            <Posts posts={tposts} />
+
+            <Posts threadId={threadId} />
           </Flex>
-        )
-    }
     </React.Fragment>
   )
 }

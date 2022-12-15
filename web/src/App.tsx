@@ -19,7 +19,7 @@ const App: React.FC = () => {
         <Route path = "/pizza" element = {<Pizza />} />
         <Route path = "/help" element = {<HelpPage />} />
         <Route path = "/post-thread" element={<PostThreadPage />} />
-        <Route path = "/thread" element={<ThreadPage />} /> 
+        <Route path = "/thread/:threadId" element={<ThreadPage />} /> 
       </Routes>
     </Layout>
   )
