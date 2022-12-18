@@ -9,6 +9,7 @@ vendor/
 # Output directories
 dist/
 build/
+tmp/
 
 # Go
 *.out
