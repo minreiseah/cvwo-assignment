@@ -134,16 +134,16 @@ const ForumHeader: React.FC = () => {
   const threadService = new ThreadService();
 
   const recentQuery = useQuery(
-   "date_desc",
+    "date_desc",
     // TODO
     // () => threadService.getSortedThreads('date_desc')
     () => {
-    return threadCardsRecent
+      return threadCardsRecent
     }
   )
 
   const popularQuery = useQuery(
-   "popularity_desc",
+    "popularity_desc",
     // TODO
     // () => threadService.getSortedThreads('popularity_desc')
     () => threadCardsPopular

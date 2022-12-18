@@ -1,7 +1,5 @@
 import axios from "axios";
 
-import {ThreadCardData} from "../app/forum/types"
-
 export interface PostData {
   post_id: number,
   content: string,
