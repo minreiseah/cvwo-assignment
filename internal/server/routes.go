@@ -1,17 +1,14 @@
 package server
 
 import (
-	"fmt"
-	"net/http"
+	"main/internal/domain/users"
 )
 
 func (s *Server) InitRoutes() {
-    s.router.HandleFunc("/users", s.handleUsers())
+    s.router.Mount("/users", users.InitRouter())
+    // s.router.Mount("/categories", categories.InitRouter())
+    // s.router.Mount("/threads", threads.InitRouter())
+    // s.router.Mount("/threads-categories", threadsCategories.InitRouter())
+    // s.router.Mount("/posts", posts.InitRouter())
 }
 
-func (s *Server) handleUsers() http.HandlerFunc {
-    a := "hello world!"
-    return func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintln(w, a)
-    }
-}
