@@ -12,7 +12,7 @@
 | - | - | - |
 | Frontend | UI/UX | Typescript + React |
 | Application | RESTful API | Golang (Go-Chi) |
-| Database | Persistent Storage Layer | PostgreSQL + Entgo |
+| Database | Persistent Storage Layer | PostgreSQL + Docker |
 | Hosting | Deployment, Web Server, Storage | Heroku, Netlify, Render, AWS(?) |
 
 </div>
@@ -83,44 +83,44 @@ Monitoring and managing content ensures that the forum is a safe place for users
 
 ## API Endpoints
 
-Refer to [API Documentation](documentation/API.md)
+Refer to [API Documentation](https://github.com/minreiseah/cvwo-assignment/tree/main/api/API.md)
 
 ## Execution Plan
 
 #### Dec 9 - 11
 
-- [ ] Learn Typescript.
-- [ ] Read up on test driven development in React.
-- [ ] Design basic wireframes in Figma.
-- [ ] Read up on MVC.
+- [x] Learn Typescript.
+- [x] Read up on test driven development in React.
+- [x] Design basic wireframes in Figma.
+- [x] Read up on MVC.
 
 #### Dec 12 - 18
 
-- [ ] Implement basic frontend in React.
-- [ ] Learn about [TDD in Go](https://quii.gitbook.io/learn-go-with-tests/).
-- [ ] Read up on [Go-Chi](https://go-chi.io/#/README) to build REST API.
-- [ ] Implement database in MySQL (tentative).
-- [ ] Read up on [Entgo](https://entgo.io/docs/getting-started/).
+- [x] Implement basic frontend in React.
+- [x] Learn about [TDD in Go](https://quii.gitbook.io/learn-go-with-tests/).
+- [x] Read up on [Go-Chi](https://go-chi.io/#/README) to build REST API.
+- [x] Implement database in PostgreSQL.
+    - Note: Using a postgres:alpine-15 docker image
+- [x] API endpoints scaffolded in Go.
 
-#### Dec 19 - 25
+#### Dec 19 - 30
 
-- [ ] Implement API.
-
-#### Dec 26 - 30
-
-- [ ] Rest.
+- No Work. On Break.
 
 #### Jan 1 - 7
 
-- [ ] Complete MVP before the semester starts.
+- [ ] Complete API Endpoints.
+- [ ] Connect postgres server to Go.
+- [ ] Dockerise
 
 #### Jan 8 - 14
 
-- [ ] Stocktake.
+- [ ] Hosting.
+- [ ] Buffer.
 
 #### Jan 15 - 25
 
-- [ ] Buffer, stretch goals.
+- [ ] Stocktake, stretch goals.
 
 ## Notes
 
@@ -138,13 +138,36 @@ Framework/language-specific notes are shown below.
 
 - This project will use npm instead of yarn as I am more familiar with the former.
 - Chakra UI is chosen over MUI for its flexibility and ease of modification.
-- The Framer Motion library is an option for adding animations such as a loading screen or transitions.
-- I will attempt to integrate Redux from the start rather than refactoring my code to integreate it later on.
+- I will attempt to integrate Redux from the start rather than refactoring my code to integrate it later on.
 
 #### Go
 
+```
+.
+├── api // API information & documentation
+├── build // build files
+├── cmd // contains main.go
+├── internal 
+│   ├── database // database information
+│   ├── domain // each domain represents an API subrouter
+│   │   ├── categories
+│   │   │   ├── handler.go // endpoint logic
+│   │   │   ├── model.go // type information
+│   │   │   └── routes.go // subrouter routes
+│   │   ├── posts
+│   │   ├── threads
+│   │   ├── threadsCategories
+│   │   └── users
+│   ├── router
+│   └── server
+│       ├── routes.go // all main routes
+│       └── server.go // server information
+```
+
 
 #### Database
+
+![](api/database_schema.png)
 
 - As most hosting providers seem to provide native PostgreSQL support, I will tentatively pick PostgreSQL for my database.
 - Seems like `pg_dump` can be used to create PostgreSQL backups
@@ -152,7 +175,7 @@ Framework/language-specific notes are shown below.
 #### Hosting
 
 - Requirements include: frontend, database, application/web server for Rest API.
-- Render or Heroku for free-tier hosting. 
+- Render for free-tier hosting. 
 - Netlify only provides a serverless backend.
 
 ### Stretch Goals
