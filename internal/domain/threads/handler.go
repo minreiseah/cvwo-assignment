@@ -1,12 +1,14 @@
 package threads
 
 import (
-    "net/http"
-    // "github.com/go-chi/chi/v5"
+	"fmt"
+	"net/http"
+	// "github.com/go-chi/chi/v5"
 )
 
 func GetAllThreads(w http.ResponseWriter, r *http.Request) {
     // ctx := r.Context()
+    fmt.Fprintln(w, "GetAllThreads")
 }
 
 func GetThread(w http.ResponseWriter, r *http.Request) {

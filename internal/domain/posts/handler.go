@@ -2,7 +2,6 @@ package posts
 
 import (
     "net/http"
-    // "github.com/go-chi/chi/v5"
 )
 
 func GetAllPosts(w http.ResponseWriter, r *http.Request) {

@@ -10,7 +10,7 @@ func InitRouter() *chi.Mux {
     // add routes to the subrouter
     r.Get("/", GetAllThreads)
     r.Get("/{id}", GetThread)
-    r.Get("?{sort}", GetSortedThreads)
+    r.Get("/?{sort}", GetSortedThreads)
     r.Get("/categories/{category_id}", GetThreadsFromCategory)
 
     r.Post("/new", CreateThread)
