@@ -1,0 +1,459 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[10pt]{exam}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+
+\date{29 Dec 2022}
+
+\begin{document}
+
+\hypertarget{cvwo-assignment}{%
+\section{CVWO Assignment}\label{cvwo-assignment}}
+
+
+\hypertarget{architecture}{%
+\subsection{Architecture}\label{architecture}}
+
+\begin{longtable}[]{@{}lll@{}}
+\toprule
+Name & Description & Technologies \\
+\midrule
+\endhead
+Frontend & UI/UX & Typescript + React \\
+Application & RESTful API & Golang (Go-Chi) \\
+Database & Persistent Storage Layer & PostgreSQL + Docker \\
+Hosting & Deployment, Web Server, Storage & Heroku, Netlify, Render,
+AWS(?) \\
+\bottomrule
+\end{longtable}
+
+\hypertarget{project-requirements}{%
+\subsection{Project Requirements}\label{project-requirements}}
+
+\hypertarget{authentication}{%
+\subsubsection{Authentication}\label{authentication}}
+
+Authentication allows the forum to control who has access to its
+features and content. It provides a personalised and secure experience
+for users.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{As a} user, \textbf{I want} to be able to create an account on
+  the forum \textbf{so that} I can particiate in discussions(threads)
+  and engage with other users.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can create an account by providing a \emph{unique} username
+    or email, and password.
+  \item
+    The user can authenticate through Google or Facebook.
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to log in and log out
+  of my account \textbf{so that} I can access my personal settings and
+  preferences.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can log in to their account by entering their username and
+    password, or authenticate via Google or Facebook.
+  \item
+    The user can log out of their account by clicking a ``sign out''
+    button.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{user-navigation-and-thread-organisation}{%
+\subsubsection{User Navigation and Thread
+Organisation}\label{user-navigation-and-thread-organisation}}
+
+Good navigation and organisation make the forum easy to use and
+accessible to users.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{As a} user, \textbf{I want} to be able to view a list of all
+  \emph{recent} threads \textbf{so that} I can have a general overview
+  of the forum's content.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can view a list of recent threads organised by time (most
+    recent update).
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to view a list of all
+  the available threads \textbf{so that} I can \emph{easily} find
+  discussions that interest me.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can view a list of all threads topics organised by
+    \emph{category}.
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to search for specific
+  discussions or keywords \textbf{so that} I can easily find relevant
+  information on the forum.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can search for specific discussions or keywords by typing
+    their search query into a search bar and clicking a ``search''
+    button.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{crud-for-threads-and-posts}{%
+\subsubsection{CRUD for Threads and
+Posts}\label{crud-for-threads-and-posts}}
+
+The bread and butter of the forum. Only by allowing users to create,
+view, update, and delete threads and posts(replies) will the forum allow
+for users to particpate in discussion.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to create a new thread
+  \textbf{so that} I can share my thoughts and ideas with other members.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can create a new thread by providing a title, category, and
+    description.
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to view the details of
+  a specific thread \textbf{so that} I can see comments and replies.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can view a thread by clicking on a thread.
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to edit or delete my
+  comments \textbf{so that} I can correct any mistakes.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can edit or delete their comments by clicking an ``edit''
+    or ``delete'' button.
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to reply to other
+  people's posts \textbf{so that} I can engage in discussions and
+  contribute to the conversation.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can reply to other people's posts by typing their response
+    and clicking a ``submit'' button.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{social-features}{%
+\subsubsection{Social Features}\label{social-features}}
+
+Social features allow users to interact with each other on the forum.
+These features help to foster a sense of community, and encourage
+engagement and participation.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{As a} user, \textbf{I want} to be able to upvote or downvote
+  other users' comments \textbf{so that} I can show my approval or
+  support for another user's comment.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can upvote or downvote other people's posts by clicking the
+    respective button next to the comment.
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to customize my profile
+  \textbf{so that} I can personalize my experience on the forum.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can customize their profile by clicking on a ``setting''
+    button, which allows them to change their profile picture, bio, and
+    other personal information.
+  \end{itemize}
+\item
+  \textbf{As a} user, \textbf{I want} to be able to view other users'
+  profiles \textbf{so that} I can learn more about them and see their
+  past contributions to the forum.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The user can view other users' profiles by clicking on their
+    username, which displays their profile information, and past posts
+    and comments.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{moderation-features}{%
+\subsubsection{Moderation Features}\label{moderation-features}}
+
+Monitoring and managing content ensures that the forum is a safe place
+for users.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \textbf{As a} moderator, \textbf{I want} to be able to delete or edit
+  posts that violate the forum's rules or guidelines \textbf{so that} we
+  can maintain a positive and respectful community.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    The moderator can delete or edit posts by clicking a ``delete'' or
+    ``edit'' button next to the post.
+  \end{itemize}
+\end{enumerate}
+
+\hypertarget{api-endpoints}{%
+\subsection{API Endpoints}\label{api-endpoints}}
+
+Refer to
+\href{https://github.com/minreiseah/cvwo-assignment/tree/main/api/API.md}{API Documentation}
+
+\hypertarget{execution-plan}{%
+\subsection{Execution Plan}\label{execution-plan}}
+
+\hypertarget{dec-9---11}{%
+\paragraph{Dec 9 - 11}\label{dec-9---11}}
+
+\begin{itemize}
+\tightlist
+\item[$\boxtimes$]
+  Learn Typescript.
+\item[$\boxtimes$]
+  Read up on test driven development in React.
+\item[$\boxtimes$]
+  Design basic wireframes in Figma.
+\item[$\boxtimes$]
+  Read up on MVC.
+\end{itemize}
+
+\hypertarget{dec-12---18}{%
+\paragraph{Dec 12 - 18}\label{dec-12---18}}
+
+\begin{itemize}
+\tightlist
+\item[$\boxtimes$]
+  Implement basic frontend in React.
+\item[$\boxtimes$]
+  Learn about \href{https://quii.gitbook.io/learn-go-with-tests/}{TDD in
+  Go}.
+\item[$\boxtimes$]
+  Read up on \href{https://go-chi.io/\#/README}{Go-Chi} to build REST
+  API.
+\item[$\boxtimes$]
+  Implement database in PostgreSQL.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Note: Using a postgres:alpine-15 docker image
+  \end{itemize}
+\item[$\boxtimes$]
+  API endpoints scaffolded in Go.
+\end{itemize}
+
+\hypertarget{dec-19---30}{%
+\paragraph{Dec 19 - 30}\label{dec-19---30}}
+
+\begin{itemize}
+\tightlist
+\item
+  No Work. On Break.
+\end{itemize}
+
+\hypertarget{jan-1---7}{%
+\paragraph{Jan 1 - 7}\label{jan-1---7}}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Complete API Endpoints.
+\item[$\square$]
+  Connect postgres server to Go.
+\item[$\square$]
+  Dockerise
+\end{itemize}
+
+\hypertarget{jan-8---14}{%
+\paragraph{Jan 8 - 14}\label{jan-8---14}}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Hosting.
+\item[$\square$]
+  Buffer.
+\end{itemize}
+
+\hypertarget{jan-15---25}{%
+\paragraph{Jan 15 - 25}\label{jan-15---25}}
+
+\begin{itemize}
+\tightlist
+\item[$\square$]
+  Stocktake, stretch goals.
+\end{itemize}
+
+\hypertarget{notes}{%
+\subsection{Notes}\label{notes}}
+
+\hypertarget{documentation}{%
+\paragraph{Documentation}\label{documentation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Go: \texttt{godoc} for docstring
+\item
+  API: Github pages (tentative)
+\end{itemize}
+
+\hypertarget{react}{%
+\paragraph{React}\label{react}}
+
+\begin{itemize}
+\tightlist
+\item
+  This project will use npm instead of yarn as I am more familiar with
+  the former.
+\item
+  Chakra UI is chosen over MUI for its flexibility and ease of
+  modification.
+\item
+  I will attempt to integrate Redux from the start rather than
+  refactoring my code to integrate it later on.
+\end{itemize}
+
+\hypertarget{go}{%
+\paragraph{Go}\label{go}}
+
+\begin{verbatim}
+api // API information & documentation
+build // build files
+cmd // contains main.go
+internal 
+   database // database information
+   domain // each domain represents an API subrouter
+      categories
+         handler.go // endpoint logic
+         model.go // type information
+         routes.go // subrouter routes
+      posts
+      threads
+      threadsCategories
+      users
+   router
+   server
+      routes.go // all main routes
+      server.go // server information
+\end{verbatim}
+
+
+\end{document}
