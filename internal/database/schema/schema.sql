@@ -11,7 +11,7 @@ CREATE TABLE "threads" (
   "id" serial PRIMARY KEY,
   "title" varchar(255) NOT NULL,
   "content" text NOT NULL,
-  "views" int DEFAULT 0 NOT NULL,
+  "views" int NOT NULL DEFAULT 0,
   "created_at" timestamptz DEFAULT (now()) NOT NULL,
   "user_id" int NOT NULL
 );
