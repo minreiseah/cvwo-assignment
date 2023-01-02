@@ -5,7 +5,6 @@
 package db
 
 import (
-	"database/sql"
 	"time"
 )
 
@@ -25,12 +24,12 @@ type Post struct {
 }
 
 type Thread struct {
-	ID        int32         `json:"id"`
-	Title     string        `json:"title"`
-	Content   string        `json:"content"`
-	Views     sql.NullInt32 `json:"views"`
-	CreatedAt time.Time     `json:"created_at"`
-	UserID    int32         `json:"user_id"`
+	ID        int32     `json:"id"`
+	Title     string    `json:"title"`
+	Content   string    `json:"content"`
+	Views     int32     `json:"views"`
+	CreatedAt time.Time `json:"created_at"`
+	UserID    int32     `json:"user_id"`
 }
 
 type ThreadsCategory struct {
