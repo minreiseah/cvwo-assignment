@@ -17,7 +17,7 @@ export interface PostData {
 export interface PostCreationData {
   content: string,
   thread_id: number,
-  user_id: number,
+  user_sub: string,
 }
 
 class PostService {
@@ -29,7 +29,7 @@ class PostService {
 * Response data format: JSON
 * Authentication: Required
 */
-  public async createPost(threadId: string, postData: PostData): Promise<void> {
+  public async createPost(threadId: string, postData: PostCreationData): Promise<void> {
     try {
       const res = await axios.post(`/threads/${threadId}/posts/new`, postData);
       return res.data;
