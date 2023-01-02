@@ -57,13 +57,56 @@ func (q *Queries) DeleteAccount(ctx context.Context, id int32) error {
 	return err
 }
 
-const getAllUsers = `-- name: GetAllUsers :many
+const getUser = `-- name: GetUser :one
+SELECT id, name, email, picture, sub, created_at FROM users
+WHERE id = $1 LIMIT 1
+`
+
+func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
+	row := q.db.QueryRowContext(ctx, getUser, id)
+	var i User
+	err := row.Scan(
+		&i.ID,
+		&i.Name,
+		&i.Email,
+		&i.Picture,
+		&i.Sub,
+		&i.CreatedAt,
+	)
+	return i, err
+}
+
+const getUserID = `-- name: GetUserID :one
+SELECT id from users
+WHERE sub = $1 LIMIT 1
+`
+
+func (q *Queries) GetUserID(ctx context.Context, sub string) (int32, error) {
+	row := q.db.QueryRowContext(ctx, getUserID, sub)
+	var id int32
+	err := row.Scan(&id)
+	return id, err
+}
+
+const getUserSub = `-- name: GetUserSub :one
+SELECT sub from users
+WHERE id = $1 LIMIT 1
+`
+
+func (q *Queries) GetUserSub(ctx context.Context, id int32) (string, error) {
+	row := q.db.QueryRowContext(ctx, getUserSub, id)
+	var sub string
+	err := row.Scan(&sub)
+	return sub, err
+}
+
+const listUsers = `-- name: ListUsers :many
 SELECT id, name, email, picture, sub, created_at FROM users
 ORDER BY id
 `
 
-func (q *Queries) GetAllUsers(ctx context.Context) ([]User, error) {
-	rows, err := q.db.QueryContext(ctx, getAllUsers)
+func (q *Queries) ListUsers(ctx context.Context) ([]User, error) {
+	rows, err := q.db.QueryContext(ctx, listUsers)
 	if err != nil {
 		return nil, err
 	}
@@ -90,23 +133,4 @@ func (q *Queries) GetAllUsers(ctx context.Context) ([]User, error) {
 		return nil, err
 	}
 	return items, nil
-}
-
-const getUser = `-- name: GetUser :one
-SELECT id, name, email, picture, sub, created_at FROM users
-WHERE id = $1 LIMIT 1
-`
-
-func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
-	row := q.db.QueryRowContext(ctx, getUser, id)
-	var i User
-	err := row.Scan(
-		&i.ID,
-		&i.Name,
-		&i.Email,
-		&i.Picture,
-		&i.Sub,
-		&i.CreatedAt,
-	)
-	return i, err
 }

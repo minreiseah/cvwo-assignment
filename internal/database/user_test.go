@@ -54,3 +54,23 @@ func TestGetUser(t *testing.T) {
     require.Equal(t, user1.Sub, user2.Sub)
     require.WithinDuration(t, user1.CreatedAt, user2.CreatedAt, time.Second)
 }
+
+func TestGetUserID(t *testing.T) {
+    user := createRandomUser(t)
+    userID, err := testQueries.GetUserID(context.Background(), user.Sub)
+
+    require.NoError(t, err)
+    require.NotEmpty(t, userID)
+
+    require.Equal(t, user.ID, userID)
+}
+
+func TestGetUserSub(t *testing.T) {
+    user := createRandomUser(t)
+    userSub, err := testQueries.GetUserSub(context.Background(), user.ID)
+
+    require.NoError(t, err)
+    require.NotEmpty(t, userSub)
+
+    require.Equal(t, user.Sub, userSub)
+}
