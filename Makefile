@@ -3,3 +3,6 @@ build:
 
 start:
 	${shell go env GOPATH}/bin/air
+
+sqlc:
+	sqlc generate

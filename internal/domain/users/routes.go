@@ -1,16 +1,22 @@
 package users
 
 import (
-    "github.com/go-chi/chi/v5"
+	"context"
+	db "main/internal/database"
+
+	"github.com/go-chi/chi/v5"
 )
 
-func InitRouter() *chi.Mux {
+func InitRouter(db *db.Queries, ctx context.Context) *chi.Mux {
     r := chi.NewRouter()
 
+    // initialise user handler
+    h := NewHandler(db, ctx)
+
     // add routes to the subrouter
-    r.Get("/", GetAllUsers)
-    r.Get("/{id}", GetUser)
-    r.Post("/new", CreateUser)
+    r.Get("/", h.HandleGetAllUsers)
+    r.Get("/{id}", h.HandleGetUser)
+    r.Post("/new", h.HandleCreateUser)
 
     return r
 }
