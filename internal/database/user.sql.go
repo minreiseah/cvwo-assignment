@@ -7,7 +7,6 @@ package db
 
 import (
 	"context"
-	"database/sql"
 )
 
 const createUser = `-- name: CreateUser :one
@@ -19,14 +18,14 @@ INSERT INTO users (
 ) VALUES (
     $1, $2, $3, $4
 )
-RETURNING id, name, email, picture, sub, created_at, updated_at
+RETURNING id, name, email, picture, sub, created_at
 `
 
 type CreateUserParams struct {
-	Name    sql.NullString `json:"name"`
-	Email   sql.NullString `json:"email"`
-	Picture sql.NullString `json:"picture"`
-	Sub     string         `json:"sub"`
+	Name    string `json:"name"`
+	Email   string `json:"email"`
+	Picture string `json:"picture"`
+	Sub     string `json:"sub"`
 }
 
 func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, error) {
@@ -44,7 +43,6 @@ func (q *Queries) CreateUser(ctx context.Context, arg CreateUserParams) (User, e
 		&i.Picture,
 		&i.Sub,
 		&i.CreatedAt,
-		&i.UpdatedAt,
 	)
 	return i, err
 }
@@ -60,7 +58,7 @@ func (q *Queries) DeleteAccount(ctx context.Context, id int32) error {
 }
 
 const getAllUsers = `-- name: GetAllUsers :many
-SELECT id, name, email, picture, sub, created_at, updated_at FROM users
+SELECT id, name, email, picture, sub, created_at FROM users
 ORDER BY id
 `
 
@@ -80,7 +78,6 @@ func (q *Queries) GetAllUsers(ctx context.Context) ([]User, error) {
 			&i.Picture,
 			&i.Sub,
 			&i.CreatedAt,
-			&i.UpdatedAt,
 		); err != nil {
 			return nil, err
 		}
@@ -96,7 +93,7 @@ func (q *Queries) GetAllUsers(ctx context.Context) ([]User, error) {
 }
 
 const getUser = `-- name: GetUser :one
-SELECT id, name, email, picture, sub, created_at, updated_at FROM users
+SELECT id, name, email, picture, sub, created_at FROM users
 WHERE id = $1 LIMIT 1
 `
 
@@ -110,7 +107,6 @@ func (q *Queries) GetUser(ctx context.Context, id int32) (User, error) {
 		&i.Picture,
 		&i.Sub,
 		&i.CreatedAt,
-		&i.UpdatedAt,
 	)
 	return i, err
 }

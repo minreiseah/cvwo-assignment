@@ -1,28 +1,25 @@
 CREATE TABLE "users" (
   "id" serial PRIMARY KEY,
-  "name" varchar(255),
-  "email" varchar(255),
-  "picture" varchar(255),
+  "name" varchar(255) NOT NULL,
+  "email" varchar(255) NOT NULL,
+  "picture" varchar(255) NOT NULL,
   "sub" varchar(255) NOT NULL,
-  "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz
+  "created_at" timestamptz DEFAULT (now()) NOT NULL
 );
 
 CREATE TABLE "threads" (
   "id" serial PRIMARY KEY,
   "title" varchar(255) NOT NULL,
   "content" text NOT NULL,
-  "views" int,
-  "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz,
+  "views" int DEFAULT 0 NOT NULL,
+  "created_at" timestamptz DEFAULT (now()) NOT NULL,
   "user_id" int NOT NULL
 );
 
 CREATE TABLE "posts" (
   "id" serial PRIMARY KEY,
   "content" text NOT NULL,
-  "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz,
+  "created_at" timestamptz DEFAULT (now()) NOT NULL,
   "user_id" int NOT NULL,
   "thread_id" int NOT NULL
 );
@@ -30,9 +27,8 @@ CREATE TABLE "posts" (
 CREATE TABLE "categories" (
   "id" serial PRIMARY KEY,
   "name" varchar(255) NOT NULL,
-  "description" text,
-  "created_at" timestamptz DEFAULT (now()),
-  "updated_at" timestamptz
+  "description" text NOT NULL,
+  "created_at" timestamptz DEFAULT (now()) NOT NULL
 );
 
 CREATE TABLE "threads_categories" (

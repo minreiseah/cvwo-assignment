@@ -7,10 +7,10 @@ import (
 	"net/http"
 
 	"github.com/go-chi/chi/v5"
-    _ "github.com/lib/pq"
+	_ "github.com/lib/pq"
 
-
-	"main/internal/database"
+	"main/config"
+	db "main/internal/database"
 	"main/internal/router"
 )
 
@@ -52,19 +52,7 @@ func (s *Server) Run() {
 
 func (s *Server) InitDatabase() {
 
-    const (
-        host     = "localhost"
-        port     = 5432
-        user     = "root"
-        password = "toor"
-        dbname   = "postgres"
-    )
-
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		host, port, user, password, dbname)
-
-    conn, err := sql.Open("postgres", psqlInfo)
+    conn, err := sql.Open(config.DbDriver(), config.DbSource())
 
 	if err != nil {
 		panic(err)

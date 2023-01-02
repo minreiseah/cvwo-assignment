@@ -6,23 +6,22 @@ package db
 
 import (
 	"database/sql"
+	"time"
 )
 
 type Category struct {
-	ID          int32          `json:"id"`
-	Name        string         `json:"name"`
-	Description sql.NullString `json:"description"`
-	CreatedAt   sql.NullTime   `json:"created_at"`
-	UpdatedAt   sql.NullTime   `json:"updated_at"`
+	ID          int32     `json:"id"`
+	Name        string    `json:"name"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"created_at"`
 }
 
 type Post struct {
-	ID        int32        `json:"id"`
-	Content   string       `json:"content"`
-	CreatedAt sql.NullTime `json:"created_at"`
-	UpdatedAt sql.NullTime `json:"updated_at"`
-	UserID    int32        `json:"user_id"`
-	ThreadID  int32        `json:"thread_id"`
+	ID        int32     `json:"id"`
+	Content   string    `json:"content"`
+	CreatedAt time.Time `json:"created_at"`
+	UserID    int32     `json:"user_id"`
+	ThreadID  int32     `json:"thread_id"`
 }
 
 type Thread struct {
@@ -30,8 +29,7 @@ type Thread struct {
 	Title     string        `json:"title"`
 	Content   string        `json:"content"`
 	Views     sql.NullInt32 `json:"views"`
-	CreatedAt sql.NullTime  `json:"created_at"`
-	UpdatedAt sql.NullTime  `json:"updated_at"`
+	CreatedAt time.Time     `json:"created_at"`
 	UserID    int32         `json:"user_id"`
 }
 
@@ -41,11 +39,10 @@ type ThreadsCategory struct {
 }
 
 type User struct {
-	ID        int32          `json:"id"`
-	Name      sql.NullString `json:"name"`
-	Email     sql.NullString `json:"email"`
-	Picture   sql.NullString `json:"picture"`
-	Sub       string         `json:"sub"`
-	CreatedAt sql.NullTime   `json:"created_at"`
-	UpdatedAt sql.NullTime   `json:"updated_at"`
+	ID        int32     `json:"id"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Picture   string    `json:"picture"`
+	Sub       string    `json:"sub"`
+	CreatedAt time.Time `json:"created_at"`
 }
