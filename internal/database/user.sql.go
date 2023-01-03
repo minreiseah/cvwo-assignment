@@ -15,9 +15,13 @@ INSERT INTO users (
     email,
     picture,
     sub
-) VALUES (
+) VALUES(
     $1, $2, $3, $4
-)
+) 
+ON CONFLICT (sub) DO UPDATE 
+SET name = $1,
+    email = $2,
+    picture = $3
 RETURNING id, name, email, picture, sub, created_at
 `
 

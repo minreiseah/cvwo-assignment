@@ -33,10 +33,10 @@ const Nav: React.FC = () => {
       if(isAuthenticated) {
        dispatch(onUserLogin({"user": user, "token": token}))
         const userData: userData = {
-          "name": "hi",
-          "email": "minre",
-          "picture": "asjd",
-          "sub": "sdf"
+          "name": user?.name,
+          "email": user?.email,
+          "picture": user?.picture,
+          "sub": user?.sub,
         }
         await userService.createUser(userData)
         console.log("saved")
@@ -51,8 +51,6 @@ const Nav: React.FC = () => {
 
   const goToNewThreads = () => {
     // TODO
-    const data: any = userService.getUsers()
-    console.log(data)
   }
 
   return (

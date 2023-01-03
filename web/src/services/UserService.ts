@@ -3,10 +3,10 @@ import { User } from "@auth0/auth0-react";
 import apiClient from "../utils/common";
 
 export interface userData {
-  "name": string,
-  "email": string,
-  "picture": string,
-  "sub": string,
+  "name"?: string,
+  "email"?: string,
+  "picture"?: string,
+  "sub"?: string,
 }
 
 class UserService {
