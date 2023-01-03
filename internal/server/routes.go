@@ -1,7 +1,6 @@
 package server
 
 import (
-	"context"
 	"main/internal/domain/categories"
 	"main/internal/domain/posts"
 	"main/internal/domain/threads"
@@ -10,12 +9,10 @@ import (
 )
 
 func (s *Server) InitRoutes() {
-    ctx := context.Background()
-    
-    s.router.Mount("/users", users.InitRouter(s.db, ctx))
-    s.router.Mount("/categories", categories.InitRouter())
-    s.router.Mount("/threads", threads.InitRouter())
-    s.router.Mount("/threads-categories", threadsCategories.InitRouter())
-    s.router.Mount("/posts", posts.InitRouter())
+    s.router.Mount("/users", users.InitRouter(s.db))
+    s.router.Mount("/categories", categories.InitRouter(s.db))
+    s.router.Mount("/threads", threads.InitRouter(s.db))
+    s.router.Mount("/threads-categories", threadsCategories.InitRouter(s.db))
+    s.router.Mount("/posts", posts.InitRouter(s.db))
 }
 

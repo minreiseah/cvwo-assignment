@@ -1,21 +1,27 @@
 package threads
 
 import (
-    "github.com/go-chi/chi/v5"
+    "main/internal/database"
+
+	"github.com/go-chi/chi/v5"
 )
 
-func InitRouter() *chi.Mux {
+func InitRouter(db *db.Queries) *chi.Mux {
     r := chi.NewRouter()
 
-    // add routes to the subrouter
-    r.Get("/", GetAllThreads)
-    r.Get("/{id}", GetThread)
-    r.Get("/?{sort}", GetSortedThreads)
-    r.Get("/categories/{category_id}", GetThreadsFromCategory)
+    // initialise thread handler
+    h := NewHandler(db)
 
-    r.Post("/new", CreateThread)
-    r.Put("/{id}/edit", EditThread)
-    r.Delete("/{id}/delete", DeleteThread)
+    // add routes to the subrouter
+    r.Get("/", h.HandleListThreads)
+    r.Get("/{id}", h.HandleGetThread)
+    r.Get("/popular", h.HandleListThreadsByPopularity)
+    r.Get("/time", h.HandleListThreadsByTime)
+    r.Get("/categories/{category_id}", h.HandleListThreadsFromCategory)
+
+    r.Post("/new", h.HandleCreateThread)
+    r.Put("/edit", h.HandleEditThread)
+    r.Delete("/delete/{id}", h.HandleDeleteThread)
 
     return r
 }

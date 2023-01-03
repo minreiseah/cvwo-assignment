@@ -9,7 +9,7 @@ import (
 	"context"
 )
 
-const createThreadCategoryCompositeLink = `-- name: CreateThreadCategoryCompositeLink :one
+const linkThreadAndCategory = `-- name: LinkThreadAndCategory :one
 INSERT INTO threads_categories (
     category_id,
     thread_id
@@ -19,13 +19,13 @@ INSERT INTO threads_categories (
 RETURNING category_id, thread_id
 `
 
-type CreateThreadCategoryCompositeLinkParams struct {
+type LinkThreadAndCategoryParams struct {
 	CategoryID int32 `json:"category_id"`
 	ThreadID   int32 `json:"thread_id"`
 }
 
-func (q *Queries) CreateThreadCategoryCompositeLink(ctx context.Context, arg CreateThreadCategoryCompositeLinkParams) (ThreadsCategory, error) {
-	row := q.db.QueryRowContext(ctx, createThreadCategoryCompositeLink, arg.CategoryID, arg.ThreadID)
+func (q *Queries) LinkThreadAndCategory(ctx context.Context, arg LinkThreadAndCategoryParams) (ThreadsCategory, error) {
+	row := q.db.QueryRowContext(ctx, linkThreadAndCategory, arg.CategoryID, arg.ThreadID)
 	var i ThreadsCategory
 	err := row.Scan(&i.CategoryID, &i.ThreadID)
 	return i, err

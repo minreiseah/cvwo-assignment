@@ -1,9 +1,6 @@
 package users
 
 import (
-    "context"
-    "encoding/json"
-    "fmt"
     "net/http"
     "strconv"
 
@@ -15,21 +12,29 @@ import (
 
 type Handler struct {
     db *db.Queries
-    ctx context.Context
 }
 
-func NewHandler (db *db.Queries, ctx context.Context) *Handler {
+func NewHandler (db *db.Queries) *Handler {
     return &Handler{
         db,
-        ctx,
     }
 }
 
-func enableCors(w *http.ResponseWriter) {
-    header := (*w).Header()
-    header.Add("Access-Control-Allow-Origin", "*")
-    header.Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
-    header.Add("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
+func (h *Handler) HandleCreateUser(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    // Parse request body to get user data
+    var params db.CreateUserParams
+    util.Parse(w, r, &params)
+
+    // Create user
+    user, err := h.db.CreateUser(ctx, params)
+    if err != nil {
+        http.Error(w, "Failed to create user", http.StatusInternalServerError)
+        return
+    }
+
+    util.Respond(w, http.StatusOK, user)
 }
 
 func (h *Handler) HandleListUsers(w http.ResponseWriter, r *http.Request) {
@@ -61,29 +66,4 @@ func (h *Handler) HandleGetUser(w http.ResponseWriter, r *http.Request) {
 
     util.Respond(w, http.StatusOK, user)
 }
-
-func (h *Handler) HandleCreateUser(w http.ResponseWriter, r *http.Request) {
-    ctx := r.Context()
-
-    // Parse request body to get user data
-    var params db.CreateUserParams
-    err := json.NewDecoder(r.Body).Decode(&params)
-    if err != nil {
-        http.Error(w, "Invalid request payload", http.StatusBadRequest)
-        http.Error(w, err.Error(), http.StatusBadRequest)
-        return
-    }
-
-    // Create user
-    user, err := h.db.CreateUser(ctx, params)
-    if err != nil {
-        http.Error(w, "Failed to create user", http.StatusInternalServerError)
-        return
-    }
-
-    util.Respond(w, http.StatusOK, user)
-    fmt.Println("success")
-}
-
-
 

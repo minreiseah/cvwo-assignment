@@ -8,17 +8,17 @@ import (
 
 )
 
-func TestCreateThreadCategoryCompositeLink(t *testing.T) {
+func TestLinkThreadAndCategory(t *testing.T) {
     user := createRandomUser(t)
     thread := createRandomThread(t, user.Sub)
     category := createRandomCategory(t)
 
-    arg := CreateThreadCategoryCompositeLinkParams{
+    arg := LinkThreadAndCategoryParams{
         CategoryID: category.ID,
         ThreadID: thread.ID,
     }
 
-    link, err := testQueries.CreateThreadCategoryCompositeLink(context.Background(), arg)
+    link, err := testQueries.LinkThreadAndCategory(context.Background(), arg)
 
     require.NoError(t, err)
     require.NotEmpty(t, link)

@@ -1,14 +1,19 @@
 package threadsCategories
 
 import (
-    "github.com/go-chi/chi/v5"
+	db "main/internal/database"
+
+	"github.com/go-chi/chi/v5"
 )
 
-func InitRouter() *chi.Mux {
+func InitRouter(db *db.Queries) *chi.Mux {
     r := chi.NewRouter()
 
+    // initialise threadsCategories handler
+    h := NewHandler(db)
+
     // add routes to the subrouter
-    r.Get("/", LinkThreadAndCategory)
+    r.Get("/", h.HandleLinkThreadAndCategory)
 
     return r
 }

@@ -24,6 +24,12 @@ ORDER BY views;
 SELECT * FROM threads
 ORDER BY created_at;
 
+-- name: ListThreadsFromCategory :many
+SELECT t.* FROM threads t
+JOIN threads_categories tc ON t.id = tc.thread_id
+WHERE tc.category_id = $1
+ORDER BY id;
+
 -- name: UpdateThread :one
 UPDATE threads
 SET title = COALESCE(sqlc.narg(title), title),

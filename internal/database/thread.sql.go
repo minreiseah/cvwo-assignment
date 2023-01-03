@@ -175,6 +175,43 @@ func (q *Queries) ListThreadsByTime(ctx context.Context) ([]Thread, error) {
 	return items, nil
 }
 
+const listThreadsFromCategory = `-- name: ListThreadsFromCategory :many
+SELECT t.id, t.title, t.content, t.views, t.created_at, t.user_id FROM threads t
+JOIN threads_categories tc ON t.id = tc.thread_id
+WHERE tc.category_id = $1
+ORDER BY id
+`
+
+func (q *Queries) ListThreadsFromCategory(ctx context.Context, categoryID int32) ([]Thread, error) {
+	rows, err := q.db.QueryContext(ctx, listThreadsFromCategory, categoryID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Thread
+	for rows.Next() {
+		var i Thread
+		if err := rows.Scan(
+			&i.ID,
+			&i.Title,
+			&i.Content,
+			&i.Views,
+			&i.CreatedAt,
+			&i.UserID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const updateThread = `-- name: UpdateThread :one
 UPDATE threads
 SET title = COALESCE($2, title),

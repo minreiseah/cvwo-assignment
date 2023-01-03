@@ -1,17 +1,23 @@
 package posts
 
 import (
-    "github.com/go-chi/chi/v5"
+    db "main/internal/database"
+
+	"github.com/go-chi/chi/v5"
 )
 
-func InitRouter() *chi.Mux {
+func InitRouter(db *db.Queries) *chi.Mux {
     r := chi.NewRouter()
 
+    // initialise post handler
+    h := NewHandler(db)
+
     // add routes to the subrouter
-    r.Get("/", GetAllPosts)
-    r.Post("/threads/{thread_id}", CreatePost)
-    r.Put("/{id}/edit", EditPost)
-    r.Delete("/{id}/delete", DeletePost)
+    r.Get("/", h.HandleGetAllPosts)
+    r.Get("/threads/{thread_id}", h.HandleListPostsFromThread)
+    r.Post("/threads/{thread_id}", h.HandleCreatePost)
+    r.Put("/edit", h.HandleEditPost)
+    r.Delete("/delete/{id}", h.HandleDeletePost)
 
     return r
 }

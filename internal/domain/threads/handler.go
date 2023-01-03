@@ -1,39 +1,144 @@
 package threads
 
 import (
-	"fmt"
+	db "main/internal/database"
+	"main/internal/util"
 	"net/http"
-	// "github.com/go-chi/chi/v5"
+	"strconv"
+
+	"github.com/go-chi/chi/v5"
 )
 
-func GetAllThreads(w http.ResponseWriter, r *http.Request) {
-    // ctx := r.Context()
-    fmt.Fprintln(w, "GetAllThreads")
+type Handler struct {
+    db *db.Queries
 }
 
-func GetThread(w http.ResponseWriter, r *http.Request) {
-    // ctx := r.Context()
+func NewHandler (db *db.Queries) *Handler {
+    return &Handler{
+        db,
+    }
 }
 
-func GetSortedThreads(w http.ResponseWriter, r *http.Request) {
-    // ctx := r.Context()
+func (h *Handler) HandleCreateThread(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    // parse request body to get post data
+    var params db.CreateThreadParams
+    util.Parse(w, r, &params)
+
+    // Create thread
+    thread, err := h.db.CreateThread(ctx, params)
+    if err != nil {
+        http.Error(w, "Failed to create thread", http.StatusInternalServerError)
+        return
+    }
+
+    util.Respond(w, http.StatusOK, thread)
 }
 
-func GetThreadsFromCategory(w http.ResponseWriter, r *http.Request) {
-    // ctx := r.Context()
+
+func (h *Handler) HandleGetThread(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 32);
+    if err != nil {
+        http.Error(w, "Invalid Thread ID", http.StatusInternalServerError)
+        return
+    }
+
+    thread, err := h.db.GetThread(ctx, int32(id))
+    if err != nil {
+        http.Error(w, "Failed to retrieve threads", http.StatusInternalServerError)
+    }
+
+    util.Respond(w, http.StatusOK, thread)
 }
 
-func CreateThread(w http.ResponseWriter, r *http.Request) {
-    // ctx := r.Context()
+func (h *Handler) HandleListThreads(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    threads, err := h.db.ListThreads(ctx)
+    if err != nil {
+        http.Error(w, "Failed to retrieve threads", http.StatusInternalServerError)
+    }
+
+    util.Respond(w, http.StatusOK, threads)
 }
 
-func EditThread(w http.ResponseWriter, r *http.Request) {
-    // ctx := r.Context()
+func (h *Handler) HandleListThreadsByPopularity(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    threads, err := h.db.ListThreadsByPopularity(ctx)
+    if err != nil {
+        http.Error(w, "Failed to retrieve threads", http.StatusInternalServerError)
+    }
+
+    util.Respond(w, http.StatusOK, threads)
 }
 
-func DeleteThread(w http.ResponseWriter, r *http.Request) {
-    // ctx := r.Context()
+func (h *Handler) HandleListThreadsByTime(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    threads, err := h.db.ListThreadsByTime(ctx)
+    if err != nil {
+        http.Error(w, "Failed to retrieve threads", http.StatusInternalServerError)
+    }
+
+    util.Respond(w, http.StatusOK, threads)
 }
 
+func (h *Handler) HandleListThreadsFromCategory(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    categoryID, err := strconv.ParseInt(chi.URLParam(r, "category_id"), 10, 32);
+    if err != nil {
+        http.Error(w, "Invalid category ID", http.StatusInternalServerError)
+        return
+    }
+
+    threads, err := h.db.ListThreadsFromCategory(ctx, int32(categoryID))
+    if err != nil {
+        http.Error(w, "Failed to retrieve threads", http.StatusInternalServerError)
+    }
+
+    util.Respond(w, http.StatusOK, threads)
+}
+
+func (h *Handler) HandleEditThread(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    // Parse request body to get thread data
+    var params db.UpdateThreadParams
+    util.Parse(w, r, &params)
+
+    // Update thread
+    thread, err := h.db.UpdateThread(ctx, params)
+    if err != nil {
+        http.Error(w, "Failed to update thread", http.StatusInternalServerError)
+        return
+    }
+
+    util.Respond(w, http.StatusOK, thread)
+}
+
+func (h *Handler) HandleDeleteThread(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 32);
+    if err != nil {
+        http.Error(w, "Invalid thread ID", http.StatusInternalServerError)
+        return
+    }
+
+    // Delete the thread with the specified id
+    err = h.db.DeleteThread(ctx, int32(id))
+
+    if err != nil {
+        http.Error(w, "Failed to delete thread", http.StatusInternalServerError)
+        return
+    }
+
+    util.Respond(w, http.StatusOK, "thread deleted")
+}
 
 

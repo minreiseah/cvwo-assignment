@@ -1,4 +1,4 @@
--- name: CreateThreadCategoryCompositeLink :one
+-- name: LinkThreadAndCategory :one
 INSERT INTO threads_categories (
     category_id,
     thread_id
