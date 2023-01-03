@@ -18,7 +18,7 @@ class UserService {
     try {
       // make a POST request to the server to create a new user
 
-      const res = await axios.post('/users/new', userData)
+      const res = await apiClient.post('/users/new', userData)
       return res.data;
     } catch (error) {
       throw error;
@@ -33,7 +33,7 @@ class UserService {
 */
   public async getUsers() {
     try {
-      const res = await axios.get('/users');
+      const res = await apiClient.get('/users');
       return res.data;
     } catch (error) {
       throw error;
@@ -48,7 +48,7 @@ class UserService {
 */
   public async getUser(userId: number) {
     try {
-      const res = await axios.get(`/users/${userId}`)
+      const res = await apiClient.get(`/users/${userId}`)
       return res.data;
     } catch (error) {
       throw error;

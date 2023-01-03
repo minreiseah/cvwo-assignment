@@ -1,15 +1,16 @@
 package users
 
 import (
-	"context"
-	"encoding/json"
-	"net/http"
-	"strconv"
+    "context"
+    "encoding/json"
+    "fmt"
+    "net/http"
+    "strconv"
 
-	"main/internal/database"
-	"main/internal/util"
+    "main/internal/database"
+    "main/internal/util"
 
-	"github.com/go-chi/chi/v5"
+    "github.com/go-chi/chi/v5"
 )
 
 type Handler struct {
@@ -22,6 +23,13 @@ func NewHandler (db *db.Queries, ctx context.Context) *Handler {
         db,
         ctx,
     }
+}
+
+func enableCors(w *http.ResponseWriter) {
+    header := (*w).Header()
+    header.Add("Access-Control-Allow-Origin", "*")
+    header.Add("Access-Control-Allow-Methods", "DELETE, POST, GET, OPTIONS")
+    header.Add("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With")
 }
 
 func (h *Handler) HandleListUsers(w http.ResponseWriter, r *http.Request) {
@@ -74,6 +82,7 @@ func (h *Handler) HandleCreateUser(w http.ResponseWriter, r *http.Request) {
     }
 
     util.Respond(w, http.StatusOK, user)
+    fmt.Println("success")
 }
 
 

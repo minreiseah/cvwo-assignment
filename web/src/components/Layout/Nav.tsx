@@ -17,16 +17,14 @@ import LogoutButton from "../Authentication/LogoutButton";
 import CreateThreadButton from "../Thread/CreateThreadButton"
 import { useAppDispatch } from "../../app/hooks";
 import { onUserLogin, onUserLogout } from "../../app/userProfile/userProfileSlice";
+import UserService, { userData } from "../../services/UserService";
 
-
-const goToNewThreads = () => {
-  // TODO
-  return null;
-}
 
 const Nav: React.FC = () => {
   const { isAuthenticated, user, isLoading, getAccessTokenSilently } = useAuth0();
   const dispatch = useAppDispatch();
+
+  const userService = new UserService()
 
   // On user login
   useEffect(() => {
@@ -34,6 +32,14 @@ const Nav: React.FC = () => {
       const token = await getAccessTokenSilently();
       if(isAuthenticated) {
        dispatch(onUserLogin({"user": user, "token": token}))
+        const userData: userData = {
+          "name": "hi",
+          "email": "minre",
+          "picture": "asjd",
+          "sub": "sdf"
+        }
+        await userService.createUser(userData)
+        console.log("saved")
       } else {
         dispatch(onUserLogout())
       }
@@ -42,6 +48,12 @@ const Nav: React.FC = () => {
     onAuthChange()
 
   }, [isAuthenticated])
+
+  const goToNewThreads = () => {
+    // TODO
+    const data: any = userService.getUsers()
+    console.log(data)
+  }
 
   return (
     <React.Fragment>

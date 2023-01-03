@@ -13,7 +13,7 @@ const mockUser = {
 
 const userService = new UserService();
 
-describe('getTodos', () => {
+describe('login flow (broken)', () => {
   it('should post user data to DB', async () => {
 
     // Desired data from axios

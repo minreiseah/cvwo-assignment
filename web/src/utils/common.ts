@@ -2,7 +2,7 @@ import axios from "axios"
 import { store } from "../app/store"
 
 const defaultOptions = {
-  baseURL: '/api/v1',
+  baseURL: 'http://localhost:8000',
   headers: {
     "Content-type": "application/json",
   }
