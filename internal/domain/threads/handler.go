@@ -1,6 +1,7 @@
 package threads
 
 import (
+	"fmt"
 	db "main/internal/database"
 	"main/internal/util"
 	"net/http"
@@ -62,6 +63,8 @@ func (h *Handler) HandleListThreadsDisplay(w http.ResponseWriter, r *http.Reques
         http.Error(w, "Failed to retrieve threads", http.StatusInternalServerError)
     }
 
+    fmt.Println(threads[0])
+
     util.Respond(w, http.StatusOK, threads)
 }
 
@@ -119,6 +122,25 @@ func (h *Handler) HandleEditThread(w http.ResponseWriter, r *http.Request) {
     }
 
     util.Respond(w, http.StatusOK, thread)
+}
+
+func (h *Handler) HandleUpdateThreadViews(w http.ResponseWriter, r *http.Request) {
+    ctx := r.Context()
+
+    id, err := strconv.ParseInt(chi.URLParam(r, "id"), 10, 32);
+    if err != nil {
+        http.Error(w, "Invalid thread ID", http.StatusInternalServerError)
+        return
+    }
+
+    // Delete the thread with the specified id
+    err = h.db.UpdateThreadViews(ctx, int32(id))
+    if err != nil {
+        http.Error(w, "Failed to update thread viewcount", http.StatusInternalServerError)
+        return
+    }
+
+    util.Respond(w, http.StatusOK, "")
 }
 
 func (h *Handler) HandleDeleteThread(w http.ResponseWriter, r *http.Request) {

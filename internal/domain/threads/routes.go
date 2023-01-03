@@ -21,6 +21,7 @@ func InitRouter(db *db.Queries) *chi.Mux {
 
     r.Post("/new", h.HandleCreateThread)
     r.Put("/edit", h.HandleEditThread)
+    r.Put("/{id}", h.HandleUpdateThreadViews)
     r.Delete("/delete/{id}", h.HandleDeleteThread)
 
     return r

@@ -75,9 +75,10 @@ const threadCardsRecent = [
 // TEMPORARY TODO
 const threadCardsPopular = [ 
   {
-    thread_id: 2,
+    id: 2,
+    user_id: 123,
     title: "Second Post. Hello.",
-    author: "Bartholomew",
+    name: "Bartholomew",
     picture: "https://bit.ly/kent-c-dodds",
     timestamp: (new Date(2022, 10, 11)).toISOString(),
     categories: ["Gaming", "Chairs"],
@@ -86,9 +87,10 @@ const threadCardsPopular = [
   },
 
   {
-    thread_id: 4,
+    id: 4,
+    user_id: 123,
     title: "Fourth Post. Hi.",
-    author: "Prosper Baba",
+    name: "Prosper Baba",
     picture: "https://bit.ly/prosper-baba",
     timestamp: (new Date(2022, 10, 11)).toISOString(),
     categories: ["Colours"],
@@ -97,9 +99,10 @@ const threadCardsPopular = [
   },
 
   {
-    thread_id: 5,
+    id: 5,
+    user_id: 123,
     title: "Fifth Post. Good Night.",
-    author: "Christian",
+    name: "Christian",
     picture: "https://bit.ly/sage-adebayo",
     timestamp: (new Date(2022, 9, 22)).toISOString(),
     categories: ["Furniture", "Architecture"],
@@ -107,9 +110,10 @@ const threadCardsPopular = [
     views: 347,
   },
   {
-    thread_id: 1,
+    id: 1,
+    user_id: 123,
     title: "First Post. Whodis.",
-    author: "John Smith",
+    name: "John Smith",
     picture: "https://bit.ly/dan-abramov",
     timestamp: (new Date(2022, 6, 11)).toISOString(),
     categories: ["Food", "Vibes"],
@@ -118,9 +122,10 @@ const threadCardsPopular = [
   },
 
   {
-    thread_id: 3,
+    id: 3,
+    user_id: 123,
     title: "Third Post. Good Morning.",
-    author: "Ryan Florence",
+    name: "Ryan Florence",
     picture: "https://bit.ly/ryan-florence",
     timestamp: (new Date(2022, 11, 30)).toISOString(),
     categories: ["Technology"],
@@ -135,11 +140,7 @@ const ForumHeader: React.FC = () => {
 
   const recentQuery = useQuery(
     "date_desc",
-    // TODO
-    // () => threadService.getSortedThreads('date_desc')
-    () => {
-      return threadCardsRecent
-    }
+    () => threadService.getThreads()
   )
 
   const popularQuery = useQuery(
@@ -157,8 +158,8 @@ const ForumHeader: React.FC = () => {
     }
 
     if(recentQuery.isSuccess) {
-      console.log("dispatch recent threads")
       dispatch(updateRecentThreadCards(recentQuery.data))
+      console.log("successfully dispatched recent threads")
     }
   }
 
@@ -177,8 +178,8 @@ const ForumHeader: React.FC = () => {
     }
 
     if (popularQuery.isSuccess) {
-      console.log("dispatch top threads")
       dispatch(updateTopThreadCards(popularQuery.data))
+      console.log("successfully dispatched top threads")
     }
   }
 

@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import apiClient from "../utils/common";
 import {ThreadCardData} from "../app/forum/types"
 
@@ -24,7 +22,7 @@ export interface ThreadCreationData {
   title: string,
   content: string,
   category_ids: number[],
-  user_id?: string | null, // sub
+  sub?: string | null, // sub
 }
 
 export type sortParamTypes = 'date_asc' | 'date_desc' | 'popularity_asc' | 'popularity_desc'
@@ -75,7 +73,7 @@ class ThreadService {
 
   public async getThread(threadId: number): Promise<ThreadDisplayData> {
     try {
-      const res = await axios.get(`/threads/${threadId}`);
+      const res = await apiClient.get(`/threads/${threadId}`);
       return res.data;
     } catch (error) {
       throw error;
@@ -91,7 +89,8 @@ class ThreadService {
 */
   public async getThreads(): Promise<ThreadCardData[]> {
     try {
-      const res = await axios.get('/threads');
+      const res = await apiClient.get('/threads');
+      console.log(res.data)
       return res.data;
     } catch (error) {
       throw error;
@@ -107,7 +106,7 @@ class ThreadService {
 */
   public async getSortedThreads(sortParam: sortParamTypes): Promise<ThreadCardData[]> {
     try {
-      const res = await axios.get('/threads', {
+      const res = await apiClient.get('/threads', {
         params: {
           sort: sortParam,
         }
@@ -127,7 +126,7 @@ class ThreadService {
 */
   public async getThreadsByCategory(categoryId: number): Promise<ThreadCardData[]> {
     try {
-      const res = await axios.get(`/categories/${categoryId}/threads`);
+      const res = await apiClient.get(`/categories/${categoryId}/threads`);
       return res.data;
     } catch (error) {
       throw error;
@@ -143,8 +142,23 @@ class ThreadService {
 */
   public async editThread(threadId: number, threadData: ThreadCreationData): Promise<void> {
     try {
-      const res = await axios.put(`/threads/${threadId}/edit`, threadData);
+      const res = await apiClient.put(`/threads/${threadId}/edit`, threadData);
       return res.data;
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  /**
+* PUT /threads/:thread_id
+* Description: Increments thread view count.
+* Request data format: None
+* Response data format: None
+* Authentication: Required
+*/
+  public async updateThreadViews(threadId: number): Promise<void> {
+    try {
+      await apiClient.put(`/threads/${threadId}`);
     } catch (error) {
       throw error;
     }
@@ -159,8 +173,9 @@ class ThreadService {
 */
   public async deleteThread(threadId: number): Promise<void> {
     try {
-      const response = await axios.delete(`/threads/${threadId}/delete`);
-      return response.data;
+      const res = await apiClient.delete(`/threads/${threadId}/delete`);
+      console.log(res.data)
+      return res.data;
     } catch (error) {
       throw error;
     }

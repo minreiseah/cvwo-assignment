@@ -1,7 +1,8 @@
 export interface ThreadCardData {
-    thread_id: number,
+    id: number,
+    user_id: number,
     title: string,
-    author: string,
+    name: string,
     picture: string,
     timestamp: string,
     categories: string[],

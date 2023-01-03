@@ -38,8 +38,10 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
       title: title,
       content: content,
       category_ids: categoryIds,
-      user_id: user?.sub,
+      sub: user?.sub,
     }
+
+    console.log(threadCreationData)
 
     const promise = threadService.createThread(threadCreationData)
 

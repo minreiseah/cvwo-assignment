@@ -9,6 +9,8 @@ import (
 	"context"
 	"database/sql"
 	"time"
+
+	"github.com/lib/pq"
 )
 
 const createThread = `-- name: CreateThread :one
@@ -182,7 +184,7 @@ t."id",
 t."title",
 t."content",
 t."created_at",
-array_agg(c."name") as "categories",
+array_agg(c."name")::TEXT[] as "categories",
 u.id as "user_id",
 u."name", 
 u.picture,
@@ -193,19 +195,20 @@ JOIN users u ON u.id = t.user_id
 JOIN threads_categories tc ON tc.thread_id = t.id 
 JOIN categories c ON c.id = tc.category_id 
 GROUP BY t.id, u.id
+ORDER BY t."created_at" DESC
 `
 
 type ListThreadsDisplayRow struct {
-	ID         int32       `json:"id"`
-	Title      string      `json:"title"`
-	Content    string      `json:"content"`
-	CreatedAt  time.Time   `json:"created_at"`
-	Categories interface{} `json:"categories"`
-	UserID     int32       `json:"user_id"`
-	Name       string      `json:"name"`
-	Picture    string      `json:"picture"`
-	Views      int32       `json:"views"`
-	Replies    int64       `json:"replies"`
+	ID         int32     `json:"id"`
+	Title      string    `json:"title"`
+	Content    string    `json:"content"`
+	CreatedAt  time.Time `json:"created_at"`
+	Categories []string  `json:"categories"`
+	UserID     int32     `json:"user_id"`
+	Name       string    `json:"name"`
+	Picture    string    `json:"picture"`
+	Views      int32     `json:"views"`
+	Replies    int64     `json:"replies"`
 }
 
 func (q *Queries) ListThreadsDisplay(ctx context.Context) ([]ListThreadsDisplayRow, error) {
@@ -222,7 +225,7 @@ func (q *Queries) ListThreadsDisplay(ctx context.Context) ([]ListThreadsDisplayR
 			&i.Title,
 			&i.Content,
 			&i.CreatedAt,
-			&i.Categories,
+			pq.Array(&i.Categories),
 			&i.UserID,
 			&i.Name,
 			&i.Picture,
@@ -305,4 +308,15 @@ func (q *Queries) UpdateThread(ctx context.Context, arg UpdateThreadParams) (Thr
 		&i.UserID,
 	)
 	return i, err
+}
+
+const updateThreadViews = `-- name: UpdateThreadViews :exec
+UPDATE threads
+SET views = views + 1
+WHERE id = $1
+`
+
+func (q *Queries) UpdateThreadViews(ctx context.Context, id int32) error {
+	_, err := q.db.ExecContext(ctx, updateThreadViews, id)
+	return err
 }

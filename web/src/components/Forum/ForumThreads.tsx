@@ -18,7 +18,7 @@ const ForumThreads: React.FC = () => {
         recentThreadCards !== null && 
         recentThreadCards.map(item => {
           return (
-            <ThreadCard {...item} key={item.thread_id}/>
+            <ThreadCard {...item} key={item.id}/>
           )}
         )
     }
@@ -27,7 +27,7 @@ const ForumThreads: React.FC = () => {
         topThreadCards !== null && 
         topThreadCards.map(item => {
           return (
-            <ThreadCard {...item} key={item.thread_id}/>
+            <ThreadCard {...item} key={item.id}/>
           )}
         )
     }

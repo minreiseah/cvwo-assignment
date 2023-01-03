@@ -10,6 +10,7 @@ import {
   Heading,
   Avatar
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 /**
 * Displays information about a thread in a card. Used on the forum homepage.
@@ -25,9 +26,9 @@ import {
 const ThreadCard = (props: ThreadCardData) => {
   // deconstruction
   const {
-    thread_id: id,
+    id: thread_id,
     title,
-    author,
+    name: author,
     picture,
     timestamp,
     categories,
@@ -36,6 +37,14 @@ const ThreadCard = (props: ThreadCardData) => {
   } = props;
 
   const date = formatDateString(timestamp);
+
+  const navigate = useNavigate()
+
+  const navigateToThread = (id: number) => {
+    console.log(thread_id)
+    console.log(title)
+    navigate(`/thread/${id}`)
+  }
 
   return (
     <Flex 
@@ -49,7 +58,9 @@ const ThreadCard = (props: ThreadCardData) => {
       p={4}
       position="relative"
       bg="white"
-      cursor="default"
+      cursor="pointer"
+
+      onClick={() => navigateToThread(thread_id)}
 
       _before={{
         content: `''`,
@@ -76,7 +87,7 @@ const ThreadCard = (props: ThreadCardData) => {
 
     >
       <HStack gap={2}>
-        <Avatar name={author} src={picture}/>
+        <Avatar name={author} src={picture} referrerPolicy="no-referrer" />
 
         <VStack align="flex-start">
           <Heading fontSize="default" letterSpacing="wide">{title}</Heading>
