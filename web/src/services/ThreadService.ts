@@ -8,9 +8,9 @@ export interface ThreadDisplayData {
   title: string,
   content: string,
   created_at: string,
-  updated_at: string,
+  updated_at?: string,
 
-  category_ids: number[],
+  category_ids?: number[],
   categories: string[],
 
   user_id: number,
@@ -44,17 +44,22 @@ class ThreadService {
     try {
       const res = await apiClient.post('threads/new', threadCreationData);
 
-      // IMPORTANT: API must return thread_id
-      const threadId = res.data.thread_id; 
-      const categoryIds = threadCreationData.category_ids;
+      console.log(res)
+
+      const threadID = res.data.id; 
+      const categoryIDs = threadCreationData.category_ids;
 
       // create composite link
-      const threadCategories = categoryIds.map( (categoryId) => ({
-        thread_id: threadId,
-        category_id: categoryId
+      const threadCategories = categoryIDs.map( (categoryID) => ({
+        category_id: categoryID,
+        thread_id: threadID
       }));
 
-      await apiClient.post('/threads_categories', threadCategories);
+      console.log(threadCategories)
+
+      for(const tc of threadCategories) {
+        await apiClient.post('/threads-categories', tc);
+      }
     } catch (error) {
       throw error;
     }

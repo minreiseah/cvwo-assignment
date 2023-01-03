@@ -15,6 +15,12 @@ WHERE id = $1 LIMIT 1;
 SELECT * FROM categories
 ORDER BY id;
 
+-- name: ListCategoriesFromThread :many
+SELECT c.* FROM categories c
+JOIN threads_categories tc ON c.id = tc.category_id
+WHERE tc.thread_id = $1
+ORDER BY id;
+
 -- name: UpdateCategory :one
 UPDATE categories
 SET name = COALESCE(sqlc.narg(name), name),

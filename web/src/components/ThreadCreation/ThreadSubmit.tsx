@@ -42,7 +42,7 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
     }
 
     const promise = threadService.createThread(threadCreationData)
-    // const promise = new Promise(resolve => setTimeout(resolve, 1000))
+
     toast.promise(
       promise,
       {

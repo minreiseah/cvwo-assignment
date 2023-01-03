@@ -13,7 +13,7 @@ func InitRouter(db *db.Queries) *chi.Mux {
     h := NewHandler(db)
 
     // add routes to the subrouter
-    r.Get("/", h.HandleLinkThreadAndCategory)
+    r.Post("/", h.HandleLinkThreadAndCategory)
 
     return r
 }

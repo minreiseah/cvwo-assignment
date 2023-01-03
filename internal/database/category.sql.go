@@ -97,6 +97,41 @@ func (q *Queries) ListCategories(ctx context.Context) ([]Category, error) {
 	return items, nil
 }
 
+const listCategoriesFromThread = `-- name: ListCategoriesFromThread :many
+SELECT c.id, c.name, c.description, c.created_at FROM categories c
+JOIN threads_categories tc ON c.id = tc.category_id
+WHERE tc.thread_id = $1
+ORDER BY id
+`
+
+func (q *Queries) ListCategoriesFromThread(ctx context.Context, threadID int32) ([]Category, error) {
+	rows, err := q.db.QueryContext(ctx, listCategoriesFromThread, threadID)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []Category
+	for rows.Next() {
+		var i Category
+		if err := rows.Scan(
+			&i.ID,
+			&i.Name,
+			&i.Description,
+			&i.CreatedAt,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
 const updateCategory = `-- name: UpdateCategory :one
 UPDATE categories
 SET name = COALESCE($2, name),

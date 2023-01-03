@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createThread = `-- name: CreateThread :one
@@ -161,6 +162,72 @@ func (q *Queries) ListThreadsByTime(ctx context.Context) ([]Thread, error) {
 			&i.Views,
 			&i.CreatedAt,
 			&i.UserID,
+		); err != nil {
+			return nil, err
+		}
+		items = append(items, i)
+	}
+	if err := rows.Close(); err != nil {
+		return nil, err
+	}
+	if err := rows.Err(); err != nil {
+		return nil, err
+	}
+	return items, nil
+}
+
+const listThreadsDisplay = `-- name: ListThreadsDisplay :many
+SELECT
+t."id",
+t."title",
+t."content",
+t."created_at",
+array_agg(c."name") as "categories",
+u.id as "user_id",
+u."name", 
+u.picture,
+t."views",
+(SELECT COUNT(*) FROM posts p WHERE p.thread_id = t.id) as "replies"
+FROM threads t 
+JOIN users u ON u.id = t.user_id
+JOIN threads_categories tc ON tc.thread_id = t.id 
+JOIN categories c ON c.id = tc.category_id 
+GROUP BY t.id, u.id
+`
+
+type ListThreadsDisplayRow struct {
+	ID         int32       `json:"id"`
+	Title      string      `json:"title"`
+	Content    string      `json:"content"`
+	CreatedAt  time.Time   `json:"created_at"`
+	Categories interface{} `json:"categories"`
+	UserID     int32       `json:"user_id"`
+	Name       string      `json:"name"`
+	Picture    string      `json:"picture"`
+	Views      int32       `json:"views"`
+	Replies    int64       `json:"replies"`
+}
+
+func (q *Queries) ListThreadsDisplay(ctx context.Context) ([]ListThreadsDisplayRow, error) {
+	rows, err := q.db.QueryContext(ctx, listThreadsDisplay)
+	if err != nil {
+		return nil, err
+	}
+	defer rows.Close()
+	var items []ListThreadsDisplayRow
+	for rows.Next() {
+		var i ListThreadsDisplayRow
+		if err := rows.Scan(
+			&i.ID,
+			&i.Title,
+			&i.Content,
+			&i.CreatedAt,
+			&i.Categories,
+			&i.UserID,
+			&i.Name,
+			&i.Picture,
+			&i.Views,
+			&i.Replies,
 		); err != nil {
 			return nil, err
 		}

@@ -12,6 +12,24 @@ RETURNING *;
 SELECT * FROM threads
 ORDER BY id;
 
+-- name: ListThreadsDisplay :many
+SELECT
+t."id",
+t."title",
+t."content",
+t."created_at",
+array_agg(c."name") as "categories",
+u.id as "user_id",
+u."name", 
+u.picture,
+t."views",
+(SELECT COUNT(*) FROM posts p WHERE p.thread_id = t.id) as "replies"
+FROM threads t 
+JOIN users u ON u.id = t.user_id
+JOIN threads_categories tc ON tc.thread_id = t.id 
+JOIN categories c ON c.id = tc.category_id 
+GROUP BY t.id, u.id;
+
 -- name: GetThread :one
 SELECT * FROM threads
 WHERE id = $1 LIMIT 1;

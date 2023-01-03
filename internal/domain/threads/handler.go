@@ -54,10 +54,10 @@ func (h *Handler) HandleGetThread(w http.ResponseWriter, r *http.Request) {
     util.Respond(w, http.StatusOK, thread)
 }
 
-func (h *Handler) HandleListThreads(w http.ResponseWriter, r *http.Request) {
+func (h *Handler) HandleListThreadsDisplay(w http.ResponseWriter, r *http.Request) {
     ctx := r.Context()
 
-    threads, err := h.db.ListThreads(ctx)
+    threads, err := h.db.ListThreadsDisplay(ctx)
     if err != nil {
         http.Error(w, "Failed to retrieve threads", http.StatusInternalServerError)
     }

@@ -76,7 +76,6 @@ func TestUpdateThreadOnlyTitle(t *testing.T) {
 
     require.Equal(t, oldThread.ID, newThread.ID)
     require.Equal(t, oldThread.UserID, newThread.UserID)
-
 }
 
 func TestUpdateThreadOnlyContent(t *testing.T) {
