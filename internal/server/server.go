@@ -32,8 +32,8 @@ func New() *Server {
 }
 
 func (s *Server) Init() {
-    s.InitRoutes()
     s.InitDatabase()
+    s.InitRoutes()
 }
 
 func (s *Server) Run() {
@@ -42,7 +42,7 @@ func (s *Server) Run() {
         Handler: s.router,
     }
 
-	fmt.Print("Listening on port 8000 at http://localhost:8000!")
+	fmt.Println("Listening on port 8000 at http://localhost:8000!")
 
     err := s.httpServer.ListenAndServe()
     if err != nil {
@@ -51,19 +51,18 @@ func (s *Server) Run() {
 }
 
 func (s *Server) InitDatabase() {
-
     conn, err := sql.Open(config.DbDriver(), config.DbSource())
-
 	if err != nil {
 		panic(err)
 	}
-	defer conn.Close()
 
 	err = conn.Ping()
 	if err != nil {
 		panic(err)
 	}
 
-    s.db = db.New(conn)
-	fmt.Print("Connected to database at http://localhost:5432!")
+    queries := db.New(conn)
+    s.db = queries
+
+	fmt.Println("Connected to database at http://localhost:5432!")
 }

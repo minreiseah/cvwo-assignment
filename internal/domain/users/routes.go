@@ -14,7 +14,7 @@ func InitRouter(db *db.Queries, ctx context.Context) *chi.Mux {
     h := NewHandler(db, ctx)
 
     // add routes to the subrouter
-    r.Get("/", h.HandleGetAllUsers)
+    r.Get("/", h.HandleListUsers)
     r.Get("/{id}", h.HandleGetUser)
     r.Post("/new", h.HandleCreateUser)
 
