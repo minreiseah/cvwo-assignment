@@ -82,7 +82,7 @@ const ForumHeader: React.FC = () => {
           cursor="pointer"
           pr={2}
         >
-          Posts
+          Threads
         </Heading>
       </Tooltip>
 

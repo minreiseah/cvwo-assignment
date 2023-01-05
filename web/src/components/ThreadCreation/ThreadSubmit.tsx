@@ -33,6 +33,17 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
       return;
     }
 
+    // categories cannot be empty
+    const keys = Object.keys(categories)
+    let categorySelected: boolean = false
+    for (const key of keys) {
+      categorySelected = categorySelected || categories[key][0]
+    }
+    if(!categorySelected) {
+      toast.error("Please select a category!")
+      return;
+    }
+
     const categoryIds: number[] =  [];
     for(const key in categories) {
       const [bool, id]: [boolean, number] = categories[key];

@@ -42,12 +42,12 @@ CREATE INDEX ON "posts" ("thread_id");
 
 CREATE INDEX "PK_FK" ON "threads_categories" ("category_id", "thread_id");
 
-ALTER TABLE "threads" ADD CONSTRAINT "FK_threads.user_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "threads" ADD CONSTRAINT "FK_threads.user_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "posts" ADD CONSTRAINT "FK_posts.user_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "posts" ADD CONSTRAINT "FK_posts.user_id" FOREIGN KEY ("user_id") REFERENCES "users" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "posts" ADD CONSTRAINT "FK_posts.thread_id" FOREIGN KEY ("thread_id") REFERENCES "threads" ("id");
+ALTER TABLE "posts" ADD CONSTRAINT "FK_posts.thread_id" FOREIGN KEY ("thread_id") REFERENCES "threads" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "threads_categories" ADD CONSTRAINT "FK_threads_categories.category_id" FOREIGN KEY ("category_id") REFERENCES "categories" ("id");
+ALTER TABLE "threads_categories" ADD CONSTRAINT "FK_threads_categories.category_id" FOREIGN KEY ("category_id") REFERENCES "categories" ("id") ON DELETE CASCADE;
 
-ALTER TABLE "threads_categories" ADD CONSTRAINT "FK_threads_categories.thread_id" FOREIGN KEY ("thread_id") REFERENCES "threads" ("id");
+ALTER TABLE "threads_categories" ADD CONSTRAINT "FK_threads_categories.thread_id" FOREIGN KEY ("thread_id") REFERENCES "threads" ("id") ON DELETE CASCADE;
