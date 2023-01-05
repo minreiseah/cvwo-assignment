@@ -3,15 +3,19 @@ import toast from 'react-hot-toast'
 
 import PostService, { PostCreationData } from "../../services/PostService"
 import { useAppSelector } from "../../app/hooks"
+import { useQuery } from "react-query"
 
 interface IPostSubmit {
   content: string,
+  setContent: React.Dispatch<React.SetStateAction<string>>
   threadID: number,
 }
 
-const PostSubmit: React.FC<IPostSubmit> = ({ content, threadID }) => {
+const PostSubmit: React.FC<IPostSubmit> = ({ content, setContent, threadID }) => {
   const postService = new PostService()
   const { user } = useAppSelector(state => state.userProfile)
+
+  const postQuery = useQuery("posts")
 
   const handlePostSubmit = async () => {
 
@@ -34,7 +38,7 @@ const PostSubmit: React.FC<IPostSubmit> = ({ content, threadID }) => {
 
     const promise = postService.createPost(postCreationData)
 
-    toast.promise(
+    await toast.promise(
       promise,
       {
         loading: 'Loading',
@@ -42,6 +46,10 @@ const PostSubmit: React.FC<IPostSubmit> = ({ content, threadID }) => {
         error: (err) => `${err.toString()}`,
       }
     )
+
+    // cleanup
+    setContent("")
+    await postQuery.refetch()
   }
 
   return (
@@ -59,7 +67,8 @@ const PostSubmit: React.FC<IPostSubmit> = ({ content, threadID }) => {
 
       onClick={handlePostSubmit}
     >
-      Post Reply</Button>
+      Post Reply
+    </Button>
   )
 
 }

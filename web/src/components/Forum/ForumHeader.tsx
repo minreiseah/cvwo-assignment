@@ -19,12 +19,12 @@ const ForumHeader: React.FC = () => {
   const threadService = new ThreadService();
 
   const recentQuery = useQuery(
-    "date_desc",
+    "threads_recent",
     () => threadService.getThreads()
   )
 
   const popularQuery = useQuery(
-    "popularity_desc",
+    "threads_popular",
     () => threadService.getPopularThreads()
   )
 

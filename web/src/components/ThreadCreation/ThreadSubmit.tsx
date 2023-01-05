@@ -5,6 +5,8 @@ import ThreadService from "../../services/ThreadService"
 import { ThreadCreationData } from "../../services/ThreadService"
 import { Category } from "./CategorySelector"
 import { useAppSelector } from "../../app/hooks"
+import { useQuery } from "react-query"
+import { useNavigate } from "react-router-dom"
 
 type ThreadSubmitProps = {
   title: string,
@@ -15,6 +17,9 @@ type ThreadSubmitProps = {
 const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
   const threadService = new ThreadService()
   const { user } = useAppSelector(state => state.userProfile)
+
+  const recentQuery = useQuery("threads_recent")
+  const navigate = useNavigate()
 
   const handleThreadSubmit = async () => {
 
@@ -53,6 +58,9 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
         error: (err) => `${err.toString()}`,
       }
     )
+
+    await recentQuery.refetch()
+    navigate("/")
   }
 
   return (

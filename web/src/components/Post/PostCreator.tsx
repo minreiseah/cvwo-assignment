@@ -73,6 +73,7 @@ const PostCreator: React.FC<IPostCreator> = ({ threadID }) => {
           />
         <PostSubmit 
           content={content}
+          setContent={setContent}
           threadID={threadID}
           />
       </Flex>
