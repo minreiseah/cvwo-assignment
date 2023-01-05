@@ -14,68 +14,6 @@ import ThreadService from "../../services/ThreadService";
 import { useAppDispatch } from "../../app/hooks";
 import { updateRecentThreadCards, updateTopThreadCards } from "../../app/forum/forumSlice";
 
-// TEMPORARY TODO
-// const threadCardsPopular = [ 
-//   {
-//     id: 2,
-//     user_id: 123,
-//     title: "Second Post. Hello.",
-//     name: "Bartholomew",
-//     picture: "https://bit.ly/kent-c-dodds",
-//     created_at: (new Date(2022, 10, 11)).toISOString(),
-//     categories: ["Gaming", "Chairs"],
-//     replies: 158,
-//     views: 473,
-//   },
-//
-//   {
-//     id: 4,
-//     user_id: 123,
-//     title: "Fourth Post. Hi.",
-//     name: "Prosper Baba",
-//     picture: "https://bit.ly/prosper-baba",
-//     created_at: (new Date(2022, 10, 11)).toISOString(),
-//     categories: ["Colours"],
-//     replies: 123,
-//     views: 412,
-//   },
-//
-//   {
-//     id: 5,
-//     user_id: 123,
-//     title: "Fifth Post. Good Night.",
-//     name: "Christian",
-//     picture: "https://bit.ly/sage-adebayo",
-//     created_at: (new Date(2022, 9, 22)).toISOString(),
-//     categories: ["Furniture", "Architecture"],
-//     replies: 70,
-//     views: 347,
-//   },
-//   {
-//     id: 1,
-//     user_id: 123,
-//     title: "First Post. Whodis.",
-//     name: "John Smith",
-//     picture: "https://bit.ly/dan-abramov",
-//     created_at: (new Date(2022, 6, 11)).toISOString(),
-//     categories: ["Food", "Vibes"],
-//     replies: 60,
-//     views: 267,
-//   },
-//
-//   {
-//     id: 3,
-//     user_id: 123,
-//     title: "Third Post. Good Morning.",
-//     name: "Ryan Florence",
-//     picture: "https://bit.ly/ryan-florence",
-//     created_at: (new Date(2022, 11, 30)).toISOString(),
-//     categories: ["Technology"],
-//     replies: 48,
-//     views: 195,
-//   },
-// ]
-
 const ForumHeader: React.FC = () => {
   const dispatch = useAppDispatch();
   const threadService = new ThreadService();

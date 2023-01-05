@@ -5,6 +5,7 @@ import Header from "./Header";
 import Nav from "./Nav";
 import Footer from "./Footer";
 import { Box } from "@chakra-ui/react";
+import ForumStats from "./ForumStats";
 
 type LayoutProps = {
   children: React.ReactNode
@@ -22,6 +23,7 @@ const Layout = (props: LayoutProps) => {
       <Header />
       <Nav />
       <main>{props.children}</main>
+      <ForumStats />
       <Footer />
       <Toaster />
     </Box>
