@@ -11,6 +11,6 @@ const options: Intl.DateTimeFormatOptions = {
   hour12: true
 };
 
-export const formatDateString = (date: string): string => {
-  return new Date(date).toLocaleString(undefined, options);
+export const formatDateString = (s: string): string => {
+  return new Date(s).toLocaleString(undefined, options);
 }

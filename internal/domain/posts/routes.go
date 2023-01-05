@@ -15,7 +15,7 @@ func InitRouter(db *db.Queries) *chi.Mux {
     // add routes to the subrouter
     r.Get("/", h.HandleGetAllPosts)
     r.Get("/threads/{thread_id}", h.HandleListPostsFromThread)
-    r.Post("/threads/{thread_id}", h.HandleCreatePost)
+    r.Post("/new", h.HandleCreatePost)
     r.Put("/edit", h.HandleEditPost)
     r.Delete("/delete/{id}", h.HandleDeletePost)
 

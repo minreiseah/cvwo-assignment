@@ -3,6 +3,7 @@ import { useQuery } from "react-query";
 import PostService from "../../services/PostService";
 
 import Post, { IPost } from "./Post";
+import PostCreator from "./PostCreator";
 
 interface IPosts {
   threadId: number
@@ -53,6 +54,7 @@ const Posts: React.FC<IPosts> = ({ threadId }) => {
             <Post {...post} key={post.post_id}/>
           )
         })}
+      <PostCreator threadID={threadId} />
     </React.Fragment>
   )
 }

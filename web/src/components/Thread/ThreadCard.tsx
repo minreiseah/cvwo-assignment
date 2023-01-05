@@ -30,7 +30,7 @@ const ThreadCard = (props: ThreadCardData) => {
     title,
     name: author,
     picture,
-    timestamp,
+    created_at: timestamp,
     categories,
     replies,
     views

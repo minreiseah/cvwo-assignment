@@ -4,7 +4,7 @@ export interface ThreadCardData {
     title: string,
     name: string,
     picture: string,
-    timestamp: string,
+    created_at: string,
     categories: string[],
     replies: number,
     views: number,

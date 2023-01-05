@@ -10,12 +10,14 @@ export interface IPostProfile {
   user_id?: number,
   author?: string,
   picture?: string,
+  facade?: boolean,
 } 
 
 const PostProfile: React.FC<IPostProfile> = ({
   user_id, 
   author,
-  picture
+  picture,
+  facade
 }) => {
   return (
     <Flex
@@ -31,10 +33,13 @@ const PostProfile: React.FC<IPostProfile> = ({
         src={picture}
         size="lg"
         key={user_id}
+        backgroundColor={facade ? "blackAlpha.300" : "default"}
+        color={facade ? "blackAlpha.700" : "default"}
+
         />
       <Text
         fontSize="lg"
-      >{author}</Text>
+      >{!facade && author}</Text>
     </Flex>
   )
 }

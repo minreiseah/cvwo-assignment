@@ -1,4 +1,4 @@
-import axios from "axios";
+import apiClient from "../utils/common";
 
 export interface PostData {
   post_id: number,
@@ -17,7 +17,7 @@ export interface PostData {
 export interface PostCreationData {
   content: string,
   thread_id: number,
-  user_sub: string,
+  sub: string,
 }
 
 class PostService {
@@ -29,9 +29,9 @@ class PostService {
 * Response data format: JSON
 * Authentication: Required
 */
-  public async createPost(threadId: string, postData: PostCreationData): Promise<void> {
+  public async createPost(postData: PostCreationData): Promise<void> {
     try {
-      const res = await axios.post(`/threads/${threadId}/posts/new`, postData);
+      const res = await apiClient.post(`/posts/new`, postData);
       return res.data;
     } catch (error) {
       throw error;
@@ -46,7 +46,7 @@ class PostService {
 */
   public async getPosts(): Promise<PostData[]> {
     try {
-      const res = await axios.get('/posts');
+      const res = await apiClient.get('/posts');
       return res.data;
     } catch (error) {
       throw error;
@@ -61,7 +61,7 @@ class PostService {
 */
   public async getThreadPosts(threadId: number): Promise<PostData[]> {
     try {
-      const res = await axios.get(`/threads/${threadId}/posts`);
+      const res = await apiClient.get(`/threads/${threadId}/posts`);
       return res.data;
     } catch (error) {
       throw error;
@@ -76,7 +76,7 @@ class PostService {
 */
   public async editPost(threadId: number, postId: number, postData: PostData): Promise<PostData> {
     try {
-      const res = await axios.put(`/threads/${threadId}/posts/${postId}/edit`, postData);
+      const res = await apiClient.put(`/threads/${threadId}/posts/${postId}/edit`, postData);
       return res.data;
     } catch (error) {
       throw error;
@@ -91,7 +91,7 @@ class PostService {
 */
   public async deletePost(threadId: number, postId: number): Promise<void> {
     try {
-      await axios.delete(`/threads/${threadId}/posts/${postId}/delete`);
+      await apiClient.delete(`/threads/${threadId}/posts/${postId}/delete`);
     } catch (error) {
       throw error;
     }
