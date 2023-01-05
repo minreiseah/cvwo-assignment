@@ -32,6 +32,12 @@ dropdb:
 listdb:
 	docker exec -it postgres15 psql -l
 
+init_backend_docker:
+	docker run --name cvwo-backend --network=cvwo-network -p 8000:8000 cvwo-backend:latest
+
+remove_backend_docker:
+	docker rm cvwo-backend
+
 # migration
 
 migrateup:

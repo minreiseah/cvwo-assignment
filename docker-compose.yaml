@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: postgres:15-alpine
+    hostname: postgres15
+    environment: 
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
