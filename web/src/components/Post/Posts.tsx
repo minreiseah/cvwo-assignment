@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useQuery } from "react-query";
 import PostService from "../../services/PostService";
 
@@ -13,23 +13,31 @@ const Posts: React.FC<IPosts> = ({ threadId }) => {
 
   const postService = new PostService()
 
-  const { data, isLoading, error } = useQuery(
-    "posts",
+  const postsQuery = useQuery(
+    `posts_${threadId}`,
     () => postService.getThreadPosts(threadId)
   )
 
-  if (isLoading) {
+  useEffect(() => {
+    const onPageLoad = async () => {
+      await postsQuery.refetch()
+    } 
+    onPageLoad()
+  }, [threadId])
+
+  if (postsQuery.isLoading) {
     return <div>Loading...</div>
   }
 
-  if (error instanceof Error) {
-    return <div>{error.message}</div>
+  if (postsQuery.error instanceof Error) {
+    return <div>{postsQuery.error.message}</div>
   }
+
 
   return (
     <React.Fragment>
-      {data && // check if data is undefined
-        data.map(post => {
+      {postsQuery.data && // check if data is undefined
+        postsQuery.data.map(post => {
           return (
             <Post {...post} key={post.post_id}/>
           )
