@@ -17,7 +17,7 @@ func DbSource() string {
         port     = 5432
         user     = "root"
         password = "toor"
-        dbname   = "postgres"
+        dbname   = "cvwo_forum"
     )
 
     return fmt.Sprintf("host=%s port=%d user=%s "+

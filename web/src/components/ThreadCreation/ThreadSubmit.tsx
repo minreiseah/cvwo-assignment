@@ -46,8 +46,6 @@ const ThreadSubmit = ({ title, content, categories }: ThreadSubmitProps) => {
       sub: user?.sub,
     }
 
-    console.log(threadCreationData)
-
     const promise = threadService.createThread(threadCreationData)
 
     toast.promise(
