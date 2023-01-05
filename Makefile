@@ -46,15 +46,9 @@ migrateup:
 migrateup1:
 	migrate -path db/migration -database "${DB_URL}" -verbose up 1
 
-migrateup1:
-	migrate -path db/migration -database "postgresql://root:toor@localhost:5432/cvwo_forum?sslmode=disable" -verbose up 1
-
 migratedown:
 	migrate -path db/migration -database "${DB_URL}" -verbose down
 
 migratedown1:
 	migrate -path db/migration -database "${DB_URL}" -verbose down 1
-
-migratedown1:
-	migrate -path db/migration -database "postgresql://root:toor@localhost:5432/cvwo_forum?sslmode=disable" -verbose down 1
 
