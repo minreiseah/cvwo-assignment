@@ -12,7 +12,6 @@ const ThreadPage: React.FC = () => {
 
   useEffect(() => {
     // Function to execute when the route is entered
-    // console.log('Route entered:', location.pathname);
     if(params.threadId === undefined) {
       return navigate("/")
     }

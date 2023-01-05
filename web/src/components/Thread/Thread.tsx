@@ -7,21 +7,6 @@ import Posts from "../Post/Posts"
 import { Flex } from "@chakra-ui/react";
 import { useQuery } from "react-query";
 
-const sampleThreadDisplayData: ThreadDisplayData = {
-  thread_id: 1,
-  title: 'How to use Promises with setTimeout()',
-  content: 'I am trying to understand how to get a promise from a setTimeout function in JavaScript.',
-  created_at: '2022-12-14T12:00:00Z',
-
-  categories: ['JavaScript', 'Promises', 'setTimeout'],
-
-  user_id: 11,
-  name: 'John Doe',
-  picture: 'https://bit.ly/dan-abramov',
-  replies: 2,
-  views: 13,
-}
-
 
 interface IThread {
   threadId: number
@@ -32,12 +17,12 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
   const threadService = new ThreadService()
 
   const { data, isLoading, error} = useQuery(
-    "thread",
+    `thread_${threadId}`,
     () => threadService.getThread(threadId)
   )
 
   if(isLoading) {
-    return <div>Loading...</div>
+    return <div></div>
   }
 
   if(error instanceof Error) {

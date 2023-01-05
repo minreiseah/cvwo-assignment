@@ -15,7 +15,7 @@ const PostSubmit: React.FC<IPostSubmit> = ({ content, setContent, threadID }) =>
   const postService = new PostService()
   const { user } = useAppSelector(state => state.userProfile)
 
-  const postQuery = useQuery("posts")
+  const postQuery = useQuery(`posts_${threadID}`)
 
   const handlePostSubmit = async () => {
 

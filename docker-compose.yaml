@@ -19,3 +19,12 @@ services:
       - db
     entrypoint: [ "/app/wait-for.sh", "postgres15:5432", "--", "/app/start.sh" ]
     command: [ "/app/main" ]
+
+  frontend:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
