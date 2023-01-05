@@ -13,7 +13,8 @@ type Database struct {
 
 func DbSource() string {
     const (
-        host     = "localhost"
+        // host     = "localhost"
+        host     = "postgres15"
         port     = 5432
         user     = "root"
         password = "toor"

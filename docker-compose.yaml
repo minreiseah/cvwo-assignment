@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:15-alpine
+    hostname: postgres15
+    environment: 
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+      - POSTGRES_DB=cvwo_forum
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    entrypoint: [ "/app/wait-for.sh", "postgres15:5432", "--", "/app/start.sh" ]
+    command: [ "/app/main" ]
