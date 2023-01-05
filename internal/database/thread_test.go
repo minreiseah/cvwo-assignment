@@ -44,12 +44,24 @@ func TestCreateThread(t *testing.T) {
 func TestGetThread(t *testing.T) {
     user := createRandomUser(t)
     thread1 := createRandomThread(t, user.Sub)
+    category := createRandomCategory(t)
+
+    createLinkThreadAndCategory(t, category, thread1)
+
     thread2, err := testQueries.GetThread(context.Background(), thread1.ID)
 
     require.NoError(t, err)
     require.NotEmpty(t, thread2)
 
-    require.Equal(t, thread1, thread2)
+    require.Equal(t, thread1.ID, thread2.ThreadID)
+    require.Equal(t, thread1.Title, thread2.Title)
+    require.Equal(t, thread1.Content, thread2.Content)
+    require.Equal(t, thread1.Views, thread2.Views)
+    require.Equal(t, thread1.CreatedAt, thread2.CreatedAt)
+
+    require.Equal(t, user.ID, thread2.UserID)
+    require.Equal(t, user.Name, thread2.Name)
+    require.Equal(t, user.Picture, thread2.Picture)
 }
 
 func TestUpdateThreadOnlyTitle(t *testing.T) {

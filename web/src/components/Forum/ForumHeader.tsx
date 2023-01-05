@@ -15,124 +15,66 @@ import { useAppDispatch } from "../../app/hooks";
 import { updateRecentThreadCards, updateTopThreadCards } from "../../app/forum/forumSlice";
 
 // TEMPORARY TODO
-const threadCardsRecent = [ 
-  {
-    thread_id: 1,
-    title: "First Post. Whodis.",
-    author: "John Smith",
-    picture: "https://bit.ly/dan-abramov",
-    timestamp: (new Date(2022, 13, 11)).toISOString(),
-    categories: ["Food", "Vibes"],
-    replies: 10,
-    views: 10,
-  },
-
-  {
-    thread_id: 2,
-    title: "Second Post. Hello.",
-    author: "Bartholomew",
-    picture: "https://bit.ly/kent-c-dodds",
-    timestamp: (new Date(2022, 10, 11)).toISOString(),
-    categories: ["Gaming", "Chairs"],
-    replies: 12,
-    views: 127,
-  },
-
-  {
-    thread_id: 3,
-    title: "Third Post. Good Morning.",
-    author: "Ryan Florence",
-    picture: "https://bit.ly/ryan-florence",
-    timestamp: (new Date(2022, 11, 30)).toISOString(),
-    categories: ["Technology"],
-    replies: 7,
-    views: 57,
-  },
-
-  {
-    thread_id: 4,
-    title: "Fourth Post. Hi.",
-    author: "Prosper Baba",
-    picture: "https://bit.ly/prosper-baba",
-    timestamp: (new Date(2022, 10, 11)).toISOString(),
-    categories: ["Colours"],
-    replies: 0,
-    views: 7,
-  },
-
-  {
-    thread_id: 5,
-    title: "Fifth Post. Good Night.",
-    author: "Christian",
-    picture: "https://bit.ly/sage-adebayo",
-    timestamp: (new Date(2022, 9, 22)).toISOString(),
-    categories: ["Furniture", "Architecture"],
-    replies: 1,
-    views: 12,
-  },
-]
-
-// TEMPORARY TODO
-const threadCardsPopular = [ 
-  {
-    id: 2,
-    user_id: 123,
-    title: "Second Post. Hello.",
-    name: "Bartholomew",
-    picture: "https://bit.ly/kent-c-dodds",
-    created_at: (new Date(2022, 10, 11)).toISOString(),
-    categories: ["Gaming", "Chairs"],
-    replies: 158,
-    views: 473,
-  },
-
-  {
-    id: 4,
-    user_id: 123,
-    title: "Fourth Post. Hi.",
-    name: "Prosper Baba",
-    picture: "https://bit.ly/prosper-baba",
-    created_at: (new Date(2022, 10, 11)).toISOString(),
-    categories: ["Colours"],
-    replies: 123,
-    views: 412,
-  },
-
-  {
-    id: 5,
-    user_id: 123,
-    title: "Fifth Post. Good Night.",
-    name: "Christian",
-    picture: "https://bit.ly/sage-adebayo",
-    created_at: (new Date(2022, 9, 22)).toISOString(),
-    categories: ["Furniture", "Architecture"],
-    replies: 70,
-    views: 347,
-  },
-  {
-    id: 1,
-    user_id: 123,
-    title: "First Post. Whodis.",
-    name: "John Smith",
-    picture: "https://bit.ly/dan-abramov",
-    created_at: (new Date(2022, 6, 11)).toISOString(),
-    categories: ["Food", "Vibes"],
-    replies: 60,
-    views: 267,
-  },
-
-  {
-    id: 3,
-    user_id: 123,
-    title: "Third Post. Good Morning.",
-    name: "Ryan Florence",
-    picture: "https://bit.ly/ryan-florence",
-    created_at: (new Date(2022, 11, 30)).toISOString(),
-    categories: ["Technology"],
-    replies: 48,
-    views: 195,
-  },
-]
+// const threadCardsPopular = [ 
+//   {
+//     id: 2,
+//     user_id: 123,
+//     title: "Second Post. Hello.",
+//     name: "Bartholomew",
+//     picture: "https://bit.ly/kent-c-dodds",
+//     created_at: (new Date(2022, 10, 11)).toISOString(),
+//     categories: ["Gaming", "Chairs"],
+//     replies: 158,
+//     views: 473,
+//   },
+//
+//   {
+//     id: 4,
+//     user_id: 123,
+//     title: "Fourth Post. Hi.",
+//     name: "Prosper Baba",
+//     picture: "https://bit.ly/prosper-baba",
+//     created_at: (new Date(2022, 10, 11)).toISOString(),
+//     categories: ["Colours"],
+//     replies: 123,
+//     views: 412,
+//   },
+//
+//   {
+//     id: 5,
+//     user_id: 123,
+//     title: "Fifth Post. Good Night.",
+//     name: "Christian",
+//     picture: "https://bit.ly/sage-adebayo",
+//     created_at: (new Date(2022, 9, 22)).toISOString(),
+//     categories: ["Furniture", "Architecture"],
+//     replies: 70,
+//     views: 347,
+//   },
+//   {
+//     id: 1,
+//     user_id: 123,
+//     title: "First Post. Whodis.",
+//     name: "John Smith",
+//     picture: "https://bit.ly/dan-abramov",
+//     created_at: (new Date(2022, 6, 11)).toISOString(),
+//     categories: ["Food", "Vibes"],
+//     replies: 60,
+//     views: 267,
+//   },
+//
+//   {
+//     id: 3,
+//     user_id: 123,
+//     title: "Third Post. Good Morning.",
+//     name: "Ryan Florence",
+//     picture: "https://bit.ly/ryan-florence",
+//     created_at: (new Date(2022, 11, 30)).toISOString(),
+//     categories: ["Technology"],
+//     replies: 48,
+//     views: 195,
+//   },
+// ]
 
 const ForumHeader: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -145,9 +87,7 @@ const ForumHeader: React.FC = () => {
 
   const popularQuery = useQuery(
     "popularity_desc",
-    // TODO
-    // () => threadService.getSortedThreads('popularity_desc')
-    () => threadCardsPopular
+    () => threadService.getPopularThreads()
   )
 
   const handleRecent = () => {

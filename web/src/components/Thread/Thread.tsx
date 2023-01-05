@@ -12,13 +12,11 @@ const sampleThreadDisplayData: ThreadDisplayData = {
   title: 'How to use Promises with setTimeout()',
   content: 'I am trying to understand how to get a promise from a setTimeout function in JavaScript.',
   created_at: '2022-12-14T12:00:00Z',
-  updated_at: '2022-12-14T12:00:00Z',
 
-  category_ids: [1, 2, 3],
   categories: ['JavaScript', 'Promises', 'setTimeout'],
 
   user_id: 11,
-  author: 'John Doe',
+  name: 'John Doe',
   picture: 'https://bit.ly/dan-abramov',
   replies: 2,
   views: 13,
@@ -35,8 +33,7 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
 
   const { data, isLoading, error} = useQuery(
     "thread",
-    // () => threadService.getThread(threadId) // TODO
-    () => sampleThreadDisplayData
+    () => threadService.getThread(threadId)
   )
 
   if(isLoading) {
@@ -52,7 +49,6 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
       <Flex direction="column">
         <ThreadHeader
           title={data?.title}
-          category_ids={data?.category_ids}
           categories={data?.categories}
           replies={data?.replies}
           views={data?.views}
@@ -60,7 +56,7 @@ const Thread: React.FC<IThread> = ( {threadId} ) => {
 
         <Post
           user_id={data?.user_id}
-          author={data?.author}
+          author={data?.name}
           picture={data?.picture}
           content={data?.content}
           created_at={data?.created_at}

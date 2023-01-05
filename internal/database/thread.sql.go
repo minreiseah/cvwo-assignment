@@ -55,20 +55,52 @@ func (q *Queries) DeleteThread(ctx context.Context, id int32) error {
 }
 
 const getThread = `-- name: GetThread :one
-SELECT id, title, content, views, created_at, user_id FROM threads
-WHERE id = $1 LIMIT 1
+SELECT
+t."id" as "thread_id",
+t."title",
+t."content",
+t."created_at",
+array_agg(c."name")::TEXT[] as "categories",
+u.id as "user_id",
+u."name", 
+u.picture,
+t."views",
+(SELECT COUNT(*) FROM posts p WHERE p.thread_id = t.id) as "replies"
+FROM threads t 
+JOIN users u ON u.id = t.user_id
+JOIN threads_categories tc ON tc.thread_id = t.id 
+JOIN categories c ON c.id = tc.category_id
+WHERE t."id" = $1
+GROUP BY t.id, u.id
 `
 
-func (q *Queries) GetThread(ctx context.Context, id int32) (Thread, error) {
+type GetThreadRow struct {
+	ThreadID   int32     `json:"thread_id"`
+	Title      string    `json:"title"`
+	Content    string    `json:"content"`
+	CreatedAt  time.Time `json:"created_at"`
+	Categories []string  `json:"categories"`
+	UserID     int32     `json:"user_id"`
+	Name       string    `json:"name"`
+	Picture    string    `json:"picture"`
+	Views      int32     `json:"views"`
+	Replies    int64     `json:"replies"`
+}
+
+func (q *Queries) GetThread(ctx context.Context, id int32) (GetThreadRow, error) {
 	row := q.db.QueryRowContext(ctx, getThread, id)
-	var i Thread
+	var i GetThreadRow
 	err := row.Scan(
-		&i.ID,
+		&i.ThreadID,
 		&i.Title,
 		&i.Content,
-		&i.Views,
 		&i.CreatedAt,
+		pq.Array(&i.Categories),
 		&i.UserID,
+		&i.Name,
+		&i.Picture,
+		&i.Views,
+		&i.Replies,
 	)
 	return i, err
 }
@@ -109,26 +141,58 @@ func (q *Queries) ListThreads(ctx context.Context) ([]Thread, error) {
 }
 
 const listThreadsByPopularity = `-- name: ListThreadsByPopularity :many
-SELECT id, title, content, views, created_at, user_id FROM threads
-ORDER BY views
+SELECT
+t."id",
+t."title",
+t."content",
+t."created_at",
+array_agg(c."name")::TEXT[] as "categories",
+u.id as "user_id",
+u."name", 
+u.picture,
+t."views",
+(SELECT COUNT(*) FROM posts p WHERE p.thread_id = t.id) as "replies"
+FROM threads t 
+JOIN users u ON u.id = t.user_id
+JOIN threads_categories tc ON tc.thread_id = t.id 
+JOIN categories c ON c.id = tc.category_id 
+GROUP BY t.id, u.id
+ORDER BY "replies" DESC, "views" DESC
 `
 
-func (q *Queries) ListThreadsByPopularity(ctx context.Context) ([]Thread, error) {
+type ListThreadsByPopularityRow struct {
+	ID         int32     `json:"id"`
+	Title      string    `json:"title"`
+	Content    string    `json:"content"`
+	CreatedAt  time.Time `json:"created_at"`
+	Categories []string  `json:"categories"`
+	UserID     int32     `json:"user_id"`
+	Name       string    `json:"name"`
+	Picture    string    `json:"picture"`
+	Views      int32     `json:"views"`
+	Replies    int64     `json:"replies"`
+}
+
+func (q *Queries) ListThreadsByPopularity(ctx context.Context) ([]ListThreadsByPopularityRow, error) {
 	rows, err := q.db.QueryContext(ctx, listThreadsByPopularity)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Thread
+	var items []ListThreadsByPopularityRow
 	for rows.Next() {
-		var i Thread
+		var i ListThreadsByPopularityRow
 		if err := rows.Scan(
 			&i.ID,
 			&i.Title,
 			&i.Content,
-			&i.Views,
 			&i.CreatedAt,
+			pq.Array(&i.Categories),
 			&i.UserID,
+			&i.Name,
+			&i.Picture,
+			&i.Views,
+			&i.Replies,
 		); err != nil {
 			return nil, err
 		}

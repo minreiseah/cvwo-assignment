@@ -8,6 +8,7 @@ package db
 import (
 	"context"
 	"database/sql"
+	"time"
 )
 
 const createPost = `-- name: CreatePost :one
@@ -105,26 +106,47 @@ func (q *Queries) ListPosts(ctx context.Context) ([]Post, error) {
 }
 
 const listPostsFromThread = `-- name: ListPostsFromThread :many
-SELECT id, content, created_at, user_id, thread_id FROM posts
-WHERE thread_id = $1
-ORDER BY id
+SELECT
+p."id" as "post_id",
+p."content",
+p."created_at",
+p."thread_id",
+u.id as "user_id",
+u."name" as "author",
+u."picture"
+FROM posts p
+JOIN users u on u.id = p.user_id
+WHERE p.thread_id = $1
+ORDER BY p."created_at" ASC
 `
 
-func (q *Queries) ListPostsFromThread(ctx context.Context, threadID int32) ([]Post, error) {
+type ListPostsFromThreadRow struct {
+	PostID    int32     `json:"post_id"`
+	Content   string    `json:"content"`
+	CreatedAt time.Time `json:"created_at"`
+	ThreadID  int32     `json:"thread_id"`
+	UserID    int32     `json:"user_id"`
+	Author    string    `json:"author"`
+	Picture   string    `json:"picture"`
+}
+
+func (q *Queries) ListPostsFromThread(ctx context.Context, threadID int32) ([]ListPostsFromThreadRow, error) {
 	rows, err := q.db.QueryContext(ctx, listPostsFromThread, threadID)
 	if err != nil {
 		return nil, err
 	}
 	defer rows.Close()
-	var items []Post
+	var items []ListPostsFromThreadRow
 	for rows.Next() {
-		var i Post
+		var i ListPostsFromThreadRow
 		if err := rows.Scan(
-			&i.ID,
+			&i.PostID,
 			&i.Content,
 			&i.CreatedAt,
-			&i.UserID,
 			&i.ThreadID,
+			&i.UserID,
+			&i.Author,
+			&i.Picture,
 		); err != nil {
 			return nil, err
 		}

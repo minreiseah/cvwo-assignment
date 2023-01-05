@@ -19,9 +19,18 @@ SELECT * FROM posts
 ORDER BY id;
 
 -- name: ListPostsFromThread :many
-SELECT * FROM posts
-WHERE thread_id = $1
-ORDER BY id;
+SELECT
+p."id" as "post_id",
+p."content",
+p."created_at",
+p."thread_id",
+u.id as "user_id",
+u."name" as "author",
+u."picture"
+FROM posts p
+JOIN users u on u.id = p.user_id
+WHERE p.thread_id = $1
+ORDER BY p."created_at" ASC;
 
 -- name: ListPostsFromUser :many
 SELECT * FROM posts

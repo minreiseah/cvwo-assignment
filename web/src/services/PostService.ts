@@ -4,14 +4,13 @@ export interface PostData {
   post_id: number,
   content: string,
   created_at: string,
-  updated_at: string,
+  updated_at?: string,
 
   thread_id: number,
 
   user_id: number,
   author: string,
   picture: string,
-  timestamp: string,
 }
 
 export interface PostCreationData {
@@ -61,7 +60,7 @@ class PostService {
 */
   public async getThreadPosts(threadId: number): Promise<PostData[]> {
     try {
-      const res = await apiClient.get(`/threads/${threadId}/posts`);
+      const res = await apiClient.get(`/posts/threads/${threadId}`);
       return res.data;
     } catch (error) {
       throw error;

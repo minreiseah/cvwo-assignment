@@ -8,11 +8,10 @@ export interface ThreadDisplayData {
   created_at: string,
   updated_at?: string,
 
-  category_ids?: number[],
   categories: string[],
 
   user_id: number,
-  author: string,
+  name: string,
   picture: string,
   replies: number,
   views: number,
@@ -104,13 +103,9 @@ class ThreadService {
 * Response data format: JSON
 * Authentication: None
 */
-  public async getSortedThreads(sortParam: sortParamTypes): Promise<ThreadCardData[]> {
+  public async getPopularThreads(): Promise<ThreadCardData[]> {
     try {
-      const res = await apiClient.get('/threads', {
-        params: {
-          sort: sortParam,
-        }
-      });
+      const res = await apiClient.get('/threads/popular');
       return res.data;
     } catch (error) {
       throw error;

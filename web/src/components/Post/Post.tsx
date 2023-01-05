@@ -29,6 +29,9 @@ const Post: React.FC<IPost> = ({
   created_at,
   updated_at
 }) => {
+
+  const date = formatDateString(created_at ?? "")
+
   return (
     <Flex
       direction="row"
@@ -55,7 +58,7 @@ const Post: React.FC<IPost> = ({
         gap={4}
       >
         <Text>
-          {updated_at !== undefined && formatDateString(updated_at)}
+          {date}
         </Text>
         <Divider 
           opacity="1" 
