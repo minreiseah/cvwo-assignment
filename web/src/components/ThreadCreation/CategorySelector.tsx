@@ -10,7 +10,6 @@ import {
 
 import { AddIcon, CheckIcon } from "@chakra-ui/icons"
 
-// category: [selected?, category_id]
 export interface Category {
   [key: string]: [boolean, number]
 }
