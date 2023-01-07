@@ -1,0 +1,22 @@
+services:
+  # Docker Go Web Service API
+  - type: web
+    name: backend
+    env: docker
+    region: singapore
+    branch: main
+    rootDir: .
+    numInstances: 1
+    plan: free
+  # Docker React Static Web Application
+  - type: web
+    name: frontend
+    env: docker
+    region: singapore
+    branch: main
+    rootDir: ./web
+    numInstances: 1
+    plan: free
+databases:
+  # Postgres database hosted on Render (expires 1 Apr '23)
+  - name: postgres15
