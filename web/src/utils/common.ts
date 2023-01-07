@@ -2,7 +2,7 @@ import axios from "axios"
 import { store } from "../app/store"
 
 const defaultOptions = {
-  baseURL: 'http://localhost:8000',
+  baseURL: `${process.env.REACT_APP_API_BASE_URL}`,
   headers: {
     "Content-type": "application/json",
   }

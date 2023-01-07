@@ -2,7 +2,7 @@ import { Auth0ProviderWithHistory } from "./Auth0ProviderWithHistory"
 import { ChakraThemedProvider } from "./ChakraThemedProvider"
 import { ReduxProvider } from "./ReduxProvider"
 
-import {BrowserRouter} from "react-router-dom"
+import { BrowserRouter } from "react-router-dom"
 import { QueryClient, QueryClientProvider } from "react-query"
 
 

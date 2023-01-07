@@ -4,7 +4,7 @@ services:
     name: backend
     env: docker
     region: singapore
-    branch: main
+    branch: production/render
     rootDir: .
     numInstances: 1
     plan: free
@@ -13,7 +13,7 @@ services:
     name: frontend
     env: docker
     region: singapore
-    branch: main
+    branch: production/render
     rootDir: ./web
     numInstances: 1
     plan: free
