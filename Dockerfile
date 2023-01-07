@@ -16,6 +16,6 @@ COPY start.sh .
 COPY wait-for.sh .
 
 EXPOSE 8000
-ENTRYPOINT [ "/app/wait-for.sh", "postgres15:5432", "--", "/app/start.sh" ]
+# ENTRYPOINT [ "/app/wait-for.sh", "postgres15:5432", "--", "/app/start.sh" ]
 CMD [ "/app/main" ]
 
