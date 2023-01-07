@@ -2,7 +2,6 @@
 FROM node:18.12.1-alpine3.17 AS builder
 WORKDIR /web
 COPY package.json .
-COPY package-lock.json .
 RUN npm install
 COPY . .
 RUN npm run build
