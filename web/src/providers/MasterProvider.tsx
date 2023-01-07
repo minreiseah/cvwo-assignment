@@ -2,7 +2,7 @@ import { Auth0ProviderWithHistory } from "./Auth0ProviderWithHistory"
 import { ChakraThemedProvider } from "./ChakraThemedProvider"
 import { ReduxProvider } from "./ReduxProvider"
 
-import {BrowserRouter} from "react-router-dom"
+import { HashRouter } from "react-router-dom"
 import { QueryClient, QueryClientProvider } from "react-query"
 
 
@@ -15,13 +15,13 @@ const MasterProvider = ({ children }: MasterProviderProps) => {
   return (
     <ReduxProvider>
       <ChakraThemedProvider>
-        <BrowserRouter>
+        <HashRouter>
           <Auth0ProviderWithHistory>
             <QueryClientProvider client={queryClient}>
               {children}
             </QueryClientProvider>
           </Auth0ProviderWithHistory>
-        </BrowserRouter>
+        </HashRouter>
       </ChakraThemedProvider>
     </ReduxProvider>
   )

@@ -1,5 +1,5 @@
 import { ReduxProvider } from "../providers/ReduxProvider"
-import { BrowserRouter } from "react-router-dom"
+import { HashRouter } from "react-router-dom"
 import { QueryClient, QueryClientProvider } from "react-query"
 
 
@@ -11,11 +11,11 @@ const TestWrapper = ({ children }: TestWrapperProps) => {
   const queryClient = new QueryClient();
   return (
     <ReduxProvider>
-        <BrowserRouter>
+        <HashRouter>
             <QueryClientProvider client={queryClient}>
               {children}
             </QueryClientProvider>
-        </BrowserRouter>
+        </HashRouter>
     </ReduxProvider>
   )
 }
