@@ -42,7 +42,7 @@ func (s *Server) Run() {
         Handler: s.router,
     }
 
-	fmt.Println("Listening on port 8000 at http://localhost:8000!")
+	fmt.Println("Listening on port 8000!")
 
     err := s.httpServer.ListenAndServe()
     if err != nil {
@@ -64,5 +64,5 @@ func (s *Server) InitDatabase() {
     queries := db.New(conn)
     s.db = queries
 
-	fmt.Println("Connected to database at http://localhost:5432!")
+	fmt.Printf("Connected to %s database at %s\n", config.DbDriver(), config.DbSource())
 }

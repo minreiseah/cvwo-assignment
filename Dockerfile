@@ -14,8 +14,8 @@ COPY --from=builder /app/migrate ./migrate
 COPY db/migration ./migration
 COPY start.sh .
 COPY wait-for.sh .
+COPY .env .
 
 EXPOSE 8000
-# ENTRYPOINT [ "/app/wait-for.sh", "postgres15:5432", "--", "/app/start.sh" ]
 CMD [ "/app/main" ]
 
