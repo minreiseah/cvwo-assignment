@@ -109,9 +109,9 @@ Refer to [API Documentation](https://github.com/minreiseah/cvwo-assignment/tree/
 
 #### Jan 1 - 7
 
-- [ ] Complete API Endpoints.
-- [ ] Connect postgres server to Go.
-- [ ] Dockerise
+- [x] Complete API Endpoints.
+- [x] Connect postgres server to Go.
+- [x] Dockerise
 
 #### Jan 8 - 14
 
@@ -170,7 +170,6 @@ Framework/language-specific notes are shown below.
 ![](api/database_schema.png)
 
 - As most hosting providers seem to provide native PostgreSQL support, I will tentatively pick PostgreSQL for my database.
-- Seems like `pg_dump` can be used to create PostgreSQL backups
 
 #### Hosting
 
@@ -180,8 +179,22 @@ Framework/language-specific notes are shown below.
 
 ### Stretch Goals
 
-- Implementing Cron to backup the database.
-- Docker
 - AWS
+- Documentation
 
 
+## Challenges
+
+### Docker & Hosting
+
+While local development with docker-compose.yaml, it is *relatively* expensive to use in production. Building and deploying three separate services (frontend, backend, database) via `docker compose up` is not possible on services such as AWS because of a requirement to use 1. ECR to host the containers, 2. ECS to deploy the containers, and 3. RDS to host and manage a PostgreSQL database.
+
+Furthermore, the above would just allow for the web application to run on a VPS. However, networking and reverse-proxying would also have to be done so as to allow end-users to access the application. This is something I will look into for future projects that require scalability.
+
+Hence, I have resorted to using Render as a *free* cloud hosting provider for now.
+
+### AWS
+
+### Networking
+
+In deciding between hosting all my services on the same network or on different networks, I went with the latter option for two reasons. One, simplicity, it is easier to host my services on three different networks and access them by their external URL. In this way, the PAAS I used does all the routing. Two, hosting all services on the same network will take up a lot of time due to my lack of proficiency with networking.
