@@ -15,7 +15,6 @@ func DbSource() string {
     err := godotenv.Load()
     if err != nil {
         log.Fatal("Error loading .env file")
-        log.Fatal(err)
     }
 
     dbSource := os.Getenv("DB_SOURCE")
@@ -33,3 +32,21 @@ func DbDriver() string {
     return "postgres"
 }
 
+// migration
+func MigrationURL() string {
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatal("Error loading .env file")
+    }
+
+    migrationURL := os.Getenv("MIGRATION_URL")
+
+    if migrationURL == "" {
+        fmt.Println("DB_SOURCE environment variable not set")
+    } else {
+        fmt.Println("DB_SOURCE:", migrationURL)
+    }
+
+    return migrationURL
+
+}
