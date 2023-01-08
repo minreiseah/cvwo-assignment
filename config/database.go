@@ -1,36 +1,30 @@
 package config
 
-// import "fmt"
+import (
+	"fmt"
+	"log"
+	"os"
 
-type Database struct {
-    Driver string
-    Host string
-    Port int
-    User string
-    Password string
-    Dbname string
-}
+	"github.com/joho/godotenv"
+)
 
 /*
-* DBSource provided by Render
-*/
+* DBSource defined in environment
+ */
 func DbSource() string {
-    // TODO IMPORT FROM ENV INSTEAD 
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatal("Error loading .env file")
+    }
 
-    // const (
-    //     // host     = "localhost"
-    //     host     = "postgres15"
-    //     port     = 5432
-    //     user     = "root"
-    //     password = "toor"
-    //     dbname   = "cvwo_forum"
-    // )
-    //
-    // return fmt.Sprintf("host=%s port=%d user=%s "+
-    //     "password=%s dbname=%s sslmode=disable",
-    //     host, port, user, password, dbname)
+    dbSource := os.Getenv("DB_SOURCE")
 
-    const dbSource = "postgres://root:EikF32o3XditPPgEATyjygwVQPyNFRWm@dpg-cesnbgirrk0dan0ldiag-a.singapore-postgres.render.com/db_0b4c"
+    if dbSource == "" {
+        fmt.Println("DB_SOURCE environment variable not set")
+    } else {
+        fmt.Println("DB_SOURCE:", dbSource)
+    }
+
     return dbSource
 }
 
@@ -38,3 +32,21 @@ func DbDriver() string {
     return "postgres"
 }
 
+// migration
+func MigrationURL() string {
+    err := godotenv.Load()
+    if err != nil {
+        log.Fatal("Error loading .env file")
+    }
+
+    migrationURL := os.Getenv("MIGRATION_URL")
+
+    if migrationURL == "" {
+        fmt.Println("DB_SOURCE environment variable not set")
+    } else {
+        fmt.Println("DB_SOURCE:", migrationURL)
+    }
+
+    return migrationURL
+
+}
