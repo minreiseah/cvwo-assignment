@@ -17,6 +17,14 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    entrypoint:
+      [
+        "/app/wait-for.sh",
+        "postgres15:5432",
+        "--",
+        "/app/start.sh"
+      ]
+    command: [ "/app/main" ]
 
   frontend:
     build:
@@ -26,3 +34,4 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+
