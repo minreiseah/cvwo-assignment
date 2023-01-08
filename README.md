@@ -1,8 +1,8 @@
 # CVWO Assignment
 
-<!-- ## Online Demo -->
-<!---->
-<!-- Deployed site:  -->
+## Description
+
+A web forum built with React & Go.
 
 ## Architecture
 
@@ -12,10 +12,49 @@
 | - | - | - |
 | Frontend | UI/UX | Typescript + React |
 | Application | RESTful API | Golang (Go-Chi) |
-| Database | Persistent Storage Layer | PostgreSQL + Docker |
-| Hosting | Deployment, Web Server, Storage | Heroku, Netlify, Render, AWS(?) |
+| Database | Persistent Storage Layer | PostgreSQL |
+| Hosting | Containerization, Deployment, Storage | Docker, Render |
 
 </div>
+
+## Installation
+
+To install set up the forum on your local machine, follow these steps:
+
+Option 1 (without Docker)
+
+1. Clone the repository.
+
+`git clone https://github.com/minreiseah/cvwo-assignment.git`
+
+2. Install the dependencies: `cd web && npm install` (frontend) and `go get` (backend).
+
+3. Set up the PostgreSQL database. Migration files are found under `db/migration`.
+
+4. Set up the environment variables:
+    1. `web/sample.env` (frontend)
+    2. `sample.env` (backend)
+
+5. Start the development servers: `cd web && npm start` (frontend) and `make start` (backend).
+
+Option 2 (with Docker)
+
+1. Clone the repository.
+
+`git clone https://github.com/minreiseah/cvwo-assignment.git`
+
+2. Build the Docker images.
+
+`docker compose build`
+
+3. Set up the environment variables:
+    1. `web/sample.env` (frontend)
+    2. `sample.env` (backend)
+
+4. Start the Docker containers.
+
+`docker compose up`
+
 
 ## Project Requirements
 
@@ -175,7 +214,6 @@ Framework/language-specific notes are shown below.
 
 - Requirements include: frontend, database, application/web server for Rest API.
 - Render for free-tier hosting. 
-- Netlify only provides a serverless backend.
 
 ### Stretch Goals
 
