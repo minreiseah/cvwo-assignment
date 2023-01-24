@@ -2,6 +2,8 @@
 
 Seah Min-Rei (A0255499J)
 
+[Live Deployment Link](https://frontend-4uqn.onrender.com/)
+
 ## Description
 
 A web forum built with React & Go.
