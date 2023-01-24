@@ -1,0 +1,283 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[12pt]{exam}
+
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{longtable,booktabs,array}
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=cyan,
+}
+
+
+\begin{document}
+
+\hypertarget{cvwo-assignment}{%
+\section{CVWO Assignment}\label{cvwo-assignment}}
+
+\subsection{User Manual}
+
+To install set up the forum on your local machine, follow these steps:
+
+Option 1 (without Docker)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Clone the repository. 
+  
+  \texttt{git\ clone\ https://github.com/minreiseah/cvwo-assignment.git}
+\end{enumerate}
+
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Install the dependencies: \texttt{cd\ web\ \&\&\ npm\ install}
+  (frontend) and \texttt{go\ get} (backend).
+\item
+  Set up the PostgreSQL database. Migration files are found under
+  \texttt{db/migration}.
+\item
+  Set up the environment variables:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    \texttt{web/sample.env} (frontend)
+  \item
+    \texttt{sample.env} (backend)
+  \end{enumerate}
+\item
+  Start the development servers: \texttt{cd\ web\ \&\&\ npm\ start}
+  (frontend) and \texttt{make\ start} (backend).\\
+\end{enumerate} 
+
+Option 2 (with Docker)
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  Clone the repository.
+
+\texttt{git\ clone\ https://github.com/minreiseah/cvwo-assignment.git}
+\end{enumerate}
+
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{1}
+\item
+  Build the Docker images.
+
+\texttt{docker\ compose\ build}
+\end{enumerate}
+
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\setcounter{enumi}{2}
+\item
+  Set up the environment variables:
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \item
+    \texttt{web/sample.env} (frontend)
+  \item
+    \texttt{sample.env} (backend)
+  \end{enumerate}
+\item
+  Start the Docker containers.
+
+\texttt{docker\ compose\ up}
+\end{enumerate}
+
+
+\hypertarget{reflections}{%
+\subsection{Reflections}\label{reflections}}
+
+\hypertarget{diving-in}{%
+\subsubsection{Diving in}\label{diving-in}}
+
+I picked Go as my choice of backend for three reasons. One, Ruby seemed
+rather outdated and opinionated. Two, Go allows for more flexbility in
+building web servers. Three, I wanted to take on the challenge.
+
+After going through this two month process of web development, I can
+gladly say that I thoroughly enjoy Go and tolerate React. Go was
+surprisingly beginner-friendly with a strong standard library, but
+offers a depth of functionality that I am sure to explore in my future
+projects.
+
+\hypertarget{testing}{%
+\subsubsection{Testing}\label{testing}}
+
+This project involved tests on both the React and Go sides, of which I
+am much happier about the latter.
+
+I began my project by building up the frontend. As there was no API to
+interface with, my React tests involved mocking axios and simulating API
+calls with Jest and the React Testing Library. It was extremely painful
+as the tests were not very useful to actually getting a product out nor
+were they easy to implement. I simply decided to write these tests
+because I wanted to learn how testing in React worked.
+
+The backend, on the other hand, was a lot more enjoyable because I was
+actually testing where my SQL queries were functional. For instance, as
+categories and threads were tightly coupled via a association table,
+writing tests would ensure that any changes made to the category
+handlers would not break the thread handlers.
+
+Furthermore, there was a lot more documentation available to writing Go
+tests as compared to the ever-changing world of frontend development.
+Even chatgpt was not kept up to date with the newest trends in React
+development.
+
+If I were ever to be on a team that had to build a frontend independent
+of the backend, testing would definitely help to write more readable and
+bugfree code. However, for future \emph{personal} projects, I will just
+build a backend first to avoid frontend tests. Well, I am still quite
+proud of my first attempt at writing unit tests. My next step would be
+to write E2E tests.
+
+\hypertarget{challenges}{%
+\subsection{Challenges}\label{challenges}}
+
+\hypertarget{docker-hosting}{%
+\subsubsection{Docker \& Hosting}\label{docker-hosting}}
+
+While local development was done with docker compose, it is
+\emph{relatively} expensive to use in production. Building and deploying
+three separate services (frontend, backend, database) via
+\texttt{docker\ compose\ up} is not possible (for free) on services such
+as AWS because of a requirement to use 1. ECR to host the containers, 2.
+ECS to deploy the containers, and 3. RDS to host and manage a PostgreSQL
+database.
+
+Furthermore, the above would just allow for the web application to run
+on a VPS. However, networking and reverse-proxying would also have to be
+done so as to allow end-users to access the application. This is
+something I will look into for future projects that require scalability.
+
+Hence, I have resorted to using Render as a \emph{free} cloud hosting
+provider for now. For future projects, AWS is definitely something I
+would aim to implement.
+
+\hypertarget{networking}{%
+\subsubsection{Networking}\label{networking}}
+
+In deciding between hosting all my services on the same network or on
+different networks, I went with the latter option for two reasons:
+
+One, simplicity; it is easier to host my services on three different
+networks and access them by their external URL. In this way, the PAAS I
+used does all the routing.
+
+Two, hosting all services on the same network will take up a lot of time
+due to my lack of proficiency with networking.
+
+\hypertarget{what-i-would-have-liked-to-add}{%
+\subsection{What I would have liked to
+add}\label{what-i-would-have-liked-to-add}}
+
+On documentation; as a novice to frontend development, using React
+docgen would have been helpful if not for the constant refactoring and
+movement of components. This would have made the project rather
+difficult to maintain, requiring more effort to document than to build
+the actual product.
+
+After `finishing' the project, I had many API routes written that went
+unused. Some features I would have liked to add to the frontend would
+be:
+
+\begin{itemize}
+\item
+  member profile page (view threads and comments)
+\item
+  inline updating of threads/comments
+\end{itemize}
+
+On security, I want to learn how to project my backend API with
+authentication. This allows only authorised users to access protected
+resources on the server.
+
+\hypertarget{Concluding Remarks}{%
+\subsection{Concluding Remarks}\label{concluding-remarks}}
+
+All in all, this project has been a great learning experience. More than
+just web development, I gained a sense of appreciation for building
+products from a client's point-of-view. I hope to be given the
+opportunity to apply my technical skills on projects that make a real
+difference in the lives of others.
+
+\end{document}
